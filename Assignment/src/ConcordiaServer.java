@@ -6,7 +6,7 @@ public class ConcordiaServer {
 
   public static void main(String args[]) throws IOException {
 
-    Logger logger = Utilities.setupLogger(Logger.getLogger("MyLog"), "ConcordiaServer.log");
+    Logger logger = Utilities.setupLogger(Logger.getLogger("CONServerlog"), "ConcordiaServer.log");
     String registryURL;
     try {
       int RMIPortNum = 8080;
@@ -19,7 +19,9 @@ public class ConcordiaServer {
       Utilities.listRegistry(registryURL);
       logger.info("Server ready.");
     } catch (Exception re) {
-      logger.info("Exception in HelloServer.main: " + re);
+      logger.info("Exception " + re);
+    }finally {
+
     }
   }
 

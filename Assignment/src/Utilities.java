@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -41,8 +42,7 @@ public class Utilities {
 
     try {
 
-      // This block configure the logger with handler and formatter
-      fh = new FileHandler(LOG_DIR + fileName,true);
+      fh = new FileHandler(LOG_DIR + fileName, true);
       logger.addHandler(fh);
       SimpleFormatter formatter = new SimpleFormatter();
       fh.setFormatter(formatter);
@@ -52,9 +52,13 @@ public class Utilities {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    logger.info("Hi How r u?");
     return logger;
+  }
+
+  public static void closeLoggerHandlers(Logger logger) {
+    for (Handler h : logger.getHandlers()) {
+      h.close();   //must call h.close or a .LCK file will remain.
+    }
   }
 
 
