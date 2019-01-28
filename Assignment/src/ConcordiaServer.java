@@ -1,20 +1,14 @@
 import java.io.IOException;
 import java.rmi.Naming;
-import org.apache.log4j.Logger;
-import org.apache.log4j.RollingFileAppender;
-import org.apache.log4j.SimpleLayout;
+import java.util.logging.Logger;
 
 public class ConcordiaServer {
 
   public static void main(String args[]) throws IOException {
-    final Logger logger = Logger.getLogger(ConcordiaServer.class);
-    SimpleLayout layout = new SimpleLayout();
-    RollingFileAppender appender = new RollingFileAppender(layout, "Assignment/logs/test.log", true);
-    logger.addAppender(appender);
 
+    Logger logger = Utilities.setupLogger(Logger.getLogger("MyLog"), "ConcordiaServer.log");
     String registryURL;
     try {
-
       int RMIPortNum = 8080;
       Utilities.startRegistry(RMIPortNum);
       LibraryRemoteServiceImpl exportedObj = new LibraryRemoteServiceImpl();

@@ -4,11 +4,14 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import org.apache.log4j.Logger;
-import org.apache.log4j.RollingFileAppender;
-import org.apache.log4j.SimpleLayout;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 
 public class Utilities {
+
+  private static final String LOG_DIR = "C:/DSD/Git/DSD_Assignment_COMP_6231/Assignment/logs/";
 
   public static void startRegistry(int RMIPortNum)
       throws RemoteException {
@@ -33,9 +36,24 @@ public class Utilities {
   }
 
   public static Logger setupLogger(Logger logger, String fileName) throws IOException {
-    SimpleLayout layout = new SimpleLayout();
-    RollingFileAppender appender = new RollingFileAppender(layout, fileName, true);
-    logger.addAppender(appender);
+
+    FileHandler fh;
+
+    try {
+
+      // This block configure the logger with handler and formatter
+      fh = new FileHandler(LOG_DIR + fileName,true);
+      logger.addHandler(fh);
+      SimpleFormatter formatter = new SimpleFormatter();
+      fh.setFormatter(formatter);
+
+    } catch (SecurityException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    logger.info("Hi How r u?");
     return logger;
   }
 

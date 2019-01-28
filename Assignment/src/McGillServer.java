@@ -1,4 +1,5 @@
 import java.rmi.Naming;
+import java.util.logging.Logger;
 
 public class McGillServer {
 
@@ -6,7 +7,7 @@ public class McGillServer {
 
     String registryURL;
     try {
-
+      Logger logger = Utilities.setupLogger(Logger.getLogger("McGill"), "McGillServer.log");
       int RMIPortNum = 8081;
       Utilities.startRegistry(RMIPortNum);
       LibraryRemoteServiceImpl exportedObj = new LibraryRemoteServiceImpl();

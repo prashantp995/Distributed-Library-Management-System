@@ -1,4 +1,5 @@
 import java.rmi.Naming;
+import java.util.logging.Logger;
 
 public class MonServer {
 
@@ -6,7 +7,7 @@ public class MonServer {
 
     String registryURL;
     try {
-
+      Logger logger = Utilities.setupLogger(Logger.getLogger("MON"), "MonServer.log");
       int RMIPortNum = 8082;
       Utilities.startRegistry(RMIPortNum);
       LibraryRemoteServiceImpl exportedObj = new LibraryRemoteServiceImpl();
