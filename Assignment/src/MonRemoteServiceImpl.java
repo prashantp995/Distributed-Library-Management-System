@@ -9,9 +9,13 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
 
   protected MonRemoteServiceImpl() throws RemoteException {
     super();
-    HashMap<String, Integer> nameAndQuantity = new HashMap<>();
-    nameAndQuantity.put("DSD", 5);
-    data.put("MON101", nameAndQuantity);
+    HashMap<String, Integer> nameAndQuantity;
+    for (int i = 1; i < 5; i++) {
+      nameAndQuantity = new HashMap<>();
+      nameAndQuantity.put("DSD_" + i, i);
+      data.put("MON_11" + i, nameAndQuantity);
+    }
+
 
   }
 
