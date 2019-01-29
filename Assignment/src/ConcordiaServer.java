@@ -1,5 +1,6 @@
 import java.io.IOException;
-import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.logging.Logger;
 
 public class ConcordiaServer {
@@ -10,17 +11,16 @@ public class ConcordiaServer {
     String registryURL;
     try {
       int RMIPortNum = 8080;
-      Utilities.startRegistry(RMIPortNum);
-      LibraryRemoteServiceImpl exportedObj = new LibraryRemoteServiceImpl();
-      System.setProperty("java.rmi.server.hostname", "localhost");
-      registryURL = "rmi://localhost:" + RMIPortNum + "/findItem";
-      Naming.rebind(registryURL, exportedObj);
-      logger.info("Server registered.  Registry currently contains:");
-      Utilities.listRegistry(registryURL);
+      ConcordiaRemoteServiceImpl exportedObj = new ConcordiaRemoteServiceImpl();
+      Registry registry =
+          LocateRegistry.createRegistry(RMIPortNum);
+      registry.bind("CON", exportedObj);
+      System.out.println("Server Started");
       logger.info("Server ready.");
+      System.out.println(exportedObj.provideCount());
     } catch (Exception re) {
       logger.info("Exception " + re);
-    }finally {
+    } finally {
 
     }
   }

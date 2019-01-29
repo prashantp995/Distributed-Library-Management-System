@@ -1,24 +1,27 @@
+import java.io.IOException;
 import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.logging.Logger;
 
 public class MonServer {
 
-  public static void main(String args[]) {
+  public static void main(String args[]) throws IOException {
 
+    Logger logger = Utilities.setupLogger(Logger.getLogger("MONServerlog"), "MONServer.log");
     String registryURL;
     try {
-      Logger logger = Utilities.setupLogger(Logger.getLogger("MON"), "MonServer.log");
       int RMIPortNum = 8082;
-      Utilities.startRegistry(RMIPortNum);
-      LibraryRemoteServiceImpl exportedObj = new LibraryRemoteServiceImpl();
-      System.setProperty("java.rmi.server.hostname", "localhost");
-      registryURL = "rmi://localhost:" + RMIPortNum + "/findItem";
-      Naming.rebind(registryURL, exportedObj);
-      System.out.println("Server registered.  Registry currently contains:");
-      Utilities.listRegistry(registryURL);
-      System.out.println("Server ready.");
+      MonRemoteServiceImpl exportedObj = new MonRemoteServiceImpl();
+      Registry registry =
+          LocateRegistry.createRegistry(RMIPortNum);
+      registry.bind("MON", exportedObj);
+      System.out.println("Server Started");
+      logger.info("Server ready.");
     } catch (Exception re) {
-      System.out.println("Exception in HelloServer.main: " + re);
+      logger.info("Exception " + re);
+    } finally {
+
     }
   }
 }

@@ -1,10 +1,10 @@
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Scanner;
-import java.util.logging.Handler;
 import java.util.logging.Logger;
 
 public class UserClient {
@@ -16,10 +16,7 @@ public class UserClient {
 
   public static void main(String args[])
       throws RemoteException, NotBoundException, MalformedURLException {
-    LibraryService libraryRemoteService = (LibraryService) Naming
-        .lookup("rmi://localhost:8080/findItem");
-    String list = libraryRemoteService.findItem("1", "2");
-    System.out.println(list);
+
     boolean valid = false;
     while (!valid) {
       System.out.println("Enter your username: ");
@@ -30,7 +27,7 @@ public class UserClient {
         determineUniversity(username);
         performValidOperation(username);
       } else {
-        System.out.println("Given user Name is not valid");
+        System.out.println("Given user Name is not in valid format");
       }
     }
 
@@ -117,11 +114,53 @@ public class UserClient {
     String itemId = getItemId();
     Logger logger = getLogger(username);
     if (isConcordiaUser) {
+      System.out.println("Connect to Concordia Server");
+      try {
+        String response = getItemFindResponse(username, itemId, 8080, "CON", logger);
+        System.out.println(response);
+      } catch (RemoteException e) {
+        e.printStackTrace();
+      } catch (NotBoundException e) {
+        e.printStackTrace();
+      }
+      Utilities.closeLoggerHandlers(logger);
+    }
+    if (isMcGillUser) {
       logger.info(
           username + " Requested to Find Item " + itemId);
       System.out.println("Connect to Concordia Server");
+      try {
+        String response = getItemFindResponse(username, itemId, 8081, "MCG", logger);
+        System.out.println(response);
+      } catch (RemoteException | NotBoundException e) {
+        e.printStackTrace();
+      }
       Utilities.closeLoggerHandlers(logger);
     }
+    if (isMonUser) {
+      logger.info(
+          username + " Requested to Find Item " + itemId);
+      System.out.println("Connect to Concordia Server");
+      try {
+        String response = getItemFindResponse(username, itemId, 8082, "MON", logger);
+        System.out.println(response);
+      } catch (RemoteException | NotBoundException e) {
+        e.printStackTrace();
+      }
+      Utilities.closeLoggerHandlers(logger);
+    }
+  }
+
+  private static String getItemFindResponse(String username, String itemId, int port,
+      String registryLookUp, Logger logger)
+      throws RemoteException, NotBoundException {
+    logger.info(
+        username + " Requested to Find Item " + itemId);
+    Registry registry = LocateRegistry.getRegistry(port);
+    LibraryService obj = (LibraryService) registry.lookup(registryLookUp);
+    String response = obj.findItem(username, itemId);
+    logger.info("Response Received from the server is ");
+    return response;
   }
 
   private static String getItemId() {
