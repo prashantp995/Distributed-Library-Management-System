@@ -1,9 +1,11 @@
-import java.io.IOException;
+import static java.util.logging.Logger.getLogger;
+
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -12,17 +14,19 @@ public class UserClient {
   static boolean isConcordiaUser = false;
   static boolean isMcGillUser = false;
   static boolean isMonUser = false;
-
+  static boolean isConcordiaManager = false;
+  static boolean isMcGillManager = false;
+  static boolean isMonManager = false;
+  static HashMap<Integer, String> serverInfo = new HashMap<Integer, String>();
 
   public static void main(String args[])
       throws RemoteException, NotBoundException, MalformedURLException {
-
     boolean valid = false;
     while (!valid) {
       System.out.println("Enter your username: ");
       Scanner scanner = new Scanner(System.in);
       String username = scanner.nextLine();
-      if (validateUserName(username)) {
+      if (Utilities.validateUserName(username)) {
         valid = true;
         determineUniversity(username);
         performValidOperation(username);
@@ -34,46 +38,177 @@ public class UserClient {
   }
 
   private static void determineUniversity(String username) {
-    if (username.startsWith("CONU")) {
+    if (username.startsWith("CON")) {
       isConcordiaUser = true;
-    } else if (username.startsWith("MCGU")) {
+      if (username.startsWith("CONM")) {
+        isConcordiaManager = true;
+      }
+    } else if (username.startsWith("MCG")) {
       isMcGillUser = true;
-    } else if (username.startsWith("MONU")) {
+      if (username.startsWith("MCGM")) {
+        isMcGillManager = true;
+      }
+    } else if (username.startsWith("MON")) {
       isMonUser = true;
+      if (username.startsWith("MONM")) {
+        isMonManager = true;
+      }
     }
   }
 
   private static void performValidOperation(String username) {
     boolean valid = false;
-    while (!valid) {
-      System.out.println("Please select option from below");
-      System.out.println(" 1  for borrowItem");
-      System.out.println(" 2  for findItem");
-      System.out.println(" 3  for returnItem");
-      Scanner scanner = new Scanner(System.in);
-      try {
+    if (isManagerUser()) {
+      while (!valid) {
+        System.out.println("Please select option from below");
+        System.out.println(" 1  for addItem");
+        System.out.println(" 2  for removeItem");
+        System.out.println(" 3  for ListItemAvailability");
+        System.out.println(" 0  Exit");
+        Scanner scanner = new Scanner(System.in);
+        try {
 
-        int choice;
-        if (scanner.hasNextInt()) {
-          choice = scanner.nextInt();
-          if (choice == 1 || choice == 2 || choice == 3) {
-            performOperation(choice, username);
-            valid = true;
+          int choice;
+          if (scanner.hasNextInt()) {
+            choice = scanner.nextInt();
+            if (choice == 0) {
+              valid = false;
+              break;
+            }
+            if (choice == 1 || choice == 2 || choice == 3) {
+              performManagerOperation(choice, username);
+            } else {
+              System.out.println("please enter valid choice");
+            }
           } else {
-            System.out.println("please enter valid choice");
+            System.out.println("Please enter number only");
+
           }
-        } else {
-          System.out.println("Please enter number only");
 
+        } catch (java.util.InputMismatchException e) {
+          System.out.println("Please enter properInput");
         }
-
-      } catch (java.util.InputMismatchException e) {
-        System.out.println("Please enter properInput");
       }
 
+    } else {
+      while (!valid) {
+        System.out.println("Please select option from below");
+        System.out.println(" 1  for borrowItem");
+        System.out.println(" 2  for findItem");
+        System.out.println(" 3  for returnItem");
+        Scanner scanner = new Scanner(System.in);
+        try {
+
+          int choice;
+          if (scanner.hasNextInt()) {
+            choice = scanner.nextInt();
+            if (choice == 1 || choice == 2 || choice == 3) {
+              performOperation(choice, username);
+              valid = true;
+            } else {
+              System.out.println("please enter valid choice");
+            }
+          } else {
+            System.out.println("Please enter number only");
+
+          }
+
+        } catch (java.util.InputMismatchException e) {
+          System.out.println("Please enter properInput");
+        }
+
+      }
     }
 
 
+  }
+
+  private static void performManagerOperation(int choice, String username) {
+    switch (choice) {
+      case 1:
+        System.out.println("perform Add item");
+        performAddItem(username);
+        break;
+      case 2:
+        System.out.println("perform Remove item");
+        performRemoveItem(username);
+        break;
+      case 3:
+        System.out.println("perform List item");
+        performListItem(username);
+        break;
+      default:
+        System.out.println("please enter valid choice");
+    }
+  }
+
+  private static void performAddItem(String username) {
+    Logger logger = getLogger(username);
+    String itemId = getItemId();
+    try {
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("Please Enter Item Name");
+      String itemName = scanner.nextLine();
+      System.out.println("Please Enter Quantity");
+      int quantity = scanner.nextInt();
+      getResponseOfAddItem(username, itemId, itemName, quantity, logger);
+    } catch (java.util.InputMismatchException e) {
+      System.out.println("Please enter properInput");
+    } catch (RemoteException | NotBoundException e) {
+      e.printStackTrace();
+    } finally {
+      Utilities.closeLoggerHandlers(logger);
+    }
+
+
+  }
+
+
+  private static void performRemoveItem(String username) {
+  }
+
+  private static void performListItem(String username) {
+    Logger logger = getLogger(username);
+    try {
+      try {
+        String response = getResponseFromListItem(username, logger);
+      } catch (NotBoundException e) {
+        e.printStackTrace();
+      }
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static String getResponseFromListItem(String username, Logger logger)
+      throws RemoteException, NotBoundException {
+    String[] serverInfo = getServerInfo();
+    logger.info(
+        username + " Requested to List Item ");
+    logger.info("Connecting to " + serverInfo[0] + "  Server");
+    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
+    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
+    String response = obj.listItem(username);
+    logger.info("Response Received from the server is " + response);
+    return response;
+  }
+
+  private static String getResponseOfAddItem(String username, String itemId,
+      String itemName, int quantity,
+      Logger logger) throws RemoteException, NotBoundException {
+    String[] serverInfo = getServerInfo();
+    logger.info(
+        username + " Requested to Add Item " + itemName);
+    logger.info("Connecting to " + serverInfo[0] + "  Server");
+    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
+    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
+    String response = obj.addItem(username, itemId, itemName, quantity);
+    logger.info("Response Received from the server is " + response);
+    return response;
+  }
+
+  private static boolean isManagerUser() {
+    return isMonManager || isConcordiaManager || isMcGillManager;
   }
 
   private static void performOperation(int choice, String username) {
@@ -100,109 +235,107 @@ public class UserClient {
     String itemId = getItemId();
     Logger logger = getLogger(username);
 
-    if (isConcordiaUser) {
-      logger.info(
-          username + " Requested to Return Item " + itemId);
-      System.out.println("Connect to Concordia Server");
-      try {
-        String response = getReturnItemResponse(username, itemId, 8080, "CON", logger);
-        System.out.println(response);
-      } catch (RemoteException | NotBoundException e) {
-        e.printStackTrace();
-      }
+    logger.info(
+        username + " Requested to Return Item " + itemId);
+    try {
+      String response = getReturnItemResponse(username, itemId, logger);
+      System.out.println(response);
+    } catch (RemoteException | NotBoundException e) {
+      e.printStackTrace();
+    } finally {
       Utilities.closeLoggerHandlers(logger);
     }
-    if (isMcGillUser) {
-      logger.info(
-          username + " Requested to Return Item " + itemId);
-      System.out.println("Connect to McGill Server");
-      try {
-        String response = getReturnItemResponse(username, itemId, 8081, "MCG", logger);
-        System.out.println(response);
-      } catch (RemoteException | NotBoundException e) {
-        e.printStackTrace();
-      }
-      Utilities.closeLoggerHandlers(logger);
-    }
-    if (isMonUser) {
-      logger.info(
-          username + " Requested to Return Item " + itemId);
-      System.out.println("Connect to Montreal Server");
-      try {
-        String response = getReturnItemResponse(username, itemId, 8082, "MON", logger);
-        System.out.println(response);
-      } catch (RemoteException | NotBoundException e) {
-        e.printStackTrace();
-      }
-      Utilities.closeLoggerHandlers(logger);
-    }
+
+
   }
 
 
   private static void performFindItem(String username) {
     boolean valid = false;
-    String itemId = getItemId();
+    String itemName = getItemName();
     Logger logger = getLogger(username);
-    if (isConcordiaUser) {
-      System.out.println("Connect to Concordia Server");
-      try {
-        String response = getItemFindResponse(username, itemId, 8080, "CON", logger);
-        System.out.println(response);
-      } catch (RemoteException e) {
-        e.printStackTrace();
-      } catch (NotBoundException e) {
-        e.printStackTrace();
-      }
+    try {
+      String response = getItemFindResponse(username, itemName, logger);
+      System.out.println(response);
+    } catch (RemoteException | NotBoundException e) {
+      e.printStackTrace();
+    } finally {
       Utilities.closeLoggerHandlers(logger);
     }
-    if (isMcGillUser) {
-      logger.info(
-          username + " Requested to Find Item " + itemId);
-      System.out.println("Connect to Concordia Server");
-      try {
-        String response = getItemFindResponse(username, itemId, 8081, "MCG", logger);
-        System.out.println(response);
-      } catch (RemoteException | NotBoundException e) {
-        e.printStackTrace();
-      }
-      Utilities.closeLoggerHandlers(logger);
-    }
-    if (isMonUser) {
-      logger.info(
-          username + " Requested to Find Item " + itemId);
-      System.out.println("Connect to Concordia Server");
-      try {
-        String response = getItemFindResponse(username, itemId, 8082, "MON", logger);
-        System.out.println(response);
-      } catch (RemoteException | NotBoundException e) {
-        e.printStackTrace();
-      }
-      Utilities.closeLoggerHandlers(logger);
-    }
+
+
   }
 
-  private static String getItemFindResponse(String username, String itemId, int port,
-      String registryLookUp, Logger logger)
+  private static String getItemFindResponse(String username, String itemName, Logger logger)
       throws RemoteException, NotBoundException {
+    String[] serverInfo = getServerInfo();
     logger.info(
-        username + " Requested to Find Item " + itemId);
-    Registry registry = LocateRegistry.getRegistry(port);
-    LibraryService obj = (LibraryService) registry.lookup(registryLookUp);
-    String response = obj.findItem(username, itemId);
+        username + " Requested to Find Item " + itemName);
+    logger.info("Connecting to " + serverInfo[0] + "  Server");
+    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
+    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
+    String response = obj.findItem(username, itemName);
     logger.info("Response Received from the server is " + response);
     return response;
   }
 
-  private static String getReturnItemResponse(String username, String itemId, int port,
-      String registryLookUp, Logger logger) throws RemoteException, NotBoundException {
+  private static String getReturnItemResponse(String username, String itemId,
+      Logger logger) throws RemoteException, NotBoundException {
+    String[] serverInfo = getServerInfo();
     logger.info(
         username + " Requested to Return Item " + itemId);
-    Registry registry = LocateRegistry.getRegistry(port);
-    LibraryService obj = (LibraryService) registry.lookup(registryLookUp);
+    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
+    logger.info("Connecting to " + serverInfo[0] + "  Server");
+    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
     String response = obj.returnItem(username, itemId);
     logger.info("Response Received from the server is " + response);
     return response;
   }
+
+  private static String getBorrowItemResponse(String itemId, int numberOfDays, String username,
+      Logger logger) throws RemoteException, NotBoundException {
+    String[] serverInfo = getServerInfo();
+    logger.info(
+        username + " Requested to Borrow Item " + itemId);
+    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
+    logger.info("Connecting to " + serverInfo[0] + "  Server");
+    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
+    String response = obj.borrowItem(username, itemId, numberOfDays);
+    logger.info("Response Received from the server is " + response);
+    return response;
+  }
+
+
+  private static void performBorrowItem(String username) {
+    boolean valid = false;
+    String itemId;
+    int numberOfDays;
+    Logger logger = getLogger(username);
+    while (!valid) {
+      Scanner scanner = new Scanner(System.in);
+      itemId = getItemId();
+      System.out.println("Please Enter number Of days");
+      numberOfDays = scanner.nextInt();
+      if (Utilities.validateItemIdAndNumberOfDays(itemId, numberOfDays)) {
+        valid = true;
+        logger.info(
+            username + " Requested to Borrow Item " + itemId + " for " + numberOfDays + " days.");
+        try {
+          getBorrowItemResponse(itemId, numberOfDays, username, logger);
+        } catch (RemoteException | NotBoundException e) {
+          e.printStackTrace();
+        } finally {
+          Utilities.closeLoggerHandlers(logger);
+        }
+      } else {
+        System.out.println("Please Enter Correct Details as specified");
+      }
+
+    }
+
+
+  }
+
 
   private static String getItemId() {
     boolean valid = false;
@@ -220,58 +353,37 @@ public class UserClient {
     return itemId;
   }
 
-  private static void performBorrowItem(String username) {
-    boolean valid = false;
-    String itemId;
-    int numberOfDays;
-    Logger logger = getLogger(username);
-    while (!valid) {
-      System.out.println("Please Enter  Item Id For example CON1012");
-      Scanner scanner = new Scanner(System.in);
-      itemId = scanner.nextLine();
-      System.out.println("Please Enter number Of days");
-      numberOfDays = scanner.nextInt();
-      if (validateItemIdAndNumberOfDays(itemId, numberOfDays)) {
-        valid = true;
-        logger.info(
-            username + " Requested to Borrow Item " + itemId + " for " + numberOfDays + " days.");
-      } else {
-        System.out.println("Please Enter Correct Details as specified");
-      }
+  private static String getItemName() {
+    System.out.println("Please Enter  Item Name");
+    Scanner scanner = new Scanner(System.in);
+    String itemName = scanner.nextLine();
+    return itemName;
+  }
 
-    }
+  private static String[] getServerInfo() {
+    String serverInfo[] = new String[2];
     if (isConcordiaUser) {
-      System.out.println("Connect to Concordia Server");
-      Utilities.closeLoggerHandlers(logger);
+      serverInfo[0] = LibConstants.CON_REG;
+      serverInfo[1] = String.valueOf(LibConstants.CON_PORT);
+    } else if (isMcGillUser) {
+      serverInfo[0] = LibConstants.MCG_REG;
+      serverInfo[1] = String.valueOf(LibConstants.MCG_PORT);
+    } else if (isMonUser) {
+      serverInfo[0] = LibConstants.MON_REG;
+      serverInfo[1] = String.valueOf(LibConstants.MON_PORT);
     }
-
+    return serverInfo;
   }
 
-  private static Logger getLogger(String username) {
-    Logger logger = null;
-    try {
-      logger = Utilities
-          .setupLogger(Logger.getLogger(username + "log"), username + ".log");
-    } catch (IOException e) {
-      e.printStackTrace();
+  public static boolean validateItemId(String itemId) {
+    if (isManagerUser()) {
+      return itemId.length() == 7 &&
+          ((itemId.startsWith("CON") && isConcordiaManager) || (itemId
+              .startsWith("MCG") && isMcGillManager) || (itemId
+              .startsWith("MON") && isMonManager));
     }
-    return logger;
-  }
-
-  private static boolean validateItemIdAndNumberOfDays(String itemId, int numberOfDays) {
-    return validateItemId(itemId) && numberOfDays > 0;
-  }
-
-  private static boolean validateItemId(String itemId) {
     return itemId.length() == 7 && (itemId.startsWith("CON") || itemId.startsWith("MCG") || itemId
         .startsWith("MON"));
-  }
-
-  private static boolean validateUserName(String username) {
-    return username.length() == 8 &&
-        (username.contains("CONU")
-            || username.contains("MCGU")
-            || username.contains("MONU"));
   }
 
 }

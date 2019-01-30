@@ -12,12 +12,13 @@ public class McGillServer {
     Logger logger = Utilities.setupLogger(Logger.getLogger("MCGServerlog"), "MCGServer.log");
     String registryURL;
     try {
-      int RMIPortNum = 8081;
+      int RMIPortNum = LibConstants.MCG_PORT;
       McGillRemoteServiceImpl exportedObj = new McGillRemoteServiceImpl();
       Registry registry =
           LocateRegistry.createRegistry(RMIPortNum);
-      registry.bind("MCG", exportedObj);
-      System.out.println("Server Started");
+      registry.bind(LibConstants.MCG_REG, exportedObj);
+      System.out.println("Server Started " + " Rmi Port Number " + RMIPortNum + " Look Up "
+          + LibConstants.MCG_REG);
       logger.info("Server ready.");
     } catch (Exception re) {
       logger.info("Exception " + re);

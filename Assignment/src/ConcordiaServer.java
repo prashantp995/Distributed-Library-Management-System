@@ -10,14 +10,14 @@ public class ConcordiaServer {
     Logger logger = Utilities.setupLogger(Logger.getLogger("CONServerlog"), "ConcordiaServer.log");
     String registryURL;
     try {
-      int RMIPortNum = 8080;
+      int RMIPortNum = LibConstants.CON_PORT;
       ConcordiaRemoteServiceImpl exportedObj = new ConcordiaRemoteServiceImpl();
       Registry registry =
           LocateRegistry.createRegistry(RMIPortNum);
-      registry.bind("CON", exportedObj);
-      System.out.println("Server Started");
+      registry.bind(LibConstants.CON_REG, exportedObj);
+      System.out.println("Server Started " + " Rmi Port Number " + RMIPortNum + " Look Up "
+          + LibConstants.CON_REG);
       logger.info("Server ready.");
-      System.out.println(exportedObj.provideCount());
     } catch (Exception re) {
       logger.info("Exception " + re);
     } finally {

@@ -61,5 +61,29 @@ public class Utilities {
     }
   }
 
+  public static Logger getLogger(String username) {
+    Logger logger = null;
+    try {
+      logger = Utilities
+          .setupLogger(Logger.getLogger(username + "log"), username + ".log");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return logger;
+  }
+
+  public static boolean validateItemIdAndNumberOfDays(String itemId, int numberOfDays) {
+    return UserClient.validateItemId(itemId) && numberOfDays > 0;
+  }
+
+
+  public static boolean validateUserName(String username) {
+    return username.length() == 8 &&
+        (username.startsWith("CONU")
+            || username.startsWith("MCGU")
+            || username.startsWith("MONU") || username.startsWith("CONM") || username
+            .startsWith("MCGM") || username.startsWith("MONM"));
+  }
+
 
 }
