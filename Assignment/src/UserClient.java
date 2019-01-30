@@ -104,6 +104,36 @@ public class UserClient {
       logger.info(
           username + " Requested to Return Item " + itemId);
       System.out.println("Connect to Concordia Server");
+      try {
+        String response = getReturnItemResponse(username, itemId, 8080, "CON", logger);
+        System.out.println(response);
+      } catch (RemoteException | NotBoundException e) {
+        e.printStackTrace();
+      }
+      Utilities.closeLoggerHandlers(logger);
+    }
+    if (isMcGillUser) {
+      logger.info(
+          username + " Requested to Return Item " + itemId);
+      System.out.println("Connect to McGill Server");
+      try {
+        String response = getReturnItemResponse(username, itemId, 8081, "MCG", logger);
+        System.out.println(response);
+      } catch (RemoteException | NotBoundException e) {
+        e.printStackTrace();
+      }
+      Utilities.closeLoggerHandlers(logger);
+    }
+    if (isMonUser) {
+      logger.info(
+          username + " Requested to Return Item " + itemId);
+      System.out.println("Connect to Montreal Server");
+      try {
+        String response = getReturnItemResponse(username, itemId, 8082, "MON", logger);
+        System.out.println(response);
+      } catch (RemoteException | NotBoundException e) {
+        e.printStackTrace();
+      }
       Utilities.closeLoggerHandlers(logger);
     }
   }
@@ -159,7 +189,18 @@ public class UserClient {
     Registry registry = LocateRegistry.getRegistry(port);
     LibraryService obj = (LibraryService) registry.lookup(registryLookUp);
     String response = obj.findItem(username, itemId);
-    logger.info("Response Received from the server is ");
+    logger.info("Response Received from the server is " + response);
+    return response;
+  }
+
+  private static String getReturnItemResponse(String username, String itemId, int port,
+      String registryLookUp, Logger logger) throws RemoteException, NotBoundException {
+    logger.info(
+        username + " Requested to Return Item " + itemId);
+    Registry registry = LocateRegistry.getRegistry(port);
+    LibraryService obj = (LibraryService) registry.lookup(registryLookUp);
+    String response = obj.returnItem(username, itemId);
+    logger.info("Response Received from the server is " + response);
     return response;
   }
 

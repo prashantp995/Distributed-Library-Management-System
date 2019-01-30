@@ -11,4 +11,14 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
   public String findItem(String userId, String iteamName) throws RemoteException {
     return "Return From McGill Remote Server";
   }
+
+  @Override
+  public String returnItem(String userId, String itemID) throws RemoteException {
+    return null;
+  }
+
+  @Override
+  public String borrowItem(String userId, String itemID, int numberOfDays) throws RemoteException {
+    return null;
+  }
 }

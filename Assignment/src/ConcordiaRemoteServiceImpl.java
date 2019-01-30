@@ -17,6 +17,16 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
     return "Return from the Concordia Remote Server";
   }
 
+  @Override
+  public String returnItem(String userId, String itemID) throws RemoteException {
+    return null;
+  }
+
+  @Override
+  public String borrowItem(String userId, String itemID, int numberOfDays) throws RemoteException {
+    return null;
+  }
+
   public String provideCount(){
     return String.valueOf(map.get("TEst"));
   }

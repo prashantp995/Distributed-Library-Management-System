@@ -1,27 +1,51 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class MonRemoteServiceImpl extends UnicastRemoteObject implements LibraryService {
 
   HashMap<String, HashMap<String, Integer>> data = new HashMap<>();
+  HashSet<String> itemIds = new HashSet<>();
+  ArrayList<String> bookName = new ArrayList<>();
 
   protected MonRemoteServiceImpl() throws RemoteException {
     super();
     HashMap<String, Integer> nameAndQuantity;
-    for (int i = 1; i < 5; i++) {
+    Initbooks();
+    for (int i = 0; i < bookName.size(); i++) {
       nameAndQuantity = new HashMap<>();
-      nameAndQuantity.put("DSD_" + i, i);
-      data.put("MON_11" + i, nameAndQuantity);
+      nameAndQuantity.put(bookName.get(0), i + 1);
+      String itemId = "MON100" + i;
+      itemIds.add(itemId);
+      data.put(itemId, nameAndQuantity);
     }
 
 
   }
 
+  private void Initbooks() {
+    bookName.add("DSD");
+    bookName.add("APP");
+    bookName.add("ALGO");
+  }
+
+
   @Override
   public String findItem(String userId, String iteamName) throws RemoteException {
     return getData(data);
+  }
+
+  @Override
+  public String returnItem(String userId, String itemID) throws RemoteException {
+    return "Return item called from " + userId + " for" + itemID;
+  }
+
+  @Override
+  public String borrowItem(String userId, String itemID, int numberOfDays) throws RemoteException {
+    return null;
   }
 
   private String getData(HashMap<String, HashMap<String, Integer>> data) {
