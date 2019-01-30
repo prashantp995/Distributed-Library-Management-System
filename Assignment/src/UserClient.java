@@ -165,6 +165,32 @@ public class UserClient {
 
 
   private static void performRemoveItem(String username) {
+    Logger logger = getLogger(username);
+    String itemId = getItemId();
+    try {
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("Please Enter Quantity");
+      int quantity = scanner.nextInt();
+      String response = getResponseFromRemoveItem(username, itemId, quantity, logger);
+    } catch (RemoteException | NotBoundException e) {
+      e.printStackTrace();
+    } catch (java.util.InputMismatchException e) {
+      System.out.println("Please enter properInput");
+    }
+  }
+
+  private static String getResponseFromRemoveItem(String username, String itemId,
+      int quantity, Logger logger)
+      throws RemoteException, NotBoundException {
+    String[] serverInfo = getServerInfo();
+    logger.info(
+        username + " Requested to Remove Item " + itemId + "Quantity" + quantity);
+    logger.info("Connecting to " + serverInfo[0] + "  Server");
+    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
+    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
+    String response = obj.removeItem(username, itemId, quantity);
+    logger.info("Response Received from the server is " + response);
+    return response;
   }
 
   private static void performListItem(String username) {

@@ -40,7 +40,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
   }
 
   @Override
-  public String removeItem(String managerId, String itemId, String quantity) {
+  public String removeItem(String managerId, String itemId, int quantity) {
     return null;
   }
 

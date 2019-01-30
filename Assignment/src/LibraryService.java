@@ -12,7 +12,7 @@ public interface LibraryService extends Remote {
   String addItem(String userId, String itemID, String itemName, int quantity)
       throws RemoteException;
 
-  String removeItem(String managerId, String itemId, String quantity)throws RemoteException;
+  String removeItem(String managerId, String itemId, int quantity)throws RemoteException;
 
   String listItem(String managerId)throws RemoteException;
 

@@ -31,7 +31,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
   }
 
   @Override
-  public String removeItem(String managerId, String itemId, String quantity) {
+  public String removeItem(String managerId, String itemId, int quantity) {
     return null;
   }
 

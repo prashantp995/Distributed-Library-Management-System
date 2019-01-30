@@ -10,6 +10,10 @@ public class LibraryModel {
     this.quantity = quantity;
   }
 
+  public LibraryModel() {
+
+  }
+
   public String getItemId() {
     return itemId;
   }
@@ -32,5 +36,14 @@ public class LibraryModel {
 
   public void setQuantity(int quantity) {
     this.quantity = quantity;
+  }
+
+  @Override
+  public String toString() {
+    return "{" +
+        "itemId='" + itemId + '\'' +
+        ", itemName='" + itemName + '\'' +
+        ", quantity=" + quantity +
+        '}';
   }
 }
