@@ -1,7 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class LibraryModel {
 
   String itemId;
   String itemName;
+  List<String> waitingList = new ArrayList<String>();
+  List<String> currentBorrowerList = new ArrayList<String>();
   int quantity;
 
   public LibraryModel(String itemId, String itemName, int quantity) {
@@ -11,6 +16,12 @@ public class LibraryModel {
   }
 
   public LibraryModel() {
+
+  }
+
+  public LibraryModel(String itemName, int quantity) {
+    this.itemName = itemName;
+    this.quantity = quantity;
 
   }
 
@@ -36,6 +47,22 @@ public class LibraryModel {
 
   public void setQuantity(int quantity) {
     this.quantity = quantity;
+  }
+
+  public List<String> getWaitingList() {
+    return waitingList;
+  }
+
+  public void setWaitingList(List<String> waitingList) {
+    this.waitingList = waitingList;
+  }
+
+  public List<String> getCurrentBorrowerList() {
+    return currentBorrowerList;
+  }
+
+  public void setCurrentBorrowerList(List<String> currentBorrowerList) {
+    this.currentBorrowerList = currentBorrowerList;
   }
 
   @Override

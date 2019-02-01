@@ -1,5 +1,6 @@
 import static java.util.logging.Logger.getLogger;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -279,11 +280,15 @@ public class UserClient {
   private static void performFindItem(String username) {
     boolean valid = false;
     String itemName = getItemName();
-    Logger logger = getLogger(username);
+    Logger logger = null;
     try {
+      logger = Utilities
+          .setupLogger(Logger.getLogger(LibConstants.USERLOG), username + ".log");
       String response = getItemFindResponse(username, itemName, logger);
       System.out.println(response);
     } catch (RemoteException | NotBoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
       e.printStackTrace();
     } finally {
       Utilities.closeLoggerHandlers(logger);

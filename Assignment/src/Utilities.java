@@ -1,5 +1,12 @@
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -83,6 +90,36 @@ public class Utilities {
             || username.startsWith("MCGU")
             || username.startsWith("MONU") || username.startsWith("CONM") || username
             .startsWith("MCGM") || username.startsWith("MONM"));
+  }
+
+  public static String callUDPServer(UdpRequestModel udpRequestModel, int udpPort, Logger logger) {
+    logger.info("Calling Concordia UDP Server To Find Item");
+    StringBuilder response = new StringBuilder();
+    byte[] buf;
+    try {
+      DatagramSocket socket = new DatagramSocket();
+      InetAddress address = InetAddress.getByName("localhost");
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      ObjectOutputStream os = new ObjectOutputStream(outputStream);
+      os.writeObject(udpRequestModel);
+      buf = outputStream.toByteArray();
+      DatagramPacket packet
+          = new DatagramPacket(buf, buf.length, address, udpPort);
+      socket.send(packet);
+      packet = new DatagramPacket(buf, buf.length);
+      socket.receive(packet);
+      String received = new String(
+          packet.getData(), 0, packet.getLength());
+      response.append("\n" + received);
+      System.out.println("Data Received" + received);
+    } catch (SocketException e) {
+      e.printStackTrace();
+    } catch (UnknownHostException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return response.toString();
   }
 
 

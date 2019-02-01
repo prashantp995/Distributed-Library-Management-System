@@ -1,25 +1,35 @@
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 public class MonRemoteServiceImpl extends UnicastRemoteObject implements LibraryService {
 
-  HashMap<String, HashMap<String, Integer>> data = new HashMap<>();
+  HashMap<String, LibraryModel> data = new HashMap<>();
   HashSet<String> itemIds = new HashSet<>();
   HashSet<String> managerId = new HashSet<>();
-  HashSet<String> userId = new HashSet<>();
+  HashSet<String> userIds = new HashSet<>();
   ArrayList<String> bookName = new ArrayList<>();
   Logger logger = null;
+
 
   protected MonRemoteServiceImpl() throws RemoteException {
     super();
     initManagerID();
     initUserID();
+    data.put("MON1012", new LibraryModel("DSD", 5));
     try {
       logger = Utilities
           .setupLogger(Logger.getLogger("MontrealServerLog"), "MontrealServerLog.log");
@@ -36,8 +46,8 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   }
 
   private void initUserID() {
-    userId.add("MONU1111");
-    userId.add("MONU1112");
+    userIds.add("MONU1111");
+    userIds.add("MONU1112");
   }
 
   private void Initbooks() {
@@ -49,7 +59,43 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
 
   @Override
   public String findItem(String userId, String itemName) throws RemoteException {
-    return "Find item is called on Montreal server by " + userId + " for " + itemName;
+    logger.info(userId + "requested to find item" + itemName);
+    String itemDetails;
+    if (!isValidUser(userId)) {
+      logger.info(userId + "is not valid/authorized to  find Item" + itemName);
+      return userId + "is not valid/authorized to  find Item" + itemName;
+    } else {
+      itemDetails = findItem(itemName, true);
+      if (itemDetails.length() == 0) {
+        return "No item found in Montreal Server";
+      }
+    }
+    return itemDetails;
+  }
+
+  public String findItem(String itemName, boolean callExternalServers) {
+    StringBuilder response = new StringBuilder();
+    for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
+      if (letterEntry.getValue().getItemName().equals(itemName)) {
+        response.append(letterEntry.getKey() + " ");
+        response.append(letterEntry.getValue().getQuantity());
+      }
+    }
+    if (callExternalServers) {
+      UdpRequestModel udpRequestModel = new UdpRequestModel("findItem", itemName);
+      String concordiaServerResponse = Utilities
+          .callUDPServer(udpRequestModel, LibConstants.UDP_CON_PORT, logger);
+      if (concordiaServerResponse != null && concordiaServerResponse.length() > 0) {
+        response.append(concordiaServerResponse);
+      }
+    }
+
+    return response.toString();
+  }
+
+
+  private boolean isValidUser(String userId) {
+    return userIds.contains(userId);
   }
 
   @Override
@@ -76,17 +122,15 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     if (itemIds.add(itemID)) {
       logger.info("Item id is not in existing database, Adding as new Item");
       bookName.add(itemName);
-      HashMap<String, Integer> nameQuantity = new HashMap<>();
-      nameQuantity.put(itemName, quantity);
-      data.put(itemID, nameQuantity);
+      LibraryModel libraryModel = new LibraryModel(itemName, quantity);
+      data.put(itemID, libraryModel);
       response.append("Item Add Success");
     } else {
       logger.info("Item id   exist in  database, modifying as new Item");
       if (validateItemIdAndName(itemID, itemName)) {
         logger.info("Item id and Item name matches");
-        HashMap<String, Integer> nameQuantity = new HashMap<>();
-        nameQuantity.put(itemName, quantity);
-        data.put(itemID, nameQuantity);
+        LibraryModel libraryModel = new LibraryModel(itemName, quantity);
+        data.put(itemID, libraryModel);
         response.append("Item add success, Quantity updated");
       } else {
         response.append("Item Add Fails , Item Id and Name Does not match");
@@ -96,16 +140,12 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   }
 
   private boolean validateItemIdAndName(String itemID, String itemName) {
-    for (Map.Entry<String, HashMap<String, Integer>> letterEntry : data.entrySet()) {
+    for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
       String id = letterEntry.getKey();
       if (id.equals(itemID)) {
-        for (Map.Entry<String, Integer> nameEntry : letterEntry.getValue().entrySet()) {
-          String name = nameEntry.getKey();
-          if (name.equals(itemName)) {
-            return true;
-          }
+        LibraryModel libraryModel = letterEntry.getValue();
+        return libraryModel.getItemName().equals(itemName);
 
-        }
       }
 
     }
@@ -141,15 +181,14 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   }
 
   private synchronized void updateQuantity(String itemId, int quantity) {
-    LibraryModel libraryModel = getData(data, itemId);
+    LibraryModel libraryModel = data.get(itemId);
+    libraryModel.setQuantity(quantity);
     logger.info("updating existing item " + libraryModel);
-    HashMap<String, Integer> nameQuantity = new HashMap<>();
-    nameQuantity.put(libraryModel.getItemName(), quantity);
-    data.put(itemId, nameQuantity);
+    data.put(itemId, libraryModel);
   }
 
   private synchronized void removeItemCompletely(String itemId) {
-    LibraryModel libraryModel = getData(data, itemId);
+    LibraryModel libraryModel = data.get(itemId);
     logger.info("removing" + libraryModel);
     data.remove(libraryModel.getItemId());
     itemIds.remove(libraryModel.getItemId());
@@ -166,15 +205,14 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     return getData(data);
   }
 
-  private String getData(HashMap<String, HashMap<String, Integer>> data) {
+  private String getData(HashMap<String, LibraryModel> data) {
     StringBuilder response = new StringBuilder();
-    for (Map.Entry<String, HashMap<String, Integer>> letterEntry : data.entrySet()) {
+    for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
       String letter = letterEntry.getKey();
       response.append("ItemId " + letter);
-      for (Map.Entry<String, Integer> nameEntry : letterEntry.getValue().entrySet()) {
-        response.append(" IeamName " + nameEntry.getKey());
-        response.append(" Quantity " + nameEntry.getValue() + "\n");
-      }
+      LibraryModel libraryModel = letterEntry.getValue();
+      response.append(" IeamName " + libraryModel.getItemName());
+      response.append(" Quantity " + libraryModel.getQuantity() + "\n");
     }
     return response.toString();
   }
@@ -196,5 +234,6 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   private boolean isValidManager(String managerId) {
     return managerId.contains(managerId);
   }
+
 
 }
