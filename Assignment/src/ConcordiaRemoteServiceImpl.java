@@ -81,6 +81,11 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       if (montrealServerResponse != null && montrealServerResponse.length() > 0) {
         response.append(montrealServerResponse);
       }
+      String mcgServerResponse = Utilities
+          .callUDPServer(udpRequestModel, LibConstants.UDP_MCG_PORT, logger);
+      if (mcgServerResponse != null && mcgServerResponse.length() > 0) {
+        response.append(mcgServerResponse);
+      }
 
     }
 
