@@ -11,4 +11,12 @@ public class LibConstants {
   public static final int UDP_MON_PORT = 8086;
 
   public static final String USERLOG = "UserLog";
+  public static final String SUCCESS = "Success";
+  public static final String FAIL = "Fail";
+  public static final String ALREADY_WAITING_LIST = "Already in Waiting List";
+  public static final String WAIT_LIST_POSSIBLE = "Wait List Possible";
+  public static final String OPR_WAIT_LIST = "waitList";
+
+  public static final int CLIENT_PORT = 8087;
+  public static final String CLIENT_REG = "CLIENT";
 }

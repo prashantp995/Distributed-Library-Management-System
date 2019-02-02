@@ -90,6 +90,15 @@ public class MonServer {
     if (request.getMethodName().equalsIgnoreCase("findItem")) {
       response = exportedObj.findItem(request.getItemName(), false);
     }
+    if (request.getMethodName().equalsIgnoreCase("borrowItem")) {
+      response = exportedObj.performBorrowItemOperation(request.getItemId(), request.getUserId(),
+          request.getNumberOfDays());
+    }
+    if (request.getMethodName().equalsIgnoreCase(LibConstants.OPR_WAIT_LIST)) {
+      response = exportedObj
+          .addUserInWaitList(request.getItemId(), request.getUserId(), request.getNumberOfDays(),
+              false);
+    }
     System.out.println("Response to send from udp is " + response);
 
     if (response != null && response.length() > 0) {

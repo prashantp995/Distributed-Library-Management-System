@@ -2,6 +2,7 @@ import static java.util.logging.Logger.getLogger;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -22,6 +23,19 @@ public class UserClient {
 
   public static void main(String args[])
       throws RemoteException, NotBoundException, MalformedURLException {
+    int RMIPortNum = 8087;
+    CallbackClientImpl exportedObj = null;
+    try {
+      exportedObj = new CallbackClientImpl();
+      Registry registry =
+          LocateRegistry.createRegistry(RMIPortNum);
+      registry.rebind("CLIENT", exportedObj);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+
+    System.out.println("Client Started " + " Rmi Port Number " + RMIPortNum + " Look Up "
+        + LibConstants.CON_REG);
     boolean valid = false;
     while (!valid) {
       System.out.println("Enter your username: ");
@@ -73,7 +87,7 @@ public class UserClient {
           if (scanner.hasNextInt()) {
             choice = scanner.nextInt();
             if (choice == 0) {
-              valid = false;
+              valid = true;
               break;
             }
             if (choice == 1 || choice == 2 || choice == 3) {
@@ -97,15 +111,19 @@ public class UserClient {
         System.out.println(" 1  for borrowItem");
         System.out.println(" 2  for findItem");
         System.out.println(" 3  for returnItem");
+        System.out.println(" 0  Exit");
         Scanner scanner = new Scanner(System.in);
         try {
 
           int choice;
           if (scanner.hasNextInt()) {
             choice = scanner.nextInt();
+            if (choice == 0) {
+              valid = false;
+              break;
+            }
             if (choice == 1 || choice == 2 || choice == 3) {
               performOperation(choice, username);
-              valid = true;
             } else {
               System.out.println("please enter valid choice");
             }

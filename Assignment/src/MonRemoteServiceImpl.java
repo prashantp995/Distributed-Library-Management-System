@@ -1,11 +1,4 @@
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -18,6 +11,7 @@ import java.util.logging.Logger;
 public class MonRemoteServiceImpl extends UnicastRemoteObject implements LibraryService {
 
   HashMap<String, LibraryModel> data = new HashMap<>();
+  HashMap<String, ArrayList<String>> currentBorrowers = new HashMap<>();
   HashSet<String> itemIds = new HashSet<>();
   HashSet<String> managerId = new HashSet<>();
   HashSet<String> userIds = new HashSet<>();
@@ -86,7 +80,12 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       String concordiaServerResponse = Utilities
           .callUDPServer(udpRequestModel, LibConstants.UDP_CON_PORT, logger);
       if (concordiaServerResponse != null && concordiaServerResponse.length() > 0) {
-        response.append(concordiaServerResponse);
+        response.append("\n" + concordiaServerResponse + "\n");
+      }
+      String mcGillServerResponse = Utilities
+          .callUDPServer(udpRequestModel, LibConstants.UDP_MCG_PORT, logger);
+      if (mcGillServerResponse != null && mcGillServerResponse.length() > 0) {
+        response.append(mcGillServerResponse + "\n");
       }
     }
 
@@ -105,8 +104,121 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
 
   @Override
   public String borrowItem(String userId, String itemID, int numberOfDays) throws RemoteException {
-    return "Borrow item is called on Montreal server by " + userId + " for " + itemID + " for "
-        + numberOfDays;
+    if (!isValidUser(userId)) {
+      logger.info(userId + "is not present/authorised");
+      return userId + "is not present/authorised";
+    }
+    StringBuilder response = new StringBuilder();
+    String result = performBorrowItemOperation(itemID, userId,
+        numberOfDays);//this will fail if itemID is not in this server
+    //if fails then we need to connect to Respective External Server to Borrow Item
+    if (result.equals(LibConstants.FAIL)) {
+      logger.info(
+          "Calling ExternalUDP Servers");
+      String res = borrowItemFromExternalServer(userId, itemID, numberOfDays);
+      response.append(res);
+      if (res.equals(LibConstants.WAIT_LIST_POSSIBLE)) {
+        int clientChoice = Utilities.getResponseFromClient(logger);
+        if (clientChoice == 1) {
+          res = addUserInWaitList(itemID, userId, numberOfDays, true);
+        }
+      }
+
+      return res;
+    }
+
+    return response.toString();
+  }
+
+  public String addUserInWaitList(String itemID, String userId, int numberOfDays,
+      boolean externalServerCallRequire) {
+    String response = null;
+    if (externalServerCallRequire) {
+      int port = Utilities.getPortFromItemId(itemID);
+      UdpRequestModel udpRequestModel = new UdpRequestModel(LibConstants.OPR_WAIT_LIST, itemID,
+          numberOfDays, userId);
+
+      if (port != 0) {
+        response = Utilities
+            .callUDPServer(udpRequestModel, port, logger);
+      } else {
+        response = "invalid item id";
+      }
+    } else {
+      synchronized (data) {
+        LibraryModel libraryModel = data.get(itemID);
+        libraryModel.getWaitingList().add(userId);
+        data.put(itemID, libraryModel);
+        response = LibConstants.SUCCESS;
+      }
+    }
+    return response;
+  }
+
+
+  public synchronized String performBorrowItemOperation(String itemID, String userId,
+      int numberOfDays) {
+    if (isItemAvailableToBorrow(itemID, userId, numberOfDays)) {
+      LibraryModel libraryModel = data.get(itemID);
+      libraryModel.getCurrentBorrowerList().add(userId);
+      libraryModel.setQuantity(libraryModel.getQuantity() - 1);
+      if (!currentBorrowers.containsKey(userId)) {
+        ArrayList<String> itemBorrowed = new ArrayList<>();
+        itemBorrowed.add(itemID);
+        currentBorrowers.put(userId, itemBorrowed);
+      } else {
+        currentBorrowers.get(userId).add(itemID);
+      }
+      return LibConstants.SUCCESS;
+    } else if (isUserInWaitList(itemID, userId)) {
+      return LibConstants.ALREADY_WAITING_LIST;
+    } else if (isWaitListPossible(itemID, userId)) {
+      return LibConstants.WAIT_LIST_POSSIBLE;
+
+    }
+    return LibConstants.FAIL;
+  }
+
+  private boolean isWaitListPossible(String itemID, String userId) {
+    if (data.containsKey(itemID) && data.get(itemID).getQuantity() == 0) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean isUserInWaitList(String itemID, String userId) {
+    if (data.containsKey(itemID) && data.get(itemID).getWaitingList() != null && data.get(itemID)
+        .getWaitingList().contains(userId)) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean isItemAvailableToBorrow(String itemID, String userId, int numberOfDays) {
+    if (data.containsKey(itemID)) {
+      if (data.get(itemID).getQuantity() > 0) {
+        //check if user has already borrowed the item
+        return !(currentBorrowers.containsKey(userId) && currentBorrowers.get(userId)
+            .contains(itemID));
+      }
+    }
+    return false;
+  }
+
+  private String borrowItemFromExternalServer(String userId, String itemID, int numberOfDays) {
+    UdpRequestModel udpRequestModel = new UdpRequestModel("borrowItem", itemID, numberOfDays,
+        userId);
+    String response = null;
+    int port = Utilities.getPortFromItemId(itemID);
+    if (port != 0) {
+      response = Utilities
+          .callUDPServer(udpRequestModel, port, logger);
+    } else {
+      response = "invalid item id";
+    }
+    return response;
+
+
   }
 
   @Override
@@ -190,8 +302,8 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   private synchronized void removeItemCompletely(String itemId) {
     LibraryModel libraryModel = data.get(itemId);
     logger.info("removing" + libraryModel);
-    data.remove(libraryModel.getItemId());
-    itemIds.remove(libraryModel.getItemId());
+    data.remove(itemId);
+    itemIds.remove(itemId);
     bookName.remove(libraryModel.getItemName());
   }
 

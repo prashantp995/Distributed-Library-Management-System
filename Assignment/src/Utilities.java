@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -93,7 +94,7 @@ public class Utilities {
   }
 
   public static String callUDPServer(UdpRequestModel udpRequestModel, int udpPort, Logger logger) {
-    logger.info("Calling Concordia UDP Server To Find Item");
+    logger.info("Calling  UDP Servers");
     StringBuilder response = new StringBuilder();
     byte[] buf;
     try {
@@ -110,8 +111,8 @@ public class Utilities {
       socket.receive(packet);
       String received = new String(
           packet.getData(), 0, packet.getLength());
-      response.append("\n" + received);
-      System.out.println("Data Received" + received);
+      response.append(received);
+      System.out.println("Data Received " + received);
     } catch (SocketException e) {
       e.printStackTrace();
     } catch (UnknownHostException e) {
@@ -122,5 +123,33 @@ public class Utilities {
     return response.toString();
   }
 
+  public static int getResponseFromClient(Logger logger) {
 
+    Registry registry = null;
+    try {
+      registry = LocateRegistry.getRegistry(LibConstants.CLIENT_PORT);
+      CallbackClientInterface obj = (CallbackClientInterface) registry
+          .lookup(LibConstants.CLIENT_REG);
+      return obj.askForWaitingList();
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    } catch (NotBoundException e) {
+      e.printStackTrace();
+    }
+
+    return 0;
+  }
+
+  public static int getPortFromItemId(String itemID) {
+    if (itemID.startsWith("CON")) {
+      return LibConstants.UDP_CON_PORT;
+    }
+    if (itemID.startsWith("MCG")) {
+      return LibConstants.UDP_MCG_PORT;
+    }
+    if (itemID.startsWith("MON")) {
+      return LibConstants.UDP_MON_PORT;
+    }
+    return 0;
+  }
 }
