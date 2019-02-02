@@ -12,7 +12,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
 
   HashMap<String, LibraryModel> data = new java.util.HashMap<>();
   HashSet<String> itemIds = new HashSet<>();
-  HashSet<String> managerId = new HashSet<>();
+  HashSet<String> managerIds = new HashSet<>();
   HashSet<String> userIds = new HashSet<>();
   ArrayList<String> bookName = new ArrayList<>();
   Logger logger = null;
@@ -34,8 +34,8 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
   }
 
   private void initManagerID() {
-    managerId.add("MCGM1111");
-    managerId.add("MCGM1112");
+    managerIds.add("MCGM1111");
+    managerIds.add("MCGM1112");
   }
 
   private void initUserID() {
@@ -226,7 +226,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
   }
 
   private boolean isValidManager(String managerId) {
-    return managerId.contains(managerId);
+    return managerIds.contains(managerId);
   }
 
 }

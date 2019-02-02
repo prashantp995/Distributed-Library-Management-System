@@ -88,7 +88,7 @@ public class McGillServer {
     }
   }
 
-  private static synchronized DatagramPacket getDatagramPacket(DatagramPacket reponsePacket,
+  private static DatagramPacket getDatagramPacket(DatagramPacket reponsePacket,
       InetAddress address,
       int port, UdpRequestModel request, String response, McGillRemoteServiceImpl exportedObj) {
     if (request.getMethodName().equalsIgnoreCase("findItem")) {
