@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -21,7 +20,8 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     super();
     initManagerID();
     initUserID();
-    data.put("MON1012", new LibraryModel("DSD", 5));
+    data.put("MON1012", new LibraryModel("DSD", 1));
+    data.put("MON1013", new LibraryModel("ALGO", 0));
     this.logger = logger;
 
 
@@ -92,6 +92,9 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     String response = null;
     if (data.containsKey(itemID)) {
       response = performReturnItemOperation(userId, itemID, false);
+      logger.info("Return Item Response is " + response);
+      logger.info("Now attempting to process wait list");
+      processWaitingListIfPossible(itemID);
     } else {
       response = performReturnItemOperation(userId, itemID, true);
       if (response.equalsIgnoreCase(LibConstants.SUCCESS)) {
@@ -100,6 +103,26 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       }
     }
     return response;
+  }
+
+  private void processWaitingListIfPossible(String itemID) {
+    if (data.containsKey(itemID)) {
+      synchronized (data) {
+        LibraryModel book = data.get(itemID);
+        if (book.getQuantity() > 0 && book.getWaitingList().size() > 0) {
+          logger.info("Waiting List Found For The Item Id " + itemID);
+          String firstUserInWaitingList = book.getWaitingList().get(0);
+          logger.info(firstUserInWaitingList + " is First in Waiting List");
+          book.getCurrentBorrowerList().add(firstUserInWaitingList);//add in borrower list
+          book.getWaitingList().remove(firstUserInWaitingList);//remove from waiting list
+          book.setQuantity(book.getQuantity() - 1);
+          addOrUpdateInCurrentBorrowers(firstUserInWaitingList, itemID);
+          data.put(itemID, book);//update the data with new details
+          logger.info(itemID + "  is assigned to " + firstUserInWaitingList);
+        }
+      }
+
+    }
   }
 
   public String performReturnItemOperation(String userId, String itemID,
@@ -154,29 +177,40 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     response.append(result);
     if (result.equals(LibConstants.FAIL)) {
       logger.info(
-          "Calling ExternalUDP Servers");
+          "Calling ExternalUDP Servers To Borrow " + itemID + " For " + userId);
       String res = borrowItemFromExternalServer(userId, itemID, numberOfDays);
       response.append(res);
       if (res.equals(LibConstants.WAIT_LIST_POSSIBLE)) {
-        int clientChoice = Utilities.getResponseFromClient(logger);
-        if (clientChoice == 1) {
-          res = addUserInWaitList(itemID, userId, numberOfDays, true);
-        }
+        res = handleWaitList(userId, itemID, numberOfDays, res, true);
       } else if (res.equalsIgnoreCase(LibConstants.SUCCESS)) {
-        //external server approved borrow item
-        if (!currentBorrowers.containsKey(userId)) {
-          ArrayList<String> itemBorrowed = new ArrayList<>();
-          itemBorrowed.add(itemID);
-          currentBorrowers.put(userId, itemBorrowed);
-        } else {
-          currentBorrowers.get(userId).add(itemID);
-        }
+        addOrUpdateInCurrentBorrowers(userId, itemID);//external server approved borrow item
       }
 
       return res;
+    } else if (result.equalsIgnoreCase(LibConstants.WAIT_LIST_POSSIBLE)) {
+      result = handleWaitList(userId, itemID, numberOfDays, result, false);
     }
 
-    return response.toString();
+    return result;
+  }
+
+  private String handleWaitList(String userId, String itemID, int numberOfDays, String res,
+      boolean externalServerCallRequire) {
+    int clientChoice = Utilities.getResponseFromClient(logger);
+    if (clientChoice == 1) {
+      res = addUserInWaitList(itemID, userId, numberOfDays, externalServerCallRequire);
+    }
+    return res;
+  }
+
+  private void addOrUpdateInCurrentBorrowers(String userId, String itemID) {
+    if (!currentBorrowers.containsKey(userId)) {
+      ArrayList<String> itemBorrowed = new ArrayList<>();
+      itemBorrowed.add(itemID);
+      currentBorrowers.put(userId, itemBorrowed);
+    } else {
+      currentBorrowers.get(userId).add(itemID);
+    }
   }
 
   public String addUserInWaitList(String itemID, String userId, int numberOfDays,
@@ -212,13 +246,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       libraryModel.getCurrentBorrowerList().add(userId);
       libraryModel.setQuantity(libraryModel.getQuantity() - 1);
       data.put(itemID, libraryModel);
-      if (!currentBorrowers.containsKey(userId)) {
-        ArrayList<String> itemBorrowed = new ArrayList<>();
-        itemBorrowed.add(itemID);
-        currentBorrowers.put(userId, itemBorrowed);
-      } else {
-        currentBorrowers.get(userId).add(itemID);
-      }
+      addOrUpdateInCurrentBorrowers(userId, itemID);
       return LibConstants.SUCCESS;
     } else if (isUserInWaitList(itemID, userId)) {
       return LibConstants.ALREADY_WAITING_LIST;
@@ -290,8 +318,13 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       logger.info("Item id   exist in  database, modifying as new Item");
       if (validateItemIdAndName(itemID, itemName)) {
         logger.info("Item id and Item name matches");
-        LibraryModel libraryModel = new LibraryModel(itemName, quantity);
+        LibraryModel libraryModel = data.get(itemID);
+        int previousQuantity = libraryModel.getQuantity();
+        libraryModel.setQuantity(quantity);
         data.put(itemID, libraryModel);
+        if (previousQuantity == 0) {
+          processWaitingListIfPossible(itemID);
+        }
         response.append("Item add success, Quantity updated");
       } else {
         response.append("Item Add Fails , Item Id and Name Does not match");
@@ -350,6 +383,13 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
 
   private synchronized void removeItemCompletely(String itemId) {
     LibraryModel libraryModel = data.get(itemId);
+    if (libraryModel.getCurrentBorrowerList() != null
+        && libraryModel.getCurrentBorrowerList().size() > 0) {
+      logger
+          .info("Manager is trying to remove item completely but item is already assigned to"
+              + libraryModel.getCurrentBorrowerList().toString());
+
+    }
     logger.info("removing" + libraryModel);
     data.remove(itemId);
   }
