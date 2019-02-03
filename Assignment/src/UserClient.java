@@ -2,7 +2,6 @@ import static java.util.logging.Logger.getLogger;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -88,6 +87,7 @@ public class UserClient {
             choice = scanner.nextInt();
             if (choice == 0) {
               valid = true;
+              System.exit(0);
               break;
             }
             if (choice == 1 || choice == 2 || choice == 3) {
@@ -120,6 +120,7 @@ public class UserClient {
             choice = scanner.nextInt();
             if (choice == 0) {
               valid = false;
+              System.exit(0);
               break;
             }
             if (choice == 1 || choice == 2 || choice == 3) {
