@@ -4,8 +4,6 @@ import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.Socket;
-import java.net.SocketException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Logger;
@@ -94,15 +92,17 @@ public class ConcordiaServer {
       int port, UdpRequestModel request, String response, ConcordiaRemoteServiceImpl exportedObj) {
     if (request.getMethodName().equalsIgnoreCase("findItem")) {
       response = exportedObj.findItem(request.getItemName(), false);
-    }
-    if (request.getMethodName().equalsIgnoreCase("borrowItem")) {
+    } else if (request.getMethodName().equalsIgnoreCase("borrowItem")) {
       response = exportedObj.performBorrowItemOperation(request.getItemId(), request.getUserId(),
           request.getNumberOfDays());
-    }
-    if (request.getMethodName().equalsIgnoreCase(LibConstants.OPR_WAIT_LIST)) {
+    } else if (request.getMethodName().equalsIgnoreCase(LibConstants.OPR_WAIT_LIST)) {
       response = exportedObj
           .addUserInWaitList(request.getItemId(), request.getUserId(), request.getNumberOfDays(),
               false);
+
+    } else if (request.getMethodName().equalsIgnoreCase("returnItem")) {
+      response = exportedObj
+          .performReturnItemOperation(request.getUserId(), request.getItemId(), false);
     }
     System.out.println("Response to send from udp is " + response);
 
