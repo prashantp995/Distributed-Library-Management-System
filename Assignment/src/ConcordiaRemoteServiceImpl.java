@@ -18,18 +18,13 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
   Logger logger = null;
 
 
-  protected ConcordiaRemoteServiceImpl() throws RemoteException {
+  protected ConcordiaRemoteServiceImpl(Logger logger) throws RemoteException {
     super();
     initManagerID();
     initUserID();
     data.put("CON1012", new LibraryModel("DSD", 5));
     data.put("CON1013", new LibraryModel("ALGO", 0));
-    try {
-      logger = Utilities
-          .setupLogger(Logger.getLogger("ConcordiaServerLog"), "ConcordiaServerLog.log");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    this.logger = logger;
 
 
   }
@@ -103,6 +98,10 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       response = performReturnItemOperation(userId, itemID, false);
     } else {
       response = performReturnItemOperation(userId, itemID, true);
+      if (response.equalsIgnoreCase(LibConstants.SUCCESS)) {
+        System.out.println("External Server Approved Return Item");
+        removeFromCurrentBorrowers(userId, itemID);
+      }
     }
     return response;
   }
@@ -277,7 +276,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       return "Item Remove Fails,User is not Present/Authorised";
     }
     if (quantity < 0) {
-      logger.info(managerId + "is not Present/Authorised");
+      logger.info(managerId + "Item Remove Fails,Quantity is not valid");
       return "Item Remove Fails,Quantity is not valid";
     }
     if (!data.containsKey(itemId)) {
@@ -285,10 +284,14 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
     } else {
       if (quantity == 0) {
         removeItemCompletely(itemId);
-        response.append("Remove Item Success , Item Removed Completely");
+        logger.info("Remove Item Success , " + itemId + " Removed Completely by " + managerId);
+        response
+            .append("Remove Item Success , " + itemId + " Removed Completely by " + managerId);
       } else {
         updateQuantity(itemId, quantity);
-        response.append("Remove Item Success , Updated the Quantity");
+        logger.info("Remove Item Success , " + itemId + " Updated the Quantity by  " + managerId);
+        response
+            .append("Remove Item Success , " + itemId + " Updated the Quantity by  " + managerId);
       }
     }
     return response.toString();
@@ -349,6 +352,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       LibraryModel libraryModel = data.get(itemID);
       libraryModel.getCurrentBorrowerList().add(userId);
       libraryModel.setQuantity(libraryModel.getQuantity() - 1);
+      data.put(itemID, libraryModel);
       if (!currentBorrowers.containsKey(userId)) {
         ArrayList<String> itemBorrowed = new ArrayList<>();
         itemBorrowed.add(itemID);

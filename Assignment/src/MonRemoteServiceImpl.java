@@ -17,17 +17,12 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   Logger logger = null;
 
 
-  protected MonRemoteServiceImpl() throws RemoteException {
+  protected MonRemoteServiceImpl(Logger logger) throws RemoteException {
     super();
     initManagerID();
     initUserID();
     data.put("MON1012", new LibraryModel("DSD", 5));
-    try {
-      logger = Utilities
-          .setupLogger(Logger.getLogger("MontrealServerLog"), "MontrealServerLog.log");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    this.logger = logger;
 
 
   }
@@ -99,6 +94,10 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       response = performReturnItemOperation(userId, itemID, false);
     } else {
       response = performReturnItemOperation(userId, itemID, true);
+      if (response.equalsIgnoreCase(LibConstants.SUCCESS)) {
+        System.out.println("External Server Approved Return Item");
+        removeFromCurrentBorrowers(userId, itemID);
+      }
     }
     return response;
   }
@@ -115,13 +114,13 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       return response;
     } else {
       if (data.containsKey(itemID)) {
-        LibraryModel model = data.get(itemID);
-        if (model.getCurrentBorrowerList() != null && model.getCurrentBorrowerList()
+        LibraryModel book = data.get(itemID);
+        if (book.getCurrentBorrowerList() != null && book.getCurrentBorrowerList()
             .contains(userId)) {
           synchronized (data) {
-            model.getCurrentBorrowerList().remove(userId);
-            model.setQuantity(model.getQuantity() + 1);
-            data.put(itemID, model);
+            book.getCurrentBorrowerList().remove(userId);
+            book.setQuantity(book.getQuantity() + 1);
+            data.put(itemID, book);
             removeFromCurrentBorrowers(userId, itemID);
             return LibConstants.SUCCESS;
           }
@@ -212,6 +211,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       LibraryModel libraryModel = data.get(itemID);
       libraryModel.getCurrentBorrowerList().add(userId);
       libraryModel.setQuantity(libraryModel.getQuantity() - 1);
+      data.put(itemID, libraryModel);
       if (!currentBorrowers.containsKey(userId)) {
         ArrayList<String> itemBorrowed = new ArrayList<>();
         itemBorrowed.add(itemID);
@@ -255,7 +255,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     return false;
   }
 
-  private String borrowItemFromExternalServer(String userId, String itemID, int numberOfDays) {
+  public String borrowItemFromExternalServer(String userId, String itemID, int numberOfDays) {
     UdpRequestModel udpRequestModel = new UdpRequestModel("borrowItem", itemID, numberOfDays,
         userId);
     String response = null;
@@ -324,7 +324,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       return "Item Remove Fails,User is not Present/Authorised";
     }
     if (quantity < 0) {
-      logger.info(managerId + "is not Present/Authorised");
+      logger.info("Item Remove Fails,Quantity is not valid");
       return "Item Remove Fails,Quantity is not valid";
     }
     if (!data.containsKey(itemId)) {

@@ -17,18 +17,13 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
   Logger logger = null;
 
 
-  protected McGillRemoteServiceImpl() throws RemoteException {
+  protected McGillRemoteServiceImpl(Logger logger) throws RemoteException {
     super();
     initManagerID();
     initUserID();
     data.put("MCG1012", new LibraryModel("DSD", 52));
     data.put("MCG1013", new LibraryModel("ALGO", 0));
-    try {
-      logger = Utilities
-          .setupLogger(Logger.getLogger("McGillServerLog"), "McGillServerLog.log");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    this.logger = logger;
 
 
   }
@@ -102,6 +97,10 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
       response = performReturnItemOperation(userId, itemID, false);
     } else {
       response = performReturnItemOperation(userId, itemID, true);
+      if (response.equalsIgnoreCase(LibConstants.SUCCESS)) {
+        System.out.println("External Server Approved Return Item");
+        removeFromCurrentBorrowers(userId, itemID);
+      }
     }
     return response;
   }
@@ -308,6 +307,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
       LibraryModel libraryModel = data.get(itemID);
       libraryModel.getCurrentBorrowerList().add(userId);
       libraryModel.setQuantity(libraryModel.getQuantity() - 1);
+      data.put(itemID, libraryModel);
       if (!currentBorrowers.containsKey(userId)) {
         ArrayList<String> itemBorrowed = new ArrayList<>();
         itemBorrowed.add(itemID);

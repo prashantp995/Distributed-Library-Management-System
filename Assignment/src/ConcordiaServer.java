@@ -19,7 +19,7 @@ public class ConcordiaServer {
     byte[] buf = new byte[256];
     try {
       int RMIPortNum = LibConstants.CON_PORT;
-      ConcordiaRemoteServiceImpl exportedObj = new ConcordiaRemoteServiceImpl();
+      ConcordiaRemoteServiceImpl exportedObj = new ConcordiaRemoteServiceImpl(logger);
       Registry registry =
           LocateRegistry.createRegistry(RMIPortNum);
       registry.bind(LibConstants.CON_REG, exportedObj);
@@ -60,8 +60,8 @@ public class ConcordiaServer {
               logger.info(request.getMethodName() + " is called by " + address + ":" + port);
               String response = null;
               reponsePacket = getDatagramPacket(reponsePacket, address, port, request, response,
-                  exportedObj);
-              logger.info("sending response " + reponsePacket);
+                  exportedObj, logger);
+              logger.info("sending response " + reponsePacket.getData().toString());
 
             } catch (ClassNotFoundException e) {
               e.printStackTrace();
@@ -89,20 +89,16 @@ public class ConcordiaServer {
 
   private static synchronized DatagramPacket getDatagramPacket(DatagramPacket reponsePacket,
       InetAddress address,
-      int port, UdpRequestModel request, String response, ConcordiaRemoteServiceImpl exportedObj) {
+      int port, UdpRequestModel request, String response, ConcordiaRemoteServiceImpl exportedObj,
+      Logger logger) {
     if (request.getMethodName().equalsIgnoreCase("findItem")) {
-      response = exportedObj.findItem(request.getItemName(), false);
+      response = getFindItemResponse(request, exportedObj, logger);
     } else if (request.getMethodName().equalsIgnoreCase("borrowItem")) {
-      response = exportedObj.performBorrowItemOperation(request.getItemId(), request.getUserId(),
-          request.getNumberOfDays());
+      response = getBorrowItemResponse(request, exportedObj, logger);
     } else if (request.getMethodName().equalsIgnoreCase(LibConstants.OPR_WAIT_LIST)) {
-      response = exportedObj
-          .addUserInWaitList(request.getItemId(), request.getUserId(), request.getNumberOfDays(),
-              false);
-
+      response = getWaitListResponse(request, exportedObj, logger);
     } else if (request.getMethodName().equalsIgnoreCase("returnItem")) {
-      response = exportedObj
-          .performReturnItemOperation(request.getUserId(), request.getItemId(), false);
+      response = getReturnItemResponse(request, exportedObj, logger);
     }
     System.out.println("Response to send from udp is " + response);
 
@@ -114,6 +110,54 @@ public class ConcordiaServer {
           address, port);
     }
     return reponsePacket;
+  }
+
+  private static String getReturnItemResponse(UdpRequestModel request,
+      ConcordiaRemoteServiceImpl exportedObj, Logger logger) {
+    String response;
+    logger.info(
+        "Return item is Called :   Item is " + request.getItemId() + " User " + request
+            .getUserId());
+    response = exportedObj
+        .performReturnItemOperation(request.getUserId(), request.getItemId(), false);
+    logger.info("Response is" + response);
+    return response;
+  }
+
+  private static String getWaitListResponse(UdpRequestModel request,
+      ConcordiaRemoteServiceImpl exportedObj, Logger logger) {
+    String response;
+    logger.info(
+        "User Selected to be in Wait List For item" + request.getItemId() + " User " + request
+            .getUserId());
+    response = exportedObj
+        .addUserInWaitList(request.getItemId(), request.getUserId(), request.getNumberOfDays(),
+            false);
+    logger.info("Response is" + response);
+    return response;
+  }
+
+  private static String getBorrowItemResponse(UdpRequestModel request,
+      ConcordiaRemoteServiceImpl exportedObj, Logger logger) {
+    String response;
+    logger.info(
+        "Borrow item is Called : Requested Item is " + request.getItemId() + " User " + request
+            .getUserId() + " for days " + request.getNumberOfDays());
+
+    response = exportedObj.performBorrowItemOperation(request.getItemId(), request.getUserId(),
+        request.getNumberOfDays());
+
+    logger.info("Response is" + response);
+    return response;
+  }
+
+  private static String getFindItemResponse(UdpRequestModel request,
+      ConcordiaRemoteServiceImpl exportedObj, Logger logger) {
+    String response;
+    logger.info("FindItem is Called : Requested Item is " + request.getItemName());
+    response = exportedObj.findItem(request.getItemName(), false);
+    logger.info("Response is  " + response);
+    return response;
   }
 
 
