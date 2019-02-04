@@ -13,6 +13,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   HashMap<String, ArrayList<String>> currentBorrowers = new HashMap<>();
   HashSet<String> managerIds = new HashSet<>();
   HashSet<String> userIds = new HashSet<>();
+  HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
 
 
@@ -90,10 +91,10 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       return userId + "is not present/authorised";
     }
     String response = null;
-    if (data.containsKey(itemID)) {
+
+    if (data.containsKey(itemID) || completelyRemovedItems.contains(itemID)) {
       response = performReturnItemOperation(userId, itemID, false);
       logger.info("Return Item Response is " + response);
-      logger.info("Now attempting to process wait list");
       processWaitingListIfPossible(itemID);
     } else {
       response = performReturnItemOperation(userId, itemID, true);
@@ -108,6 +109,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   private void processWaitingListIfPossible(String itemID) {
     if (data.containsKey(itemID)) {
       synchronized (data) {
+        logger.info("Now attempting to process wait list");
         LibraryModel book = data.get(itemID);
         if (book.getQuantity() > 0 && book.getWaitingList().size() > 0) {
           logger.info("Waiting List Found For The Item Id " + itemID);
@@ -136,6 +138,11 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       }
       return response;
     } else {
+      if (completelyRemovedItems.contains(itemID)) {
+        logger.info(userId + " is trying to return item which is removed from library by manager");
+        //we do not update the data in this case , simply accept the return request from user
+        return LibConstants.SUCCESS;
+      }
       if (data.containsKey(itemID)) {
         LibraryModel book = data.get(itemID);
         if (book.getCurrentBorrowerList() != null && book.getCurrentBorrowerList()
@@ -313,6 +320,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       logger.info("Item id is not in existing database, Adding as new Item");
       LibraryModel libraryModel = new LibraryModel(itemName, quantity);
       data.put(itemID, libraryModel);
+      handleAlreadyRemovedItems(itemID);
       response.append("Item Add Success");
     } else {
       logger.info("Item id   exist in  database, modifying as new Item");
@@ -325,12 +333,27 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
         if (previousQuantity == 0) {
           processWaitingListIfPossible(itemID);
         }
+        handleAlreadyRemovedItems(itemID);
         response.append("Item add success, Quantity updated");
       } else {
         response.append("Item Add Fails , Item Id and Name Does not match");
       }
     }
     return response.toString();
+  }
+
+  private void handleAlreadyRemovedItems(String itemID) {
+    if (completelyRemovedItems.contains(itemID)) {
+      logger
+          .info(itemID
+              + " was removed completely by manager in past, removing item id from the records of removed item ");
+      synchronized (completelyRemovedItems) {
+        completelyRemovedItems
+            .remove(
+                itemID);// remove from the set as Now the Item is added by the Manager , so that users can borrow/return it
+      }
+
+    }
   }
 
   private boolean validateItemIdAndName(String itemID, String itemName) {
@@ -388,6 +411,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       logger
           .info("Manager is trying to remove item completely but item is already assigned to"
               + libraryModel.getCurrentBorrowerList().toString());
+      completelyRemovedItems.add(itemId);
 
     }
     logger.info("removing" + libraryModel);

@@ -14,6 +14,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
 
   HashSet<String> managerId = new HashSet<>();
   HashSet<String> userIds = new HashSet<>();
+  HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
 
 
@@ -55,36 +56,6 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
     return itemDetails;
   }
 
-  public String findItem(String itemName, boolean callExternalServers) {
-    StringBuilder response = new StringBuilder();
-    for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
-      if (letterEntry.getValue().getItemName().equals(itemName)) {
-        response.append(letterEntry.getKey() + " ");
-        response.append(letterEntry.getValue().getQuantity());
-      }
-    }
-    if (callExternalServers) {
-      UdpRequestModel udpRequestModel = new UdpRequestModel("findItem", itemName);
-      String montrealServerResponse = Utilities
-          .callUDPServer(udpRequestModel, LibConstants.UDP_MON_PORT, logger);
-      if (montrealServerResponse != null && montrealServerResponse.length() > 0) {
-        response.append("\n" + montrealServerResponse + "\n");
-      }
-      String mcgServerResponse = Utilities
-          .callUDPServer(udpRequestModel, LibConstants.UDP_MCG_PORT, logger);
-      if (mcgServerResponse != null && mcgServerResponse.length() > 0) {
-        response.append("\n" + mcgServerResponse + "\n");
-      }
-
-    }
-
-    return response.toString();
-  }
-
-
-  private boolean isValidUser(String userId) {
-    return userIds.contains(userId);
-  }
 
   @Override
   public String returnItem(String userId, String itemID) throws RemoteException {
@@ -93,10 +64,9 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       return userId + "is not present/authorised";
     }
     String response = null;
-    if (data.containsKey(itemID)) {
+    if (data.containsKey(itemID) || completelyRemovedItems.contains(itemID)) {
       response = performReturnItemOperation(userId, itemID, false);
       logger.info("Return Item Response is " + response);
-      logger.info("Now attempting to process wait list");
       processWaitingListIfPossible(itemID);
     } else {
       response = performReturnItemOperation(userId, itemID, true);
@@ -148,75 +118,6 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
     return result;
   }
 
-  public String addUserInWaitList(String itemID, String userId, int numberOfDays,
-      boolean externalServerCallRequire) {
-    String response = null;
-    if (externalServerCallRequire) {
-      int port = Utilities.getPortFromItemId(itemID);
-      UdpRequestModel udpRequestModel = new UdpRequestModel(LibConstants.OPR_WAIT_LIST, itemID,
-          numberOfDays, userId);
-
-      if (port != 0) {
-        response = Utilities
-            .callUDPServer(udpRequestModel, port, logger);
-      } else {
-        response = "invalid item id";
-      }
-    } else {
-      synchronized (data) {
-        LibraryModel libraryModel = data.get(itemID);
-        libraryModel.getWaitingList().add(userId);
-        data.put(itemID, libraryModel);
-        response = LibConstants.SUCCESS;
-      }
-    }
-    return response;
-  }
-
-  public String performReturnItemOperation(String userId, String itemID,
-      boolean callExternalServer) {
-    String response = null;
-    if (callExternalServer) {
-      UdpRequestModel udpRequestModel = new UdpRequestModel("returnItem", userId, itemID);
-      int port = Utilities.getPortFromItemId(itemID);
-      if (port != 0) {
-        response = Utilities.callUDPServer(udpRequestModel, port, logger);
-      }
-      return response;
-    } else {
-      if (data.containsKey(itemID)) {
-        LibraryModel model = data.get(itemID);
-        if (model.getCurrentBorrowerList() != null && model.getCurrentBorrowerList()
-            .contains(userId)) {
-          synchronized (data) {
-            model.getCurrentBorrowerList().remove(userId);
-            model.setQuantity(model.getQuantity() + 1);
-            data.put(itemID, model);
-            removeFromCurrentBorrowers(userId, itemID);
-            return LibConstants.SUCCESS;
-          }
-        }
-      }
-      return LibConstants.FAIL;
-    }
-  }
-
-  private String borrowItemFromExternalServer(String userId, String itemID, int numberOfDays) {
-    UdpRequestModel udpRequestModel = new UdpRequestModel("borrowItem", itemID, numberOfDays,
-        userId);
-    String response = null;
-    int port = Utilities.getPortFromItemId(itemID);
-    if (port != 0) {
-      response = Utilities
-          .callUDPServer(udpRequestModel, port, logger);
-    } else {
-      response = "invalid item id";
-    }
-    return response;
-
-
-  }
-
   @Override
   public String addItem(String userId, String itemID, String itemName, int quantity)
       throws RemoteException {
@@ -231,6 +132,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       logger.info("Item id is not in existing database, Adding as new Item");
       LibraryModel libraryModel = new LibraryModel(itemName, quantity);
       data.put(itemID, libraryModel);
+      handleAlreadyRemovedItems(itemID);
       response.append("Item Add Success");
     } else {
       logger.info("Item id   exist in  database, modifying as new Item");
@@ -243,25 +145,13 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
         if (previousQuantity == 0) {
           processWaitingListIfPossible(itemID);
         }
+        handleAlreadyRemovedItems(itemID);
         response.append("Item add success, Quantity updated");
       } else {
         response.append("Item Add Fails , Item Id and Name Does not match");
       }
     }
     return response.toString();
-  }
-
-  private boolean validateItemIdAndName(String itemID, String itemName) {
-    for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
-      String id = letterEntry.getKey();
-      if (id.equals(itemID)) {
-        LibraryModel libraryModel = letterEntry.getValue();
-        return libraryModel.getItemName().equals(itemName);
-
-      }
-
-    }
-    return false;
   }
 
   @Override
@@ -296,26 +186,6 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
     return response.toString();
   }
 
-  private synchronized void updateQuantity(String itemId, int quantity) {
-    LibraryModel libraryModel = data.get(itemId);
-    libraryModel.setQuantity(quantity);
-    logger.info("updating existing item " + libraryModel);
-    data.put(itemId, libraryModel);
-  }
-
-  private synchronized void removeItemCompletely(String itemId) {
-    LibraryModel libraryModel = data.get(itemId);
-    logger.info("removing" + libraryModel);
-    if (libraryModel.getCurrentBorrowerList() != null
-        && libraryModel.getCurrentBorrowerList().size() > 0) {
-      logger
-          .info("Manager is trying to remove item completely but item is already assigned to"
-              + libraryModel.getCurrentBorrowerList().toString());
-
-    }
-    data.remove(itemId);
-  }
-
   @Override
   public String listItem(String managerId) {
     logger.info(managerId + "Requested to View Data");
@@ -336,6 +206,40 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       response.append(" Quantity " + libraryModel.getQuantity() + "\n");
     }
     return response.toString();
+  }
+
+  private boolean validateItemIdAndName(String itemID, String itemName) {
+    for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
+      String id = letterEntry.getKey();
+      if (id.equals(itemID)) {
+        LibraryModel libraryModel = letterEntry.getValue();
+        return libraryModel.getItemName().equals(itemName);
+
+      }
+
+    }
+    return false;
+  }
+
+  private synchronized void updateQuantity(String itemId, int quantity) {
+    LibraryModel libraryModel = data.get(itemId);
+    libraryModel.setQuantity(quantity);
+    logger.info("updating existing item " + libraryModel);
+    data.put(itemId, libraryModel);
+  }
+
+  private synchronized void removeItemCompletely(String itemId) {
+    LibraryModel libraryModel = data.get(itemId);
+    logger.info("removing" + libraryModel);
+    if (libraryModel.getCurrentBorrowerList() != null
+        && libraryModel.getCurrentBorrowerList().size() > 0) {
+      logger
+          .info("Manager is trying to remove item completely but item is already assigned to"
+              + libraryModel.getCurrentBorrowerList().toString());
+      completelyRemovedItems.add(itemId);
+
+    }
+    data.remove(itemId);
   }
 
   private synchronized LibraryModel getData(HashMap<String, HashMap<String, Integer>> data,
@@ -429,6 +333,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
 
   private void processWaitingListIfPossible(String itemID) {
     if (data.containsKey(itemID)) {
+      logger.info("Now attempting to process wait list");
       synchronized (data) {
         LibraryModel book = data.get(itemID);
         if (book.getQuantity() > 0 && book.getWaitingList().size() > 0) {
@@ -442,6 +347,125 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
           data.put(itemID, book);//update the data with new details
           logger.info(itemID + "  is assigned to " + firstUserInWaitingList);
         }
+      }
+
+    }
+  }
+
+  public String findItem(String itemName, boolean callExternalServers) {
+    StringBuilder response = new StringBuilder();
+    for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
+      if (letterEntry.getValue().getItemName().equals(itemName)) {
+        response.append(letterEntry.getKey() + " ");
+        response.append(letterEntry.getValue().getQuantity());
+      }
+    }
+    if (callExternalServers) {
+      UdpRequestModel udpRequestModel = new UdpRequestModel("findItem", itemName);
+      String montrealServerResponse = Utilities
+          .callUDPServer(udpRequestModel, LibConstants.UDP_MON_PORT, logger);
+      if (montrealServerResponse != null && montrealServerResponse.length() > 0) {
+        response.append("\n" + montrealServerResponse + "\n");
+      }
+      String mcgServerResponse = Utilities
+          .callUDPServer(udpRequestModel, LibConstants.UDP_MCG_PORT, logger);
+      if (mcgServerResponse != null && mcgServerResponse.length() > 0) {
+        response.append("\n" + mcgServerResponse + "\n");
+      }
+
+    }
+
+    return response.toString();
+  }
+
+
+  private boolean isValidUser(String userId) {
+    return userIds.contains(userId);
+  }
+
+  public String addUserInWaitList(String itemID, String userId, int numberOfDays,
+      boolean externalServerCallRequire) {
+    String response = null;
+    if (externalServerCallRequire) {
+      int port = Utilities.getPortFromItemId(itemID);
+      UdpRequestModel udpRequestModel = new UdpRequestModel(LibConstants.OPR_WAIT_LIST, itemID,
+          numberOfDays, userId);
+
+      if (port != 0) {
+        response = Utilities
+            .callUDPServer(udpRequestModel, port, logger);
+      } else {
+        response = "invalid item id";
+      }
+    } else {
+      synchronized (data) {
+        LibraryModel libraryModel = data.get(itemID);
+        libraryModel.getWaitingList().add(userId);
+        data.put(itemID, libraryModel);
+        response = LibConstants.SUCCESS;
+      }
+    }
+    return response;
+  }
+
+  public String performReturnItemOperation(String userId, String itemID,
+      boolean callExternalServer) {
+    String response = null;
+    if (callExternalServer) {
+      UdpRequestModel udpRequestModel = new UdpRequestModel("returnItem", userId, itemID);
+      int port = Utilities.getPortFromItemId(itemID);
+      if (port != 0) {
+        response = Utilities.callUDPServer(udpRequestModel, port, logger);
+      }
+      return response;
+    } else {
+      if (completelyRemovedItems.contains(itemID)) {
+        logger.info(userId + " is trying to return item which is removed from library by manager");
+        //we do not update the data in this case , simply accept the return request from user
+        return LibConstants.SUCCESS;
+      }
+      if (data.containsKey(itemID)) {
+        LibraryModel model = data.get(itemID);
+        if (model.getCurrentBorrowerList() != null && model.getCurrentBorrowerList()
+            .contains(userId)) {
+          synchronized (data) {
+            model.getCurrentBorrowerList().remove(userId);
+            model.setQuantity(model.getQuantity() + 1);
+            data.put(itemID, model);
+            removeFromCurrentBorrowers(userId, itemID);
+            return LibConstants.SUCCESS;
+          }
+        }
+      }
+      return LibConstants.FAIL;
+    }
+  }
+
+  private String borrowItemFromExternalServer(String userId, String itemID, int numberOfDays) {
+    UdpRequestModel udpRequestModel = new UdpRequestModel("borrowItem", itemID, numberOfDays,
+        userId);
+    String response = null;
+    int port = Utilities.getPortFromItemId(itemID);
+    if (port != 0) {
+      response = Utilities
+          .callUDPServer(udpRequestModel, port, logger);
+    } else {
+      response = "invalid item id";
+    }
+    return response;
+
+
+  }
+
+  private void handleAlreadyRemovedItems(String itemID) {
+    if (completelyRemovedItems.contains(itemID)) {
+      logger
+          .info(itemID
+              + " was removed completely by manager in past, removing item id from the records of removed item ");
+      synchronized (completelyRemovedItems) {
+        completelyRemovedItems
+            .remove(
+                itemID);// remove from the set as Now the Item is added by the Manager , so that users can borrow/return it
       }
 
     }
