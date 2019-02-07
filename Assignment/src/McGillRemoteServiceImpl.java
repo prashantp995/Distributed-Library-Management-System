@@ -1,8 +1,10 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -93,7 +95,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
       return userId + "is not present/authorised";
     }
     String response = null;
-    if (data.containsKey(itemID)|| completelyRemovedItems.contains(itemID)) {
+    if (data.containsKey(itemID) || completelyRemovedItems.contains(itemID)) {
       response = performReturnItemOperation(userId, itemID, false);
       logger.info("Return Item Response is " + response);
       processWaitingListIfPossible(itemID);
@@ -115,6 +117,8 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
     }
     if (currentBorrowers.containsKey(userId)) {
       synchronized (currentBorrowers) {
+        logger.info("Current Borrower" + userId + "Borrowed Item " + currentBorrowers.get(userId)
+            .toString());
         for (String borrowedItem : currentBorrowers.get(userId)) {
           if (!borrowedItem.startsWith("MCG") && !itemID.startsWith("MCG")) {
             return LibConstants.FAIL + "Can not borrow more than one item from external library";
@@ -175,6 +179,14 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
           logger.info("Waiting List Found For The Item Id " + itemID);
           String firstUserInWaitingList = book.getWaitingList().get(0);
           logger.info(firstUserInWaitingList + " is First in Waiting List");
+          String res = isUsereligibleToGetbook(firstUserInWaitingList, itemID,
+              true);
+          if (res.equalsIgnoreCase(LibConstants.FAIL)) {
+            logger.info(
+                firstUserInWaitingList + "Already got one thing out of library , can not assign "
+                    + itemID);
+            return;
+          }
           book.getCurrentBorrowerList().add(firstUserInWaitingList);//add in borrower list
           book.getWaitingList().remove(firstUserInWaitingList);//remove from waiting list
           book.setQuantity(book.getQuantity() - 1);
@@ -222,7 +234,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
       logger.info(userId + "is not present/authorised");
       return "Item Add Fails,User is not Present/Authorised";
     }
-    if (data.containsKey(itemID)) {
+    if (!data.containsKey(itemID)) {
       logger.info("Item id is not in existing database, Adding as new Item");
       LibraryModel libraryModel = new LibraryModel(itemName, quantity);
       data.put(itemID, libraryModel);
@@ -329,6 +341,8 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
       LibraryModel libraryModel = letterEntry.getValue();
       response.append(" IeamName " + libraryModel.getItemName());
       response.append(" Quantity " + libraryModel.getQuantity() + "\n");
+      response.append("Current Borrowers" + libraryModel.getCurrentBorrowerList() + "\n");
+      response.append("Waiting List" + libraryModel.getWaitingList() + "\n");
     }
     return response.toString();
   }
@@ -415,7 +429,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
       boolean callExternalServer) {
     String response = null;
     if (callExternalServer) {
-      UdpRequestModel udpRequestModel = new UdpRequestModel("returnItem", userId, itemID);
+      UdpRequestModel udpRequestModel = new UdpRequestModel("returnItem", itemID, userId);
       int port = Utilities.getPortFromItemId(itemID);
       if (port != 0) {
         response = Utilities.callUDPServer(udpRequestModel, port, logger);
@@ -463,5 +477,36 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
       }
 
     }
+  }
+
+  public String isUsereligibleToGetbook(String firstUserInWaitingList, String itemId,
+      boolean callExternalServers) {
+
+    if (callExternalServers) {
+      UdpRequestModel requestModel = new UdpRequestModel();
+      requestModel.setMethodName(LibConstants.USER_BORROWED_ITEMS);
+      requestModel.setUserId(firstUserInWaitingList);
+      requestModel.setItemId(itemId);
+      String response = Utilities.callUDPServer(requestModel, LibConstants.UDP_MON_PORT, logger);
+      String response2 = Utilities.callUDPServer(requestModel, LibConstants.UDP_CON_PORT, logger);
+      System.out.println("reseponse received" + response + "response received 2" + response2);
+      if (response.equalsIgnoreCase(LibConstants.FAIL) || response2
+          .equalsIgnoreCase(LibConstants.FAIL)) {
+        return LibConstants.FAIL;
+      }
+    } else {
+      if (currentBorrowers.containsKey(firstUserInWaitingList)) {
+        synchronized (currentBorrowers) {
+          for (String borrowedItem : currentBorrowers.get(firstUserInWaitingList)) {
+            if (!borrowedItem.startsWith("MCG") && !itemId.startsWith("MCG")) {
+              return LibConstants.FAIL;
+            }
+
+          }
+        }
+
+      }
+    }
+    return LibConstants.SUCCESS;
   }
 }

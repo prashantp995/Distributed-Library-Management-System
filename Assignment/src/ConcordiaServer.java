@@ -7,6 +7,7 @@ import java.net.InetAddress;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 public class ConcordiaServer {
 
@@ -99,6 +100,9 @@ public class ConcordiaServer {
       response = getWaitListResponse(request, exportedObj, logger);
     } else if (request.getMethodName().equalsIgnoreCase("returnItem")) {
       response = getReturnItemResponse(request, exportedObj, logger);
+    } else if (request.getMethodName().equalsIgnoreCase(LibConstants.USER_BORROWED_ITEMS)) {
+      response = exportedObj
+          .isUsereligibleToGetbook(request.getUserId(), request.getItemId(), false);
     }
     System.out.println("Response to send from udp is " + response);
 

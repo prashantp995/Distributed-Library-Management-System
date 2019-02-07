@@ -1,8 +1,10 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -86,6 +88,8 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
     }
     if (currentBorrowers.containsKey(userId)) {
       synchronized (currentBorrowers) {
+        logger.info("Current Borrower" + userId + "Borrowed Item " + currentBorrowers.get(userId)
+            .toString());
         for (String borrowedItem : currentBorrowers.get(userId)) {
           if (!borrowedItem.startsWith("CON") && !itemID.startsWith("CON")) {
             return LibConstants.FAIL + "Can not borrow more than one item from external library";
@@ -340,6 +344,14 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
           logger.info("Waiting List Found For The Item Id " + itemID);
           String firstUserInWaitingList = book.getWaitingList().get(0);
           logger.info(firstUserInWaitingList + " is First in Waiting List");
+          String res = isUsereligibleToGetbook(firstUserInWaitingList, itemID,
+              true);
+          if (res.equalsIgnoreCase(LibConstants.FAIL)) {
+            logger.info(
+                firstUserInWaitingList + "Already got one thing out of library , can not assign "
+                    + itemID);
+            return;
+          }
           book.getCurrentBorrowerList().add(firstUserInWaitingList);//add in borrower list
           book.getWaitingList().remove(firstUserInWaitingList);//remove from waiting list
           book.setQuantity(book.getQuantity() - 1);
@@ -351,6 +363,38 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
 
     }
   }
+
+  public String isUsereligibleToGetbook(String firstUserInWaitingList, String itemId,
+      boolean callExternalServers) {
+
+    if (callExternalServers) {
+      UdpRequestModel requestModel = new UdpRequestModel();
+      requestModel.setMethodName(LibConstants.USER_BORROWED_ITEMS);
+      requestModel.setUserId(firstUserInWaitingList);
+      requestModel.setItemId(itemId);
+      String response = Utilities.callUDPServer(requestModel, LibConstants.UDP_MON_PORT, logger);
+      String response2 = Utilities.callUDPServer(requestModel, LibConstants.UDP_MCG_PORT, logger);
+      System.out.println("reseponse received" + response + "response received 2" + response2);
+      if (response.equalsIgnoreCase(LibConstants.FAIL) || response2
+          .equalsIgnoreCase(LibConstants.FAIL)) {
+        return LibConstants.FAIL;
+      }
+    } else {
+      if (currentBorrowers.containsKey(firstUserInWaitingList)) {
+        synchronized (currentBorrowers) {
+          for (String borrowedItem : currentBorrowers.get(firstUserInWaitingList)) {
+            if (!borrowedItem.startsWith("CON") && !itemId.startsWith("CON")) {
+              return LibConstants.FAIL;
+            }
+
+          }
+        }
+
+      }
+    }
+    return LibConstants.SUCCESS;
+  }
+
 
   public String findItem(String itemName, boolean callExternalServers) {
     StringBuilder response = new StringBuilder();
@@ -412,7 +456,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       boolean callExternalServer) {
     String response = null;
     if (callExternalServer) {
-      UdpRequestModel udpRequestModel = new UdpRequestModel("returnItem", userId, itemID);
+      UdpRequestModel udpRequestModel = new UdpRequestModel("returnItem", itemID, userId);
       int port = Utilities.getPortFromItemId(itemID);
       if (port != 0) {
         response = Utilities.callUDPServer(udpRequestModel, port, logger);

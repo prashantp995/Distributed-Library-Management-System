@@ -61,7 +61,7 @@ public class McGillServer {
               logger.info(request.getMethodName() + " is called by " + address + ":" + port);
               String response = null;
               reponsePacket = getDatagramPacket(reponsePacket, address, port, request, response,
-                  exportedObj,logger);
+                  exportedObj, logger);
               logger.info("sending response " + reponsePacket.getData());
 
             } catch (ClassNotFoundException e) {
@@ -100,6 +100,9 @@ public class McGillServer {
       response = getWaitListResponse(request, exportedObj, logger);
     } else if (request.getMethodName().equalsIgnoreCase("returnItem")) {
       response = getReturnItemResponse(request, exportedObj, logger);
+    } else if (request.getMethodName().equalsIgnoreCase(LibConstants.USER_BORROWED_ITEMS)) {
+      response = exportedObj
+          .isUsereligibleToGetbook(request.getUserId(), request.getItemId(), false);
     }
     System.out.println("Response to send from udp is " + response);
 

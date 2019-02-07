@@ -19,4 +19,5 @@ public class LibConstants {
 
   public static final int CLIENT_PORT = 8087;
   public static final String CLIENT_REG = "CLIENT";
+  public static final String USER_BORROWED_ITEMS = "userBorrowedItems";
 }

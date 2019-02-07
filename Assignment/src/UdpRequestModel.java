@@ -13,6 +13,10 @@ public class UdpRequestModel implements Serializable {
     this.itemName = itemName;
   }
 
+  public UdpRequestModel() {
+
+  }
+
   public String getMethodName() {
     return methodName;
   }
