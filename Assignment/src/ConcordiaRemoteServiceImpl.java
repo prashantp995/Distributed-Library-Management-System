@@ -1,10 +1,8 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -208,6 +206,8 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       LibraryModel libraryModel = letterEntry.getValue();
       response.append(" IeamName " + libraryModel.getItemName());
       response.append(" Quantity " + libraryModel.getQuantity() + "\n");
+      response.append(" WaitingList " + libraryModel.getWaitingList() + "\n");
+      response.append(" Current Borrowers" + libraryModel.getCurrentBorrowerList());
     }
     return response.toString();
   }
@@ -367,7 +367,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
   public String isUsereligibleToGetbook(String firstUserInWaitingList, String itemId,
       boolean callExternalServers) {
 
-    if (callExternalServers) {
+    if (callExternalServers && isOtherLibraryUser(firstUserInWaitingList)) {
       UdpRequestModel requestModel = new UdpRequestModel();
       requestModel.setMethodName(LibConstants.USER_BORROWED_ITEMS);
       requestModel.setUserId(firstUserInWaitingList);
@@ -380,8 +380,17 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
         return LibConstants.FAIL;
       }
     } else {
+
       if (currentBorrowers.containsKey(firstUserInWaitingList)) {
         synchronized (currentBorrowers) {
+          if (isOtherLibraryUser(firstUserInWaitingList)) {
+            for (String borrowedItem : currentBorrowers.get(firstUserInWaitingList)) {
+              if (borrowedItem.startsWith("CON")) {
+                return LibConstants.FAIL;
+              }
+
+            }
+          }
           for (String borrowedItem : currentBorrowers.get(firstUserInWaitingList)) {
             if (!borrowedItem.startsWith("CON") && !itemId.startsWith("CON")) {
               return LibConstants.FAIL;
@@ -393,6 +402,10 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       }
     }
     return LibConstants.SUCCESS;
+  }
+
+  private boolean isOtherLibraryUser(String firstUserInWaitingList) {
+    return !isValidUser(firstUserInWaitingList);
   }
 
 

@@ -1,10 +1,8 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -425,6 +423,11 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
 
   }
 
+  /**
+   * this is to perform return operation ,
+   *
+   * @param callExternalServer set false , if you return itemid belongs to this server
+   */
   public String performReturnItemOperation(String userId, String itemID,
       boolean callExternalServer) {
     String response = null;
@@ -457,6 +460,12 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
     }
   }
 
+  /**
+   * Once item is return by user , remove user from the current borrower list
+   *
+   * @param userId userId
+   * @param itemID itemID
+   */
   private synchronized void removeFromCurrentBorrowers(String userId, String itemID) {
     if (currentBorrowers.containsKey(userId)) {
       ArrayList<String> borrowedItems = currentBorrowers.get(userId);
@@ -465,6 +474,10 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
     }
   }
 
+  /**
+   * if item is removed from the manager  , after that if manager decides to add item again in
+   * database we should update completelyRemoved item data .
+   */
   private void handleAlreadyRemovedItems(String itemID) {
     if (completelyRemovedItems.contains(itemID)) {
       logger
@@ -482,7 +495,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
   public String isUsereligibleToGetbook(String firstUserInWaitingList, String itemId,
       boolean callExternalServers) {
 
-    if (callExternalServers) {
+    if (callExternalServers && isOtherLibraryUser(firstUserInWaitingList)) {
       UdpRequestModel requestModel = new UdpRequestModel();
       requestModel.setMethodName(LibConstants.USER_BORROWED_ITEMS);
       requestModel.setUserId(firstUserInWaitingList);
@@ -497,6 +510,14 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
     } else {
       if (currentBorrowers.containsKey(firstUserInWaitingList)) {
         synchronized (currentBorrowers) {
+          if (isOtherLibraryUser(firstUserInWaitingList)) {
+            for (String borrowedItem : currentBorrowers.get(firstUserInWaitingList)) {
+              if (borrowedItem.startsWith("MCG")) {
+                return LibConstants.FAIL;
+              }
+
+            }
+          }
           for (String borrowedItem : currentBorrowers.get(firstUserInWaitingList)) {
             if (!borrowedItem.startsWith("MCG") && !itemId.startsWith("MCG")) {
               return LibConstants.FAIL;
@@ -508,5 +529,9 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
       }
     }
     return LibConstants.SUCCESS;
+  }
+
+  private boolean isOtherLibraryUser(String firstUserInWaitingList) {
+    return !isValidUser(firstUserInWaitingList);
   }
 }

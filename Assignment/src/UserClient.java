@@ -1,7 +1,6 @@
 import static java.util.logging.Logger.getLogger;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -19,9 +18,10 @@ public class UserClient {
   static boolean isMcGillManager = false;
   static boolean isMonManager = false;
   static HashMap<Integer, String> serverInfo = new HashMap<Integer, String>();
+  static Logger logger = null;
 
   public static void main(String args[])
-      throws RemoteException, NotBoundException, MalformedURLException {
+      throws IOException, NotBoundException {
     int RMIPortNum = 8087;
     CallbackClientImpl exportedObj = null;
     try {
@@ -43,7 +43,10 @@ public class UserClient {
       if (Utilities.validateUserName(username)) {
         valid = true;
         determineUniversity(username);
+        logger = Utilities
+            .setupLogger(Logger.getLogger("UserLogger"), username + ".log");
         performValidOperation(username);
+
       } else {
         System.out.println("Given user Name is not in valid format");
       }
@@ -87,6 +90,7 @@ public class UserClient {
             choice = scanner.nextInt();
             if (choice == 0) {
               valid = true;
+              Utilities.closeLoggerHandlers(logger);
               System.exit(0);
               break;
             }
@@ -120,6 +124,7 @@ public class UserClient {
             choice = scanner.nextInt();
             if (choice == 0) {
               valid = false;
+              Utilities.closeLoggerHandlers(logger);
               System.exit(0);
               break;
             }
@@ -147,31 +152,35 @@ public class UserClient {
     switch (choice) {
       case 1:
         System.out.println("perform Add item");
+        logger.info(username + " choose to Add Item");
         performAddItem(username);
         break;
       case 2:
         System.out.println("perform Remove item");
+        logger.info(username + " choose to Remove Item");
         performRemoveItem(username);
         break;
       case 3:
         System.out.println("perform List item");
+        logger.info(username + " choose to List Item");
         performListItem(username);
         break;
       default:
+        logger.info(username + " Entered invalid choice");
         System.out.println("please enter valid choice");
     }
   }
 
   private static void performAddItem(String username) {
-    Logger logger = getLogger(username);
     String itemId = getItemId();
+    logger.info(username + " is trying to Add item with item id " + itemId);
     try {
       Scanner scanner = new Scanner(System.in);
       System.out.println("Please Enter Item Name");
       String itemName = scanner.nextLine();
       System.out.println("Please Enter Quantity");
       int quantity = scanner.nextInt();
-      getResponseOfAddItem(username, itemId, itemName, quantity, logger);
+      getResponseOfAddItem(username, itemId, itemName, quantity);
     } catch (java.util.InputMismatchException e) {
       System.out.println("Please enter properInput");
     } catch (RemoteException | NotBoundException e) {
@@ -185,8 +194,8 @@ public class UserClient {
 
 
   private static void performRemoveItem(String username) {
-    Logger logger = getLogger(username);
     String itemId = getItemId();
+    logger.info(username + " is trying to remove " + itemId);
     try {
       Scanner scanner = new Scanner(System.in);
       System.out.println("Please Enter Quantity");
@@ -217,7 +226,7 @@ public class UserClient {
     Logger logger = getLogger(username);
     try {
       try {
-        String response = getResponseFromListItem(username, logger);
+        String response = getResponseFromListItem(username);
       } catch (NotBoundException e) {
         e.printStackTrace();
       }
@@ -226,7 +235,7 @@ public class UserClient {
     }
   }
 
-  private static String getResponseFromListItem(String username, Logger logger)
+  private static String getResponseFromListItem(String username)
       throws RemoteException, NotBoundException {
     String[] serverInfo = getServerInfo();
     logger.info(
@@ -240,8 +249,9 @@ public class UserClient {
   }
 
   private static String getResponseOfAddItem(String username, String itemId,
-      String itemName, int quantity,
-      Logger logger) throws RemoteException, NotBoundException {
+      String itemName, int quantity) throws RemoteException, NotBoundException {
+    logger
+        .info(username + " asked to Add item " + itemId + " " + itemName + " Quantity " + quantity);
     String[] serverInfo = getServerInfo();
     logger.info(
         username + " Requested to Add Item " + itemName);
@@ -284,7 +294,7 @@ public class UserClient {
     logger.info(
         username + " Requested to Return Item " + itemId);
     try {
-      String response = getReturnItemResponse(username, itemId, logger);
+      String response = getReturnItemResponse(username, itemId);
       System.out.println(response);
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
@@ -303,7 +313,7 @@ public class UserClient {
     try {
       logger = Utilities
           .setupLogger(Logger.getLogger(LibConstants.USERLOG), username + ".log");
-      String response = getItemFindResponse(username, itemName, logger);
+      String response = getItemFindResponse(username, itemName);
       System.out.println(response);
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
@@ -316,7 +326,7 @@ public class UserClient {
 
   }
 
-  private static String getItemFindResponse(String username, String itemName, Logger logger)
+  private static String getItemFindResponse(String username, String itemName)
       throws RemoteException, NotBoundException {
     String[] serverInfo = getServerInfo();
     logger.info(
@@ -329,8 +339,8 @@ public class UserClient {
     return response;
   }
 
-  private static String getReturnItemResponse(String username, String itemId,
-      Logger logger) throws RemoteException, NotBoundException {
+  private static String getReturnItemResponse(String username, String itemId)
+      throws RemoteException, NotBoundException {
     String[] serverInfo = getServerInfo();
     logger.info(
         username + " Requested to Return Item " + itemId);
@@ -342,8 +352,8 @@ public class UserClient {
     return response;
   }
 
-  private static String getBorrowItemResponse(String itemId, int numberOfDays, String username,
-      Logger logger) throws RemoteException, NotBoundException {
+  private static String getBorrowItemResponse(String itemId, int numberOfDays, String username)
+      throws RemoteException, NotBoundException {
     String[] serverInfo = getServerInfo();
     logger.info(
         username + " Requested to Borrow Item " + itemId);
@@ -371,7 +381,7 @@ public class UserClient {
         logger.info(
             username + " Requested to Borrow Item " + itemId + " for " + numberOfDays + " days.");
         try {
-          getBorrowItemResponse(itemId, numberOfDays, username, logger);
+          getBorrowItemResponse(itemId, numberOfDays, username);
         } catch (RemoteException | NotBoundException e) {
           e.printStackTrace();
         } finally {

@@ -1,10 +1,8 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -222,6 +220,10 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     return res;
   }
 
+  /**
+   * update current borrower data , if user borrows item or wait list is processed and item assigned
+   * to user
+   */
   private void addOrUpdateInCurrentBorrowers(String userId, String itemID) {
     if (!currentBorrowers.containsKey(userId)) {
       ArrayList<String> itemBorrowed = new ArrayList<>();
@@ -232,6 +234,9 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     }
   }
 
+  /**
+   * ask user if he/she wants to add him/her self in to waiting list
+   */
   public String addUserInWaitList(String itemID, String userId, int numberOfDays,
       boolean externalServerCallRequire) {
     String response = null;
@@ -448,6 +453,8 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       LibraryModel libraryModel = letterEntry.getValue();
       response.append(" IeamName " + libraryModel.getItemName());
       response.append(" Quantity " + libraryModel.getQuantity() + "\n");
+      response.append(" WaitingList " + libraryModel.getWaitingList());
+      response.append(" Current Borrowers" + libraryModel.getCurrentBorrowerList());
     }
     return response.toString();
   }
@@ -478,10 +485,15 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     }
   }
 
+  /**
+   * if the user is in two waiting list (both out of library) This  is for the scenario where we are
+   * processing waiting list and we want to make sure user gets only one book from other library
+   */
   public String isUsereligibleToGetbook(String firstUserInWaitingList, String itemId,
       boolean callExternalServers) {
 
-    if (callExternalServers) {
+    if (callExternalServers && isOtherLibraryUser(firstUserInWaitingList)) {
+      logger.info("checking if " + firstUserInWaitingList + " eligible to get item " + itemId);
       UdpRequestModel requestModel = new UdpRequestModel();
       requestModel.setMethodName(LibConstants.USER_BORROWED_ITEMS);
       requestModel.setUserId(firstUserInWaitingList);
@@ -496,6 +508,14 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     } else {
       if (currentBorrowers.containsKey(firstUserInWaitingList)) {
         synchronized (currentBorrowers) {
+          if (isOtherLibraryUser(firstUserInWaitingList)) {
+            for (String borrowedItem : currentBorrowers.get(firstUserInWaitingList)) {
+              if (borrowedItem.startsWith("MON")) {
+                return LibConstants.FAIL;
+              }
+
+            }
+          }
           for (String borrowedItem : currentBorrowers.get(firstUserInWaitingList)) {
             if (!borrowedItem.startsWith("MON") && !itemId.startsWith("MON")) {
               return LibConstants.FAIL;
@@ -507,6 +527,10 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       }
     }
     return LibConstants.SUCCESS;
+  }
+
+  private boolean isOtherLibraryUser(String firstUserInWaitingList) {
+    return !isValidUser(firstUserInWaitingList);
   }
 
 }

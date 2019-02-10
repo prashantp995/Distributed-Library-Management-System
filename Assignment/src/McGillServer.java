@@ -88,6 +88,17 @@ public class McGillServer {
     }
   }
 
+  /**
+   * prepare datagram packet to send as a response from the server
+   * @param reponsePacket
+   * @param address
+   * @param port
+   * @param request
+   * @param response
+   * @param exportedObj
+   * @param logger
+   * @return
+   */
   private static synchronized DatagramPacket getDatagramPacket(DatagramPacket reponsePacket,
       InetAddress address,
       int port, UdpRequestModel request, String response, McGillRemoteServiceImpl exportedObj,
