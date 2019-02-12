@@ -281,16 +281,14 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
       logger.info(managerId + "is not Present/Authorised");
       return "Item Remove Fails,User is not Present/Authorised";
     }
-    if (quantity < 0) {
-      logger.info(managerId + "is not Present/Authorised");
-      return "Item Remove Fails,Quantity is not valid";
-    }
     if (!data.containsKey(itemId)) {
       response.append("Remove Item Fails , Item id is not present in database");
     } else {
-      if (quantity == 0) {
+      if (quantity <= 0 || data.get(itemId).getQuantity() - quantity == 0) {
         removeItemCompletely(itemId);
         response.append("Remove Item Success , Item Removed Completely");
+      } else if (data.get(itemId).getQuantity() - quantity < 0) {
+        response.append("Please Provide Correct Quantity");
       } else {
         updateQuantity(itemId, quantity);
         response.append("Remove Item Success , Updated the Quantity");
@@ -301,7 +299,8 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
 
   private synchronized void updateQuantity(String itemId, int quantity) {
     LibraryModel libraryModel = data.get(itemId);
-    libraryModel.setQuantity(quantity);
+    int previousQuantity = libraryModel.getQuantity();
+    libraryModel.setQuantity(previousQuantity - quantity);
     logger.info("updating existing item " + libraryModel);
     data.put(itemId, libraryModel);
   }

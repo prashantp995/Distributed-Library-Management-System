@@ -396,16 +396,14 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       logger.info(managerId + "is not Present/Authorised");
       return "Item Remove Fails,User is not Present/Authorised";
     }
-    if (quantity < 0) {
-      logger.info("Item Remove Fails,Quantity is not valid");
-      return "Item Remove Fails,Quantity is not valid";
-    }
     if (!data.containsKey(itemId)) {
       response.append("Remove Item Fails , Item id is not present in database");
     } else {
-      if (quantity == 0) {
+      if (quantity <= 0 || data.get(itemId).getQuantity() - quantity == 0) {
         removeItemCompletely(itemId);
         response.append("Remove Item Success , Item Removed Completely");
+      } else if (data.get(itemId).getQuantity() - quantity < 0) {
+        response.append("Please Provide Correct Quantity");
       } else {
         updateQuantity(itemId, quantity);
         response.append("Remove Item Success , Updated the Quantity");
@@ -416,7 +414,8 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
 
   private synchronized void updateQuantity(String itemId, int quantity) {
     LibraryModel libraryModel = data.get(itemId);
-    libraryModel.setQuantity(quantity);
+    int previousQuantity = libraryModel.getQuantity();
+    libraryModel.setQuantity(previousQuantity - quantity);
     logger.info("updating existing item " + libraryModel);
     data.put(itemId, libraryModel);
   }
@@ -453,8 +452,8 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       LibraryModel libraryModel = letterEntry.getValue();
       response.append(" IeamName " + libraryModel.getItemName());
       response.append(" Quantity " + libraryModel.getQuantity() + "\n");
-      response.append(" WaitingList " + libraryModel.getWaitingList()+"\n");
-      response.append(" Current Borrowers" + libraryModel.getCurrentBorrowerList()+"\n");
+      response.append(" WaitingList " + libraryModel.getWaitingList() + "\n");
+      response.append(" Current Borrowers" + libraryModel.getCurrentBorrowerList() + "\n");
     }
     return response.toString();
   }
