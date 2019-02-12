@@ -345,7 +345,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
         logger.info("Item id and Item name matches");
         LibraryModel libraryModel = data.get(itemID);
         int previousQuantity = libraryModel.getQuantity();
-        libraryModel.setQuantity(quantity);
+        libraryModel.setQuantity(previousQuantity + quantity);
         data.put(itemID, libraryModel);
         if (previousQuantity == 0) {
           processWaitingListIfPossible(itemID);
