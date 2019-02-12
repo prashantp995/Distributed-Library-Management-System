@@ -453,8 +453,8 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       LibraryModel libraryModel = letterEntry.getValue();
       response.append(" IeamName " + libraryModel.getItemName());
       response.append(" Quantity " + libraryModel.getQuantity() + "\n");
-      response.append(" WaitingList " + libraryModel.getWaitingList());
-      response.append(" Current Borrowers" + libraryModel.getCurrentBorrowerList());
+      response.append(" WaitingList " + libraryModel.getWaitingList()+"\n");
+      response.append(" Current Borrowers" + libraryModel.getCurrentBorrowerList()+"\n");
     }
     return response.toString();
   }

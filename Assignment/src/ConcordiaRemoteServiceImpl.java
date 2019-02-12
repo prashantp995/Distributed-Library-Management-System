@@ -207,7 +207,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       response.append(" IeamName " + libraryModel.getItemName());
       response.append(" Quantity " + libraryModel.getQuantity() + "\n");
       response.append(" WaitingList " + libraryModel.getWaitingList() + "\n");
-      response.append(" Current Borrowers" + libraryModel.getCurrentBorrowerList());
+      response.append(" Current Borrowers" + libraryModel.getCurrentBorrowerList() + "\n");
     }
     return response.toString();
   }
@@ -318,6 +318,8 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
 
   private String handleWaitList(String userId, String itemID, int numberOfDays, String res,
       boolean externalServerCallRequire) {
+    logger.info(
+        itemID + " is not available to borrow now, adding wait list is possible ,asking " + userId);
     int clientChoice = Utilities.getResponseFromClient(logger);
     if (clientChoice == 1) {
       res = addUserInWaitList(itemID, userId, numberOfDays, externalServerCallRequire);

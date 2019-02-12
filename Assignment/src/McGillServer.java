@@ -14,7 +14,7 @@ public class McGillServer {
   public static void main(String args[]) throws IOException {
 
     Logger logger = Utilities
-        .setupLogger(Logger.getLogger("McGillServerLog"), "McGillServerLog.log");
+        .setupLogger(Logger.getLogger("McGillServerLog"), "McGillServerLog.log", true);
     String registryURL;
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_MCG_PORT);
     byte[] buf = new byte[256];

@@ -44,7 +44,7 @@ public class UserClient {
         valid = true;
         determineUniversity(username);
         logger = Utilities
-            .setupLogger(Logger.getLogger("UserLogger"), username + ".log");
+            .setupLogger(Logger.getLogger("UserLogger"), username + ".log", false);
         performValidOperation(username);
 
       } else {
@@ -185,8 +185,6 @@ public class UserClient {
       System.out.println("Please enter properInput");
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
-    } finally {
-      Utilities.closeLoggerHandlers(logger);
     }
 
 
@@ -200,7 +198,7 @@ public class UserClient {
       Scanner scanner = new Scanner(System.in);
       System.out.println("Please Enter Quantity");
       int quantity = scanner.nextInt();
-      String response = getResponseFromRemoveItem(username, itemId, quantity, logger);
+      String response = getResponseFromRemoveItem(username, itemId, quantity);
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
     } catch (java.util.InputMismatchException e) {
@@ -209,7 +207,7 @@ public class UserClient {
   }
 
   private static String getResponseFromRemoveItem(String username, String itemId,
-      int quantity, Logger logger)
+      int quantity)
       throws RemoteException, NotBoundException {
     String[] serverInfo = getServerInfo();
     logger.info(
@@ -218,12 +216,12 @@ public class UserClient {
     Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
     LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
     String response = obj.removeItem(username, itemId, quantity);
+    System.out.println("Response Received from the server is " + response);
     logger.info("Response Received from the server is " + response);
     return response;
   }
 
   private static void performListItem(String username) {
-    Logger logger = getLogger(username);
     try {
       try {
         String response = getResponseFromListItem(username);
@@ -244,6 +242,7 @@ public class UserClient {
     Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
     LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
     String response = obj.listItem(username);
+    System.out.println("Response Received from the server is " + response);
     logger.info("Response Received from the server is " + response);
     return response;
   }
@@ -260,6 +259,7 @@ public class UserClient {
     LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
     String response = obj.addItem(username, itemId, itemName, quantity);
     logger.info("Response Received from the server is " + response);
+    System.out.println("Response Received from the server is " + response);
     return response;
   }
 
@@ -289,8 +289,6 @@ public class UserClient {
   private static void performReturnItem(String username) {
     boolean valid = false;
     String itemId = getItemId();
-    Logger logger = getLogger(username);
-
     logger.info(
         username + " Requested to Return Item " + itemId);
     try {
@@ -298,8 +296,6 @@ public class UserClient {
       System.out.println(response);
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
-    } finally {
-      Utilities.closeLoggerHandlers(logger);
     }
 
 
@@ -309,18 +305,10 @@ public class UserClient {
   private static void performFindItem(String username) {
     boolean valid = false;
     String itemName = getItemName();
-    Logger logger = null;
     try {
-      logger = Utilities
-          .setupLogger(Logger.getLogger(LibConstants.USERLOG), username + ".log");
       String response = getItemFindResponse(username, itemName);
-      System.out.println(response);
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
-      Utilities.closeLoggerHandlers(logger);
     }
 
 
@@ -336,6 +324,7 @@ public class UserClient {
     LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
     String response = obj.findItem(username, itemName);
     logger.info("Response Received from the server is " + response);
+    System.out.println("Response Received from the server is " + response);
     return response;
   }
 
@@ -349,6 +338,7 @@ public class UserClient {
     LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
     String response = obj.returnItem(username, itemId);
     logger.info("Response Received from the server is " + response);
+    System.out.println("Response Received from the server is " + response);
     return response;
   }
 
@@ -362,6 +352,7 @@ public class UserClient {
     LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
     String response = obj.borrowItem(username, itemId, numberOfDays);
     logger.info("Response Received from the server is " + response);
+    System.out.println("Response Received from the server is " + response);
     return response;
   }
 
@@ -370,7 +361,6 @@ public class UserClient {
     boolean valid = false;
     String itemId;
     int numberOfDays;
-    Logger logger = getLogger(username);
     while (!valid) {
       Scanner scanner = new Scanner(System.in);
       itemId = getItemId();
@@ -384,8 +374,6 @@ public class UserClient {
           getBorrowItemResponse(itemId, numberOfDays, username);
         } catch (RemoteException | NotBoundException e) {
           e.printStackTrace();
-        } finally {
-          Utilities.closeLoggerHandlers(logger);
         }
       } else {
         System.out.println("Please Enter Correct Details as specified");

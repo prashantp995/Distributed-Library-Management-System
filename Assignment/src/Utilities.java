@@ -44,12 +44,14 @@ public class Utilities {
     }
   }
 
-  public static Logger setupLogger(Logger logger, String fileName) throws IOException {
+  public static Logger setupLogger(Logger logger, String fileName, boolean showlogsInConsole) throws IOException {
 
     FileHandler fh;
 
     try {
-
+      if(!showlogsInConsole){
+        logger.setUseParentHandlers(false);
+      }
       fh = new FileHandler(LOG_DIR + fileName, true);
       logger.addHandler(fh);
       SimpleFormatter formatter = new SimpleFormatter();
@@ -73,7 +75,7 @@ public class Utilities {
     Logger logger = null;
     try {
       logger = Utilities
-          .setupLogger(Logger.getLogger(username + "log"), username + ".log");
+          .setupLogger(Logger.getLogger(username + "log"), username + ".log", true);
     } catch (IOException e) {
       e.printStackTrace();
     }

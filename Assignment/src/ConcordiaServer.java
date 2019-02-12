@@ -7,14 +7,14 @@ import java.net.InetAddress;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 public class ConcordiaServer {
 
 
   public static void main(String args[]) throws IOException {
 
-    Logger logger = Utilities.setupLogger(Logger.getLogger("CONServerlog"), "ConcordiaServer.log");
+    Logger logger = Utilities.setupLogger(Logger.getLogger("CONServerlog"), "ConcordiaServer.log",
+        true);
     String registryURL;
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_CON_PORT);
     byte[] buf = new byte[256];

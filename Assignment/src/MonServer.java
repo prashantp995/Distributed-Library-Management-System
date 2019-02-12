@@ -12,7 +12,7 @@ public class MonServer {
 
   public static void main(String args[]) throws IOException {
 
-    Logger logger = Utilities.setupLogger(Logger.getLogger("MONServerlog"), "MONServer.log");
+    Logger logger = Utilities.setupLogger(Logger.getLogger("MONServerlog"), "MONServer.log", true);
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_MON_PORT);
     byte[] buf = new byte[256];
     try {
@@ -58,7 +58,7 @@ public class MonServer {
               logger.info(request.getMethodName() + " is called by " + address + ":" + port);
               String response = null;
               reponsePacket = getDatagramPacket(reponsePacket, address, port, request, response,
-                  exportedObj,logger);
+                  exportedObj, logger);
               logger.info("sending response " + reponsePacket.getData());
 
             } catch (ClassNotFoundException e) {
@@ -96,6 +96,9 @@ public class MonServer {
       response = getWaitListResponse(request, exportedObj, logger);
     } else if (request.getMethodName().equalsIgnoreCase("returnItem")) {
       response = getReturnItemResponse(request, exportedObj, logger);
+    } else if (request.getMethodName().equalsIgnoreCase(LibConstants.USER_BORROWED_ITEMS)) {
+      response = exportedObj
+          .isUsereligibleToGetbook(request.getUserId(), request.getItemId(), false);
     }
     System.out.println("Response to send from udp is " + response);
 
