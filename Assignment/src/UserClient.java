@@ -1,5 +1,3 @@
-import static java.util.logging.Logger.getLogger;
-
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -81,6 +79,7 @@ public class UserClient {
         System.out.println(" 1  for addItem");
         System.out.println(" 2  for removeItem");
         System.out.println(" 3  for ListItemAvailability");
+        System.out.println(" 4  MultiThread");
         System.out.println(" 0  Exit");
         Scanner scanner = new Scanner(System.in);
         try {
@@ -88,6 +87,9 @@ public class UserClient {
           int choice;
           if (scanner.hasNextInt()) {
             choice = scanner.nextInt();
+            if (choice == 4) {
+              performMultiThreading();
+            }
             if (choice == 0) {
               valid = true;
               Utilities.closeLoggerHandlers(logger);
@@ -432,6 +434,53 @@ public class UserClient {
     }
     return itemId.length() == 7 && (itemId.startsWith("CON") || itemId.startsWith("MCG") || itemId
         .startsWith("MON"));
+  }
+
+  public static void performMultiThreading() {
+    Runnable runnable = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          getResponseOfAddItem("CONM1111", "CON1015", "DSD", 1);
+          //getBorrowItemResponse("CON1012", 5, "CONU1111");
+          //getReturnItemResponse("CONU1111", "CON1012");
+        } catch (RemoteException e) {
+          e.printStackTrace();
+        } catch (NotBoundException e) {
+          e.printStackTrace();
+        }
+      }
+    };
+
+
+    Runnable runnable2 = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          //getResponseOfAddItem("CONM1111", "CON1015", "DSD", 1);
+          getBorrowItemResponse("CON1015", 5, "CONU1111");
+          //getReturnItemResponse("CONU1111", "CON1012");
+        } catch (RemoteException e) {
+          e.printStackTrace();
+        } catch (NotBoundException e) {
+          e.printStackTrace();
+        }
+      }
+    };
+    Runnable runnable3 = new Runnable() {
+      @Override
+      public void run() {
+        // getResponseOfAddItem("CONM1111", "CON1015", "DSD", 1);
+        // getBorrowItemResponse("CON1012", 5, "CONU1111");
+        // getReturnItemResponse("CONU1111", "CON1012");
+      }
+    };
+    Thread thread = new Thread(runnable);
+    Thread thread2 = new Thread(runnable2);
+    Thread thread3 = new Thread(runnable3);
+    thread.start();thread2.start();thread3.start();
+
+
   }
 
 }
