@@ -96,7 +96,6 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
     if (data.containsKey(itemID) || completelyRemovedItems.contains(itemID)) {
       response = performReturnItemOperation(userId, itemID, false);
       logger.info("Return Item Response is " + response);
-      processWaitingListIfPossible(itemID);
     } else {
       response = performReturnItemOperation(userId, itemID, true);
       if (response.equalsIgnoreCase(LibConstants.SUCCESS)) {
@@ -127,6 +126,9 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
 
     }
     StringBuilder response = new StringBuilder();
+    if (itemID.startsWith("MCG") && !data.containsKey(itemID)) {
+      return LibConstants.FAIL + "Can not borrow , Item id is unknown to Library";
+    }
     String result = performBorrowItemOperation(itemID, userId,
         numberOfDays);//this will fail if itemID is not in this server
     //if fails then we need to connect to Respective External Server to Borrow Item
@@ -172,26 +174,29 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
     if (data.containsKey(itemID)) {
       logger.info("Now attempting to process wait list");
       synchronized (data) {
-        LibraryModel book = data.get(itemID);
-        if (book.getQuantity() > 0 && book.getWaitingList().size() > 0) {
-          logger.info("Waiting List Found For The Item Id " + itemID);
-          String firstUserInWaitingList = book.getWaitingList().get(0);
-          logger.info(firstUserInWaitingList + " is First in Waiting List");
-          String res = isUsereligibleToGetbook(firstUserInWaitingList, itemID,
-              true);
-          if (res.equalsIgnoreCase(LibConstants.FAIL)) {
-            logger.info(
-                firstUserInWaitingList + "Already got one thing out of library , can not assign "
-                    + itemID);
-            return;
+        while (data.get(itemID).waitingList.size() > 0) {
+          String waitlistUser = data.get(itemID).getWaitingList().get(0);
+          if (data.get(itemID).getQuantity() > 0) {
+            logger.info("Waiting List Found For The Item Id " + itemID);
+            String res = isUsereligibleToGetbook(waitlistUser, itemID,
+                true);
+            if (res.equalsIgnoreCase(LibConstants.FAIL)) {
+              logger.info(
+                  waitlistUser + "Already got one thing out of library , can not assign "
+                      + itemID);
+              data.get(itemID).getWaitingList().remove(waitlistUser);//remove from waiting list
+              continue;
+            } else {
+              data.get(itemID).getCurrentBorrowerList().add(waitlistUser);//add in borrower list
+              data.get(itemID).getWaitingList().remove(waitlistUser);//remove from waiting list
+              data.get(itemID).setQuantity(data.get(itemID).getQuantity() - 1);
+              addOrUpdateInCurrentBorrowers(waitlistUser, itemID);
+              logger.info(itemID + "  is assigned to " + waitlistUser);
+            }
           }
-          book.getCurrentBorrowerList().add(firstUserInWaitingList);//add in borrower list
-          book.getWaitingList().remove(firstUserInWaitingList);//remove from waiting list
-          book.setQuantity(book.getQuantity() - 1);
-          addOrUpdateInCurrentBorrowers(firstUserInWaitingList, itemID);
-          data.put(itemID, book);//update the data with new details
-          logger.info(itemID + "  is assigned to " + firstUserInWaitingList);
         }
+
+
       }
 
     }
@@ -344,19 +349,6 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
     return response.toString();
   }
 
-  private synchronized LibraryModel getData(HashMap<String, HashMap<String, Integer>> data,
-      String itemId) {
-    StringBuilder response = new StringBuilder();
-    LibraryModel libraryModel = new LibraryModel();
-    HashMap<String, Integer> nameQuantity = data.get(itemId);
-    libraryModel.setItemId(itemId);
-    for (Map.Entry<String, Integer> nameEntry : nameQuantity.entrySet()) {
-      libraryModel.setItemName(nameEntry.getKey());
-      libraryModel.setQuantity(nameEntry.getValue());
-    }
-
-    return libraryModel;
-  }
 
   private boolean isValidManager(String managerId) {
     return managerIds.contains(managerId);
@@ -449,8 +441,15 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
             .contains(userId)) {
           synchronized (data) {
             model.getCurrentBorrowerList().remove(userId);
+            int previousQuantity = model.getQuantity();
+            model.setQuantity(model.getQuantity() + 1);
             data.put(itemID, model);
             removeFromCurrentBorrowers(userId, itemID);
+            if (previousQuantity == 0) {
+              logger.info("Previous Quantity for the item " + itemID
+                  + " was 0 ,Now processing waitinglist");
+              processWaitingListIfPossible(itemID);
+            }
             return LibConstants.SUCCESS;
           }
         }
