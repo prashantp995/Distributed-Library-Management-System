@@ -1,0 +1,421 @@
+Feb 13, 2019 2:16:59 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:16:59 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:16:59 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:16:59 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:16:59 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:16:59 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:16:59 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:16:59 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is FailCan not borrow , Item id is unknown to Library
+Feb 13, 2019 2:16:59 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Success
+Feb 13, 2019 2:16:59 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Feb 13, 2019 2:20:40 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:20:40 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:20:40 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:20:40 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:20:40 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:20:40 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:20:40 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:20:40 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:20:40 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Feb 13, 2019 2:20:40 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:23:49 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 13, 2019 2:23:49 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 13, 2019 2:23:49 PM UserClient getResponseFromListItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:23:49 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1015 IeamName DSD Quantity 1
+ WaitingList []
+ Current Borrowers[CONU1111]
+
+Feb 13, 2019 2:24:02 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:24:02 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:24:02 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:24:02 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:24:02 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:24:02 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:24:02 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:24:02 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:24:02 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:24:02 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:24:06 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 13, 2019 2:24:06 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 13, 2019 2:24:06 PM UserClient getResponseFromListItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:24:06 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1015 IeamName DSD Quantity 2
+ WaitingList []
+ Current Borrowers[CONU1111]
+
+Feb 13, 2019 2:50:49 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:50:49 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:50:49 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:50:49 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:50:49 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:50:49 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:50:49 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:50:49 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Success
+Feb 13, 2019 2:50:49 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Feb 13, 2019 2:50:49 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:50:55 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 13, 2019 2:50:55 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 13, 2019 2:50:55 PM UserClient getResponseFromListItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:50:55 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1015 IeamName DSD Quantity 0
+ WaitingList []
+ Current Borrowers[CONU1111]
+
+Feb 13, 2019 2:51:04 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:51:04 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:51:04 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:04 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:51:04 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:51:04 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:04 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:04 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:51:04 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:51:04 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:51:08 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 13, 2019 2:51:08 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 13, 2019 2:51:08 PM UserClient getResponseFromListItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:08 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1015 IeamName DSD Quantity 1
+ WaitingList []
+ Current Borrowers[CONU1111]
+
+Feb 13, 2019 2:51:20 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:51:20 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:51:20 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:20 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:51:20 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:51:20 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:20 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:20 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:51:20 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:51:20 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:51:30 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:51:30 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:51:30 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:30 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:51:30 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:51:30 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:30 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:30 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Fail user already borrowed item
+Feb 13, 2019 2:51:30 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:51:30 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:51:36 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:51:36 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:51:36 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:51:36 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:51:36 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:36 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:36 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:51:36 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Feb 13, 2019 2:51:36 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:51:36 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:53:03 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:53:03 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:53:03 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:53:03 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:53:03 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:53:03 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:53:03 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:53:03 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:53:03 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:53:03 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:55:31 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:55:31 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:55:31 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1015
+Feb 13, 2019 2:55:31 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:55:31 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:55:31 PM UserClient getBorrowItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:55:31 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:55:31 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:55:31 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:55:31 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:58:13 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:58:13 PM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Feb 13, 2019 2:58:13 PM UserClient getResponseFromRemoveItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:58:13 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:58:13 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:58:13 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:58:13 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:58:13 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Success
+Feb 13, 2019 2:58:13 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:58:13 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Remove Item Success , CON1015 Updated the Quantity by  CONM1111
+Feb 13, 2019 2:58:47 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 13, 2019 2:58:47 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 13, 2019 2:58:47 PM UserClient getResponseFromListItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:58:47 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1015 IeamName DSD Quantity 3
+ WaitingList []
+ Current Borrowers[]
+
+Feb 13, 2019 2:59:09 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 2:59:09 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 2:59:09 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:59:09 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 2:59:09 PM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Feb 13, 2019 2:59:09 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:59:09 PM UserClient getResponseFromRemoveItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 2:59:09 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Feb 13, 2019 2:59:09 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 2:59:09 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Please Provide Correct Quantity
+Feb 13, 2019 4:36:28 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Feb 13, 2019 4:36:31 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Feb 13, 2019 4:36:36 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1013 ALGO Quantity 1
+Feb 13, 2019 4:36:36 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item ALGO
+Feb 13, 2019 4:36:36 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 4:36:36 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 4:36:39 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 13, 2019 4:36:39 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 13, 2019 4:36:39 PM UserClient getResponseFromListItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 4:36:39 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 4
+ WaitingList []
+ Current Borrowers[CONU1111]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[CONU1111]
+
+Feb 13, 2019 4:36:57 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Feb 13, 2019 4:37:00 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Feb 13, 2019 4:37:04 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1013 ALGO Quantity 1
+Feb 13, 2019 4:37:04 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item ALGO
+Feb 13, 2019 4:37:04 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 4:37:04 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 13, 2019 4:37:10 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 13, 2019 4:37:10 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 13, 2019 4:37:10 PM UserClient getResponseFromListItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 4:37:10 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 4
+ WaitingList []
+ Current Borrowers[CONU1111]
+ItemId CON1013 IeamName ALGO Quantity 1
+ WaitingList []
+ Current Borrowers[CONU1111]
+
+Feb 13, 2019 4:37:20 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 13, 2019 4:37:20 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 13, 2019 4:37:20 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 4:37:20 PM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Feb 13, 2019 4:37:20 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 13, 2019 4:37:20 PM UserClient getResponseFromRemoveItem
+INFO: Connecting to CON  Server
+Feb 13, 2019 4:37:20 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 13, 2019 4:37:20 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Success
+Feb 13, 2019 4:37:20 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Please Provide Correct Quantity
+Feb 13, 2019 4:37:20 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Feb 14, 2019 11:42:55 AM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Feb 14, 2019 11:43:00 AM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1012
+Feb 14, 2019 11:43:04 AM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1012 DSD Quantity 3
+Feb 14, 2019 11:43:04 AM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 14, 2019 11:43:04 AM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 14, 2019 11:45:02 AM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 14, 2019 11:45:08 AM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Feb 14, 2019 11:45:12 AM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1012
+Feb 14, 2019 11:45:15 AM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1012 DSD Quantity 22
+Feb 14, 2019 11:45:15 AM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 14, 2019 11:45:15 AM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 14, 2019 11:46:52 AM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated

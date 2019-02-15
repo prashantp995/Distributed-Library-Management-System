@@ -1,0 +1,94 @@
+Feb 13, 2019 2:16:46 PM McGillServer main
+INFO: Server ready.
+Feb 13, 2019 2:50:31 PM McGillServer main
+INFO: Server ready.
+Feb 13, 2019 4:34:48 PM McGillServer main
+INFO: Server ready.
+Feb 13, 2019 4:35:40 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:64565
+Feb 13, 2019 4:35:40 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1013 User CONU1111 for days 1
+Feb 13, 2019 4:35:40 PM McGillServer getBorrowItemResponse
+INFO: Response isWait List Possible
+Feb 13, 2019 4:35:40 PM McGillServer$1 run
+INFO: sending response [B@1a6c5a9e
+Feb 13, 2019 4:35:41 PM McGillServer$1 run
+INFO: waitList is called by /127.0.0.1:64566
+Feb 13, 2019 4:35:41 PM McGillServer getWaitListResponse
+INFO: User Selected to be in Wait List For itemMCG1013 User CONU1111
+Feb 13, 2019 4:35:41 PM McGillServer getWaitListResponse
+INFO: Response isSuccess
+Feb 13, 2019 4:35:41 PM McGillServer$1 run
+INFO: sending response [B@37bba400
+Feb 13, 2019 4:35:50 PM McGillServer$1 run
+INFO: findItem is called by /127.0.0.1:64568
+Feb 13, 2019 4:35:50 PM McGillServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSDs
+Feb 13, 2019 4:35:50 PM McGillServer getFindItemResponse
+INFO: Response is  
+Feb 13, 2019 4:35:50 PM McGillServer$1 run
+INFO: sending response [B@179d3b25
+Feb 15, 2019 2:28:44 PM McGillServer main
+INFO: Server ready.
+Feb 15, 2019 2:29:05 PM McGillServer$1 run
+INFO: findItem is called by /127.0.0.1:56982
+Feb 15, 2019 2:29:05 PM McGillServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSD
+Feb 15, 2019 2:29:05 PM McGillServer getFindItemResponse
+INFO: Response is  MCG1012 52
+Feb 15, 2019 2:29:05 PM McGillServer$1 run
+INFO: sending response [B@1a6c5a9e
+Feb 15, 2019 2:29:48 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:56986
+Feb 15, 2019 2:29:48 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User CONU1111 for days 1
+Feb 15, 2019 2:29:48 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Feb 15, 2019 2:29:48 PM McGillServer$1 run
+INFO: sending response [B@37bba400
+Feb 15, 2019 2:35:14 PM McGillRemoteServiceImpl listItem
+INFO: MCGM1111Requested to View Data
+Feb 15, 2019 2:35:45 PM McGillRemoteServiceImpl removeItem
+INFO: Remove item is called on McGill server by CONM1111 for CON1015 for 5
+Feb 15, 2019 2:35:45 PM McGillRemoteServiceImpl returnItem
+INFO: CONU1111is not present/authorised
+Feb 15, 2019 2:35:45 PM McGillRemoteServiceImpl addItem
+INFO: Add item is called on McGill server by CONM1111 for CON1015 for 1 name DSD
+Feb 15, 2019 2:35:45 PM McGillRemoteServiceImpl removeItem
+INFO: CONM1111is not Present/Authorised
+Feb 15, 2019 2:35:45 PM McGillRemoteServiceImpl addItem
+INFO: CONM1111is not present/authorised
+Feb 15, 2019 2:35:55 PM McGillRemoteServiceImpl addItem
+INFO: Add item is called on McGill server by CONM1111 for CON1015 for 1 name DSD
+Feb 15, 2019 2:35:55 PM McGillRemoteServiceImpl addItem
+INFO: CONM1111is not present/authorised
+Feb 15, 2019 2:35:55 PM McGillRemoteServiceImpl returnItem
+INFO: CONU1111is not present/authorised
+Feb 15, 2019 2:35:55 PM McGillRemoteServiceImpl removeItem
+INFO: Remove item is called on McGill server by CONM1111 for CON1015 for 5
+Feb 15, 2019 2:35:55 PM McGillRemoteServiceImpl removeItem
+INFO: CONM1111is not Present/Authorised
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl addItem
+INFO: Add item is called on McGill server by CONM1111 for CON1015 for 1 name DSD
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl returnItem
+INFO: CONU1111is not present/authorised
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl addItem
+INFO: CONM1111is not present/authorised
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl removeItem
+INFO: Remove item is called on McGill server by CONM1111 for CON1015 for 5
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl removeItem
+INFO: CONM1111is not Present/Authorised
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl removeItem
+INFO: Remove item is called on McGill server by CONM1111 for CON1015 for 5
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl returnItem
+INFO: CONU1111is not present/authorised
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl removeItem
+INFO: CONM1111is not Present/Authorised
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl addItem
+INFO: Add item is called on McGill server by CONM1111 for CON1015 for 1 name DSD
+Feb 15, 2019 2:35:56 PM McGillRemoteServiceImpl addItem
+INFO: CONM1111is not present/authorised
+Feb 15, 2019 2:36:04 PM McGillRemoteServiceImpl removeItem
+INFO: Remove item is called on McGill server by MCGM1111 for MCG1012 for 2
+Feb 15, 2019 2:36:04 PM McGillRemoteServiceImpl updateQuantity
+INFO: updating existing item {, itemName='DSD', quantity=49}

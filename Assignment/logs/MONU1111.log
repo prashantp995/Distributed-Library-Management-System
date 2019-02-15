@@ -1,0 +1,6 @@
+Feb 14, 2019 2:06:48 PM UserClient performBorrowItem
+INFO: MONU1111 Requested to Borrow Item MON1012 for 2 days.
+Feb 14, 2019 2:06:48 PM UserClient getBorrowItemResponse
+INFO: MONU1111 Requested to Borrow Item MON1012
+Feb 14, 2019 2:06:48 PM UserClient getBorrowItemResponse
+INFO: Connecting to MON  Server

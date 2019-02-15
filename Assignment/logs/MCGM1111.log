@@ -1,0 +1,108 @@
+Feb 15, 2019 2:35:14 PM UserClient performManagerOperation
+INFO: MCGM1111 choose to List Item
+Feb 15, 2019 2:35:14 PM UserClient getResponseFromListItem
+INFO: MCGM1111 Requested to List Item 
+Feb 15, 2019 2:35:14 PM UserClient getResponseFromListItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:14 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MCG1012 IeamName DSD Quantity 51
+Current Borrowers[CONU1111]
+Waiting List[]
+ItemId MCG1013 IeamName ALGO Quantity 0
+Current Borrowers[]
+Waiting List[]
+
+Feb 15, 2019 2:35:45 PM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Feb 15, 2019 2:35:45 PM UserClient getResponseFromRemoveItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:45 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 15, 2019 2:35:45 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 15, 2019 2:35:45 PM UserClient getReturnItemResponse
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:45 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 15, 2019 2:35:45 PM UserClient getResponseOfAddItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:45 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is CONU1111is not present/authorised
+Feb 15, 2019 2:35:45 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Item Remove Fails,User is not Present/Authorised
+Feb 15, 2019 2:35:45 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Fails,User is not Present/Authorised
+Feb 15, 2019 2:35:55 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 15, 2019 2:35:55 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 15, 2019 2:35:55 PM UserClient getResponseOfAddItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:55 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 15, 2019 2:35:55 PM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Feb 15, 2019 2:35:55 PM UserClient getReturnItemResponse
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:55 PM UserClient getResponseFromRemoveItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:55 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Fails,User is not Present/Authorised
+Feb 15, 2019 2:35:55 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is CONU1111is not present/authorised
+Feb 15, 2019 2:35:55 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Item Remove Fails,User is not Present/Authorised
+Feb 15, 2019 2:35:56 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 15, 2019 2:35:56 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 15, 2019 2:35:56 PM UserClient getResponseOfAddItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:56 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 15, 2019 2:35:56 PM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Feb 15, 2019 2:35:56 PM UserClient getResponseFromRemoveItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:56 PM UserClient getReturnItemResponse
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:56 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is CONU1111is not present/authorised
+Feb 15, 2019 2:35:56 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Fails,User is not Present/Authorised
+Feb 15, 2019 2:35:56 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Item Remove Fails,User is not Present/Authorised
+Feb 15, 2019 2:35:56 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 15, 2019 2:35:56 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 15, 2019 2:35:56 PM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Feb 15, 2019 2:35:56 PM UserClient getResponseFromRemoveItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:56 PM UserClient getReturnItemResponse
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:56 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 15, 2019 2:35:56 PM UserClient getResponseOfAddItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:35:56 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is CONU1111is not present/authorised
+Feb 15, 2019 2:35:56 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Item Remove Fails,User is not Present/Authorised
+Feb 15, 2019 2:35:56 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Fails,User is not Present/Authorised
+Feb 15, 2019 2:36:01 PM UserClient performManagerOperation
+INFO: MCGM1111 choose to Remove Item
+Feb 15, 2019 2:36:03 PM UserClient performRemoveItem
+INFO: MCGM1111 is trying to remove MCG1012
+Feb 15, 2019 2:36:04 PM UserClient getResponseFromRemoveItem
+INFO: MCGM1111 Requested to Remove Item MCG1012Quantity2
+Feb 15, 2019 2:36:04 PM UserClient getResponseFromRemoveItem
+INFO: Connecting to MCG  Server
+Feb 15, 2019 2:36:04 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Remove Item Success , Updated the Quantity
+Feb 15, 2019 2:36:38 PM UserClient performManagerOperation
+INFO: MCGM1111 choose to Add Item
+Feb 15, 2019 2:36:56 PM UserClient performAddItem
+INFO: MCGM1111 is trying to Add item with item id MCG1014

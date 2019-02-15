@@ -1,0 +1,71 @@
+Feb 13, 2019 2:16:48 PM MonServer main
+INFO: Server ready.
+Feb 13, 2019 2:50:32 PM MonServer main
+INFO: Server ready.
+Feb 13, 2019 4:34:50 PM MonServer main
+INFO: Server ready.
+Feb 13, 2019 4:35:10 PM MonServer$1 run
+INFO: borrowItem is called by /127.0.0.1:64563
+Feb 13, 2019 4:35:10 PM MonServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MON1012 User CONU1111 for days 1
+Feb 13, 2019 4:35:10 PM MonServer getBorrowItemResponse
+INFO: Response isSuccess
+Feb 13, 2019 4:35:10 PM MonServer$1 run
+INFO: sending response [B@1a6c5a9e
+Feb 13, 2019 4:35:24 PM MonServer$1 run
+INFO: returnItem is called by /127.0.0.1:64564
+Feb 13, 2019 4:35:24 PM MonServer getReturnItemResponse
+INFO: Return item is Called :   Item is MON1012 User CONU1111
+Feb 13, 2019 4:35:24 PM MonRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MON1012 was 0 ,Now processing waitinglist
+Feb 13, 2019 4:35:24 PM MonRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Feb 13, 2019 4:35:24 PM MonServer getReturnItemResponse
+INFO: Response isSuccess
+Feb 13, 2019 4:35:24 PM MonServer$1 run
+INFO: sending response [B@37bba400
+Feb 13, 2019 4:35:50 PM MonServer$1 run
+INFO: findItem is called by /127.0.0.1:64567
+Feb 13, 2019 4:35:50 PM MonServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSDs
+Feb 13, 2019 4:35:50 PM MonServer getFindItemResponse
+INFO: Response is  
+Feb 13, 2019 4:35:50 PM MonServer$1 run
+INFO: sending response [B@179d3b25
+Feb 14, 2019 2:03:20 PM MonServer main
+INFO: Exception java.rmi.ConnectException: Connection refused to host: 192.168.56.1; nested exception is: 
+	java.net.ConnectException: Connection refused: connect
+Feb 14, 2019 2:06:24 PM MonServer main
+INFO: Server ready.
+Feb 15, 2019 2:28:51 PM MonServer main
+INFO: Server ready.
+Feb 15, 2019 2:29:05 PM MonServer$1 run
+INFO: findItem is called by /127.0.0.1:56981
+Feb 15, 2019 2:29:05 PM MonServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSD
+Feb 15, 2019 2:29:05 PM MonServer getFindItemResponse
+INFO: Response is  MON1012 1
+Feb 15, 2019 2:29:05 PM MonServer$1 run
+INFO: sending response [B@1a6c5a9e
+Feb 15, 2019 2:29:30 PM MonServer$1 run
+INFO: borrowItem is called by /127.0.0.1:56984
+Feb 15, 2019 2:29:30 PM MonServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MON1012 User CONU1111 for days 2
+Feb 15, 2019 2:29:30 PM MonServer getBorrowItemResponse
+INFO: Response isSuccess
+Feb 15, 2019 2:29:30 PM MonServer$1 run
+INFO: sending response [B@37bba400
+Feb 15, 2019 2:29:42 PM MonServer$1 run
+INFO: returnItem is called by /127.0.0.1:56985
+Feb 15, 2019 2:29:42 PM MonServer getReturnItemResponse
+INFO: Return item is Called :   Item is MON1012 User CONU1111
+Feb 15, 2019 2:29:42 PM MonRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MON1012 was 0 ,Now processing waitinglist
+Feb 15, 2019 2:29:42 PM MonRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Feb 15, 2019 2:29:42 PM MonServer getReturnItemResponse
+INFO: Response isSuccess
+Feb 15, 2019 2:29:42 PM MonServer$1 run
+INFO: sending response [B@179d3b25
+Feb 15, 2019 2:36:27 PM MonRemoteServiceImpl listItem
+INFO: MONM1111Requested to View Data

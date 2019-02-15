@@ -1,0 +1,14 @@
+Feb 15, 2019 2:36:27 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Feb 15, 2019 2:36:27 PM UserClient getResponseFromListItem
+INFO: MONM1111 Requested to List Item 
+Feb 15, 2019 2:36:27 PM UserClient getResponseFromListItem
+INFO: Connecting to MON  Server
+Feb 15, 2019 2:36:27 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MON1012 IeamName DSD Quantity 1
+ WaitingList []
+ Current Borrowers[]
+ItemId MON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
