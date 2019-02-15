@@ -442,8 +442,6 @@ public class UserClient {
       public void run() {
         try {
           getResponseOfAddItem("CONM1111", "CON1015", "DSD", 1);
-          //getBorrowItemResponse("CON1012", 5, "CONU1111");
-          //getReturnItemResponse("CONU1111", "CON1012");
         } catch (RemoteException e) {
           e.printStackTrace();
         } catch (NotBoundException e) {
@@ -452,13 +450,12 @@ public class UserClient {
       }
     };
 
-
     Runnable runnable2 = new Runnable() {
       @Override
       public void run() {
         try {
           //getResponseOfAddItem("CONM1111", "CON1015", "DSD", 1);
-          getBorrowItemResponse("CON1015", 5, "CONU1111");
+          getResponseFromRemoveItem("CONM1111", "CON1015", 5);
           //getReturnItemResponse("CONU1111", "CON1012");
         } catch (RemoteException e) {
           e.printStackTrace();
@@ -470,15 +467,21 @@ public class UserClient {
     Runnable runnable3 = new Runnable() {
       @Override
       public void run() {
-        // getResponseOfAddItem("CONM1111", "CON1015", "DSD", 1);
-        // getBorrowItemResponse("CON1012", 5, "CONU1111");
-        // getReturnItemResponse("CONU1111", "CON1012");
+        try {
+          getReturnItemResponse("CONU1111", "CON1015");
+        } catch (RemoteException e) {
+          e.printStackTrace();
+        } catch (NotBoundException e) {
+          e.printStackTrace();
+        }
       }
     };
     Thread thread = new Thread(runnable);
     Thread thread2 = new Thread(runnable2);
     Thread thread3 = new Thread(runnable3);
-    thread.start();thread2.start();thread3.start();
+    thread.start();
+    thread2.start();
+    thread3.start();
 
 
   }
