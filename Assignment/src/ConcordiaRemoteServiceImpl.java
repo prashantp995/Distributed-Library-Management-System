@@ -3,7 +3,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
@@ -91,7 +90,15 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
             .toString());
         for (String borrowedItem : currentBorrowers.get(userId)) {
           if (!borrowedItem.startsWith("CON") && !itemID.startsWith("CON")) {
-            return LibConstants.FAIL + "Can not borrow more than one item from external library";
+            if (borrowedItem.startsWith("MON") && itemID.startsWith("MON")) {
+              return LibConstants.FAIL
+                  + "Can not borrow more than one item from each of  external library";
+            }
+            if (borrowedItem.startsWith("MCG") && itemID.startsWith("MCG")) {
+              return LibConstants.FAIL
+                  + "Can not borrow more than one item from each of  external library";
+            }
+
           }
 
         }
@@ -103,7 +110,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
       logger.info(userId + " Can not borrow , Item id is unknown to Library  " + itemID);
       return LibConstants.FAIL + " Can not borrow , Item id is unknown to Library";
     }
-    if(data.containsKey(itemID) && data.get(itemID).getCurrentBorrowerList().contains(userId)){
+    if (data.containsKey(itemID) && data.get(itemID).getCurrentBorrowerList().contains(userId)) {
       logger.info("user already borrowed item ");
       return LibConstants.FAIL + " user already borrowed item";
     }
