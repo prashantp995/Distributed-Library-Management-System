@@ -110,7 +110,8 @@ public class ConcordiaServer {
       reponsePacket = new DatagramPacket(response.getBytes(), response.getBytes().length,
           address, port);
     } else {
-      reponsePacket = new DatagramPacket(" No Data".getBytes(), "No Data".getBytes().length,
+      String noResponse = "No Data Found";
+      reponsePacket = new DatagramPacket(noResponse.getBytes(), noResponse.getBytes().length,
           address, port);
     }
     return reponsePacket;
