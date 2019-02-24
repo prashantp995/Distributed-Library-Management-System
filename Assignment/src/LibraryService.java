@@ -1,7 +1,7 @@
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface LibraryService extends Remote {
+public interface   LibraryService extends Remote {
 
   String findItem(String userId, String itemName) throws RemoteException;
 
@@ -15,5 +15,7 @@ public interface LibraryService extends Remote {
   String removeItem(String managerId, String itemId, int quantity)throws RemoteException;
 
   String listItem(String managerId)throws RemoteException;
+
+  String addUserInWaitingList(String userId,String ItemId ,int numberOfDays) throws RemoteException;
 
 }
