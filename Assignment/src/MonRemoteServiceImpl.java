@@ -216,14 +216,15 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       String res = borrowItemFromExternalServer(userId, itemID, numberOfDays);
       response.append(res);
       if (res.equals(LibConstants.WAIT_LIST_POSSIBLE)) {
-        res = handleWaitList(userId, itemID, numberOfDays, res, true);
+        return res;
       } else if (res.equalsIgnoreCase(LibConstants.SUCCESS)) {
         addOrUpdateInCurrentBorrowers(userId, itemID);//external server approved borrow item
+        return LibConstants.SUCCESS;
       }
 
-      return res;
+
     } else if (result.equalsIgnoreCase(LibConstants.WAIT_LIST_POSSIBLE)) {
-      result = handleWaitList(userId, itemID, numberOfDays, result, false);
+      return result;
     }
 
     return result;
@@ -460,6 +461,11 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       return "ManagerId is not registered";
     }
     return getData(data);
+  }
+
+  @Override
+  public String addUserInWaitingList(String userId, String ItemId, int numberOfDays) {
+    return addUserInWaitList(ItemId, userId, numberOfDays, !ItemId.startsWith("MON"));
   }
 
   private String getData(HashMap<String, LibraryModel> data) {
