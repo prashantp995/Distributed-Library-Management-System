@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
-public class McGillRemoteServiceImpl extends UnicastRemoteObject implements LibraryService {
+public class McGillRemoteServiceImpl extends LibraryServicePOA {
 
   HashMap<String, LibraryModel> data = new java.util.HashMap<>();
   HashMap<String, ArrayList<String>> currentBorrowers = new HashMap<>();
@@ -16,7 +16,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
   Logger logger = null;
 
 
-  protected McGillRemoteServiceImpl(Logger logger) throws RemoteException {
+  protected McGillRemoteServiceImpl(Logger logger)  {
     super();
     initManagerID();
     initUserID();
@@ -39,7 +39,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
 
 
   @Override
-  public String findItem(String userId, String itemName) throws RemoteException {
+  public String findItem(String userId, String itemName)  {
     logger.info(userId + "requested to find item" + itemName);
     String itemDetails;
     if (!isValidUser(userId)) {
@@ -86,7 +86,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
   }
 
   @Override
-  public String returnItem(String userId, String itemID) throws RemoteException {
+  public String returnItem(String userId, String itemID)  {
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
       return userId + "is not present/authorised";
@@ -106,7 +106,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
   }
 
   @Override
-  public String borrowItem(String userId, String itemID, int numberOfDays) throws RemoteException {
+  public String borrowItem(String userId, String itemID, int numberOfDays)  {
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
       return userId + "is not present/authorised";
@@ -236,7 +236,7 @@ public class McGillRemoteServiceImpl extends UnicastRemoteObject implements Libr
 
   @Override
   public String addItem(String userId, String itemID, String itemName, int quantity)
-      throws RemoteException {
+       {
     logger.info("Add item is called on McGill server by " + userId + " for " + itemID + " for "
         + quantity + " name " + itemName);
     StringBuilder response = new StringBuilder();

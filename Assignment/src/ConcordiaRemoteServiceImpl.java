@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
-public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements LibraryService {
+public class ConcordiaRemoteServiceImpl extends LibraryServicePOA{
 
   HashMap<String, LibraryModel> data = new HashMap<>();
   HashMap<String, ArrayList<String>> currentBorrowers = new HashMap<>();
@@ -17,7 +17,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
   Logger logger = null;
 
 
-  protected ConcordiaRemoteServiceImpl(Logger logger) throws RemoteException {
+  protected ConcordiaRemoteServiceImpl(Logger logger)  {
     super();
     initManagerID();
     initUserID();
@@ -40,7 +40,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
 
 
   @Override
-  public String findItem(String userId, String itemName) throws RemoteException {
+  public String findItem(String userId, String itemName)  {
     logger.info(userId + "requested to find item" + itemName);
     String itemDetails;
     if (!isValidUser(userId)) {
@@ -57,7 +57,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
 
 
   @Override
-  public String returnItem(String userId, String itemID) throws RemoteException {
+  public String returnItem(String userId, String itemID)  {
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
       return userId + "is not present/authorised";
@@ -78,7 +78,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
   }
 
   @Override
-  public String borrowItem(String userId, String itemID, int numberOfDays) throws RemoteException {
+  public String borrowItem(String userId, String itemID, int numberOfDays)  {
     logger.info(userId + " has asked to borrow item " + itemID);
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
@@ -139,7 +139,7 @@ public class ConcordiaRemoteServiceImpl extends UnicastRemoteObject implements L
 
   @Override
   public String addItem(String userId, String itemID, String itemName, int quantity)
-      throws RemoteException {
+       {
     logger.info("Add item is called on Concordia server by " + userId + " for " + itemID + " for "
         + quantity + " name " + itemName);
     StringBuilder response = new StringBuilder();
