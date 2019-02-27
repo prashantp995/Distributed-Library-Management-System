@@ -76,4 +76,19 @@ public class ServerUtils {
     }
     return logger;
   }
+
+  public static String[] getServerInfo(String serverName) {
+    String serverInfo[] = new String[4];
+    serverInfo[0] = "-ORBInitialHost";
+    serverInfo[1] = "localhost";
+    serverInfo[2] = "-ORBInitialPort";
+    if (serverName.equalsIgnoreCase("CON")) {
+      serverInfo[3] = String.valueOf(LibConstants.CON_PORT);
+    } else if (serverName.equalsIgnoreCase("MCG")) {
+      serverInfo[3] = String.valueOf(LibConstants.MCG_PORT);
+    } else if (serverName.equalsIgnoreCase("MON")) {
+      serverInfo[3] = String.valueOf(LibConstants.MON_PORT);
+    }
+    return serverInfo;
+  }
 }

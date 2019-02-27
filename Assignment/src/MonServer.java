@@ -19,7 +19,7 @@ public class MonServer {
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_MON_PORT);
     byte[] buf = new byte[256];
     try {
-      ORB orb = ORB.init(args, null);
+      ORB orb = ORB.init(ServerUtils.getServerInfo("MON"), null);
       //get reference to rootpoa & activate the POAManager
       POA rootpoa =
           (POA) orb.resolve_initial_references("RootPOA");
