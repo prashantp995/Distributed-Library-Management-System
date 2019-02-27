@@ -92,3 +92,65 @@ Feb 15, 2019 2:36:04 PM McGillRemoteServiceImpl removeItem
 INFO: Remove item is called on McGill server by MCGM1111 for MCG1012 for 2
 Feb 15, 2019 2:36:04 PM McGillRemoteServiceImpl updateQuantity
 INFO: updating existing item {, itemName='DSD', quantity=49}
+Feb 23, 2019 9:37:27 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 9:39:24 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:04:17 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:05:44 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:26:16 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:30:58 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:59891
+Feb 23, 2019 10:30:58 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User CONU1111 for days 1
+Feb 23, 2019 10:30:58 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Feb 23, 2019 10:30:58 PM McGillServer$1 run
+INFO: sending response [B@c4437c4
+Feb 23, 2019 10:36:31 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:37:50 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:55372
+Feb 23, 2019 10:37:50 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1019 User CONU1111 for days 1
+Feb 23, 2019 10:37:50 PM McGillServer getBorrowItemResponse
+INFO: Response isFail
+Feb 23, 2019 10:37:50 PM McGillServer$1 run
+INFO: sending response [B@c4437c4
+Feb 23, 2019 10:37:57 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:55373
+Feb 23, 2019 10:37:57 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1013 User CONU1111 for days 1
+Feb 23, 2019 10:37:57 PM McGillServer getBorrowItemResponse
+INFO: Response isWait List Possible
+Feb 23, 2019 10:37:57 PM McGillServer$1 run
+INFO: sending response [B@433c675d
+Feb 23, 2019 10:38:00 PM McGillServer$1 run
+INFO: waitList is called by /127.0.0.1:55374
+Feb 23, 2019 10:38:00 PM McGillServer getWaitListResponse
+INFO: User Selected to be in Wait List For itemMCG1013 User CONU1111
+Feb 23, 2019 10:38:00 PM McGillServer getWaitListResponse
+INFO: Response isSuccess
+Feb 23, 2019 10:38:00 PM McGillServer$1 run
+INFO: sending response [B@3f91beef
+Feb 23, 2019 11:10:10 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 11:13:48 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:57980
+Feb 23, 2019 11:13:48 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1013 User MONU1111 for days 1
+Feb 23, 2019 11:13:48 PM McGillServer getBorrowItemResponse
+INFO: Response isWait List Possible
+Feb 23, 2019 11:13:48 PM McGillServer$1 run
+INFO: sending response [B@c4437c4
+Feb 23, 2019 11:13:50 PM McGillServer$1 run
+INFO: waitList is called by /127.0.0.1:57981
+Feb 23, 2019 11:13:50 PM McGillServer getWaitListResponse
+INFO: User Selected to be in Wait List For itemMCG1013 User MONU1111
+Feb 23, 2019 11:13:50 PM McGillServer getWaitListResponse
+INFO: Response isSuccess
+Feb 23, 2019 11:13:50 PM McGillServer$1 run
+INFO: sending response [B@433c675d

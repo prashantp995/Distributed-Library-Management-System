@@ -12,3 +12,55 @@ ItemId MON1013 IeamName ALGO Quantity 0
  WaitingList []
  Current Borrowers[]
 
+Feb 23, 2019 10:29:07 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Feb 23, 2019 10:29:07 PM UserClient getResponseFromListItem
+INFO: MONM1111 Requested to List Item 
+Feb 23, 2019 10:29:07 PM UserClient getResponseFromListItem
+INFO: Connecting to MON  Server
+Feb 23, 2019 10:29:07 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MON1012 IeamName DSD Quantity 0
+ WaitingList []
+ Current Borrowers[CONU1111]
+ItemId MON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
+Feb 26, 2019 10:28:07 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Feb 26, 2019 10:31:22 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Feb 26, 2019 10:33:22 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Feb 26, 2019 10:35:39 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Feb 26, 2019 10:35:40 PM UserClient getResponseFromListItem
+INFO: MONM1111 Requested to List Item 
+Feb 26, 2019 10:35:40 PM UserClient getResponseFromListItem
+INFO: Connecting to -ORBInitialHost  Server
+Feb 26, 2019 10:36:30 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Feb 26, 2019 10:36:30 PM UserClient getResponseFromListItem
+INFO: MONM1111 Requested to List Item 
+Feb 26, 2019 10:36:30 PM UserClient getResponseFromListItem
+INFO: Connecting to -ORBInitialHost  Server
+Feb 26, 2019 10:36:30 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MON1012 IeamName DSD Quantity 1
+ WaitingList []
+ Current Borrowers[]
+ItemId MON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
+Feb 26, 2019 10:45:16 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Feb 26, 2019 10:45:16 PM UserClient getResponseFromListItem
+INFO: MONM1111 Requested to List Item 
+Feb 26, 2019 10:45:16 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MON1012 IeamName DSD Quantity 1
+ WaitingList []
+ Current Borrowers[]
+ItemId MON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
