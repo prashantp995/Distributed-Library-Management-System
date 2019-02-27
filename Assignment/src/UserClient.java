@@ -355,6 +355,23 @@ public class UserClient {
     String response = obj.borrowItem(username, itemId, numberOfDays);
     logger.info("Response Received from the server is " + response);
     System.out.println("Response Received from the server is " + response);
+    if (response.equalsIgnoreCase("Wait List Possible")) {
+      Scanner scanner = new Scanner(System.in);
+      System.out.println(
+          "Item is not available now , WaitList Possible, Do you wish to enroll your self in waitList "
+              + "\n" +
+              "Please enter 1 for yes" + "\n" +
+              "Please enter 0 for No");
+      int choice = scanner.nextInt();
+      if (choice == 1) {
+        logger.info(username + "is requesting to enroll in waitList of " + itemId);
+        String waitListResponse = obj.addUserInWaitingList(username, itemId, numberOfDays);
+        logger.info("Response regarding to waitList for " + itemId + " : " + username + " is "
+            + waitListResponse);
+        System.out.println("Response regarding to waitList for " + itemId + " " + username + " is "
+            + waitListResponse);
+      }
+    }
     return response;
   }
 
