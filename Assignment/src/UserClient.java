@@ -6,6 +6,12 @@ import java.rmi.registry.Registry;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Logger;
+import org.omg.CORBA.ORB;
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.CosNaming.NamingContextExt;
+import org.omg.CosNaming.NamingContextExtHelper;
+import org.omg.CosNaming.NamingContextPackage.CannotProceed;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 public class UserClient {
 
@@ -17,6 +23,7 @@ public class UserClient {
   static boolean isMonManager = false;
   static HashMap<Integer, String> serverInfo = new HashMap<Integer, String>();
   static Logger logger = null;
+  static LibraryService libraryService;
 
   public static void main(String args[])
       throws IOException, NotBoundException {
@@ -43,6 +50,7 @@ public class UserClient {
         determineUniversity(username);
         logger = Utilities
             .setupLogger(Logger.getLogger("UserLogger"), username + ".log", false);
+        setupConnectionInfo();
         performValidOperation(username);
 
       } else {
@@ -50,6 +58,25 @@ public class UserClient {
       }
     }
 
+  }
+
+  private static void setupConnectionInfo() {
+    String[] serverInfo = getServerInfo();
+    ORB orb = ORB.init(serverInfo, null);
+    org.omg.CORBA.Object objRef = null;
+    try {
+      objRef = orb.resolve_initial_references("NameService");
+      NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
+      libraryService = LibraryServiceHelper.narrow(ncRef.resolve_str(getKeyForNamingService()));
+    } catch (InvalidName invalidName) {
+      invalidName.printStackTrace();
+    } catch (CannotProceed cannotProceed) {
+      cannotProceed.printStackTrace();
+    } catch (org.omg.CosNaming.NamingContextPackage.InvalidName invalidName) {
+      invalidName.printStackTrace();
+    } catch (NotFound notFound) {
+      notFound.printStackTrace();
+    }
   }
 
   private static void determineUniversity(String username) {
@@ -237,16 +264,24 @@ public class UserClient {
 
   private static String getResponseFromListItem(String username)
       throws RemoteException, NotBoundException {
-    String[] serverInfo = getServerInfo();
+
     logger.info(
         username + " Requested to List Item ");
-    logger.info("Connecting to " + serverInfo[0] + "  Server");
-    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
-    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
-    String response = obj.listItem(username);
+    String response = libraryService.listItem(username);
     System.out.println("Response Received from the server is " + response);
     logger.info("Response Received from the server is " + response);
     return response;
+  }
+
+  private static String getKeyForNamingService() {
+    if (isConcordiaUser) {
+      return LibConstants.CON_REG;
+    } else if (isMcGillUser) {
+      return LibConstants.MCG_REG;
+    } else if (isMonUser) {
+      return LibConstants.MON_REG;
+    }
+    return null;
   }
 
   private static String getResponseOfAddItem(String username, String itemId,
@@ -428,7 +463,7 @@ public class UserClient {
   }
 
   private static String[] getServerInfo() {
-    String serverInfo[] = new String[2];
+    String serverInfo[] = new String[4];
     if (isConcordiaUser) {
       serverInfo[0] = LibConstants.CON_REG;
       serverInfo[1] = String.valueOf(LibConstants.CON_PORT);
@@ -436,8 +471,11 @@ public class UserClient {
       serverInfo[0] = LibConstants.MCG_REG;
       serverInfo[1] = String.valueOf(LibConstants.MCG_PORT);
     } else if (isMonUser) {
-      serverInfo[0] = LibConstants.MON_REG;
-      serverInfo[1] = String.valueOf(LibConstants.MON_PORT);
+
+      serverInfo[0] = "-ORBInitialHost";
+      serverInfo[1] = "localhost";
+      serverInfo[2] = "-ORBInitialPort";
+      serverInfo[3] = "8082";
     }
     return serverInfo;
   }

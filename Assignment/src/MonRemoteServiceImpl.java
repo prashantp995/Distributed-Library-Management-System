@@ -1,10 +1,9 @@
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
+import org.omg.CORBA.ORB;
 
 public class MonRemoteServiceImpl extends LibraryServicePOA {
 
@@ -14,6 +13,7 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
   HashSet<String> userIds = new HashSet<>();
   HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
+  private ORB orb;
 
 
   protected MonRemoteServiceImpl(Logger logger) {
@@ -25,6 +25,10 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
     this.logger = logger;
 
 
+  }
+
+  public void setORB(ORB orb_val) {
+    orb = orb_val;
   }
 
   private void initManagerID() {

@@ -23,7 +23,7 @@ public class McGillServer {
       McGillRemoteServiceImpl exportedObj = new McGillRemoteServiceImpl(logger);
       Registry registry =
           LocateRegistry.createRegistry(RMIPortNum);
-      registry.bind(LibConstants.MCG_REG, exportedObj);
+     // registry.bind(LibConstants.MCG_REG, exportedObj);
       System.out.println("Server Started " + " Rmi Port Number " + RMIPortNum + " Look Up "
           + LibConstants.MCG_REG);
       logger.info("Server ready.");

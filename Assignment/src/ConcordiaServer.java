@@ -23,7 +23,7 @@ public class ConcordiaServer {
       ConcordiaRemoteServiceImpl exportedObj = new ConcordiaRemoteServiceImpl(logger);
       Registry registry =
           LocateRegistry.createRegistry(RMIPortNum);
-      registry.bind(LibConstants.CON_REG, exportedObj);
+      //registry.bind(LibConstants.CON_REG, exportedObj);
       System.out.println("Server Started " + " Rmi Port Number " + RMIPortNum + " Look Up "
           + LibConstants.CON_REG);
       logger.info("Server ready.");
