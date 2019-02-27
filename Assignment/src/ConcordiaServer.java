@@ -13,7 +13,7 @@ public class ConcordiaServer {
 
   public static void main(String args[]) throws IOException {
 
-    Logger logger = Utilities.setupLogger(Logger.getLogger("CONServerlog"), "ConcordiaServer.log",
+    Logger logger = ServerUtils.setupLogger(Logger.getLogger("CONServerlog"), "ConcordiaServer.log",
         true);
     String registryURL;
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_CON_PORT);

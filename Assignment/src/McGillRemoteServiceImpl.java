@@ -64,9 +64,9 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     }
     if (callExternalServers) {
       UdpRequestModel udpRequestModel = new UdpRequestModel("findItem", itemName);
-      String montrealServerResponse = Utilities
+      String montrealServerResponse = ServerUtils
           .callUDPServer(udpRequestModel, LibConstants.UDP_MON_PORT, logger);
-      String concordiaServerResponse = Utilities
+      String concordiaServerResponse = ServerUtils
           .callUDPServer(udpRequestModel, LibConstants.UDP_CON_PORT, logger);
       if (montrealServerResponse != null && montrealServerResponse.length() > 0) {
         response.append("\n" + montrealServerResponse + "\n");
@@ -213,12 +213,12 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
       boolean externalServerCallRequire) {
     String response = null;
     if (externalServerCallRequire) {
-      int port = Utilities.getPortFromItemId(itemID);
+      int port = ServerUtils.getPortFromItemId(itemID);
       UdpRequestModel udpRequestModel = new UdpRequestModel(LibConstants.OPR_WAIT_LIST, itemID,
           numberOfDays, userId);
 
       if (port != 0) {
-        response = Utilities
+        response = ServerUtils
             .callUDPServer(udpRequestModel, port, logger);
       } else {
         response = "invalid item id";
@@ -414,9 +414,9 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     UdpRequestModel udpRequestModel = new UdpRequestModel("borrowItem", itemID, numberOfDays,
         userId);
     String response = null;
-    int port = Utilities.getPortFromItemId(itemID);
+    int port = ServerUtils.getPortFromItemId(itemID);
     if (port != 0) {
-      response = Utilities
+      response = ServerUtils
           .callUDPServer(udpRequestModel, port, logger);
     } else {
       response = "invalid item id";
@@ -436,9 +436,9 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     String response = null;
     if (callExternalServer) {
       UdpRequestModel udpRequestModel = new UdpRequestModel("returnItem", itemID, userId);
-      int port = Utilities.getPortFromItemId(itemID);
+      int port = ServerUtils.getPortFromItemId(itemID);
       if (port != 0) {
-        response = Utilities.callUDPServer(udpRequestModel, port, logger);
+        response = ServerUtils.callUDPServer(udpRequestModel, port, logger);
       }
       return response;
     } else {
@@ -510,8 +510,8 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
       requestModel.setMethodName(LibConstants.USER_BORROWED_ITEMS);
       requestModel.setUserId(firstUserInWaitingList);
       requestModel.setItemId(itemId);
-      String response = Utilities.callUDPServer(requestModel, LibConstants.UDP_MON_PORT, logger);
-      String response2 = Utilities.callUDPServer(requestModel, LibConstants.UDP_CON_PORT, logger);
+      String response = ServerUtils.callUDPServer(requestModel, LibConstants.UDP_MON_PORT, logger);
+      String response2 = ServerUtils.callUDPServer(requestModel, LibConstants.UDP_CON_PORT, logger);
       System.out.println("reseponse received" + response + "response received 2" + response2);
       if (response.equalsIgnoreCase(LibConstants.FAIL) || response2
           .equalsIgnoreCase(LibConstants.FAIL)) {

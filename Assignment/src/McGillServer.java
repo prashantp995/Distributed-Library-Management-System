@@ -13,7 +13,7 @@ public class McGillServer {
 
   public static void main(String args[]) throws IOException {
 
-    Logger logger = Utilities
+    Logger logger = ServerUtils
         .setupLogger(Logger.getLogger("McGillServerLog"), "McGillServerLog.log", true);
     String registryURL;
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_MCG_PORT);
@@ -23,7 +23,7 @@ public class McGillServer {
       McGillRemoteServiceImpl exportedObj = new McGillRemoteServiceImpl(logger);
       Registry registry =
           LocateRegistry.createRegistry(RMIPortNum);
-     // registry.bind(LibConstants.MCG_REG, exportedObj);
+      // registry.bind(LibConstants.MCG_REG, exportedObj);
       System.out.println("Server Started " + " Rmi Port Number " + RMIPortNum + " Look Up "
           + LibConstants.MCG_REG);
       logger.info("Server ready.");
@@ -90,14 +90,6 @@ public class McGillServer {
 
   /**
    * prepare datagram packet to send as a response from the server
-   * @param reponsePacket
-   * @param address
-   * @param port
-   * @param request
-   * @param response
-   * @param exportedObj
-   * @param logger
-   * @return
    */
   private static synchronized DatagramPacket getDatagramPacket(DatagramPacket reponsePacket,
       InetAddress address,
