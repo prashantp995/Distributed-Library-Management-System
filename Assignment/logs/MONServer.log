@@ -167,3 +167,25 @@ Feb 26, 2019 10:36:30 PM MonRemoteServiceImpl listItem
 INFO: MONM1111Requested to View Data
 Feb 26, 2019 10:45:16 PM MonRemoteServiceImpl listItem
 INFO: MONM1111Requested to View Data
+Feb 27, 2019 7:55:12 PM MonServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Feb 27, 2019 8:59:32 PM MonServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Feb 27, 2019 9:01:23 PM MonServer main
+INFO: Server ready.
+Feb 27, 2019 9:14:01 PM MonServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Feb 27, 2019 9:17:46 PM MonServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Feb 27, 2019 10:29:15 PM MonServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Feb 27, 2019 10:29:41 PM MonServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Feb 27, 2019 10:32:23 PM MonServer main
+INFO: Server ready.
+Feb 28, 2019 8:36:04 AM MonServer main
+INFO: Server ready.
+Feb 28, 2019 8:36:51 AM MonRemoteServiceImpl listItem
+INFO: MONM1111Requested to View Data
+Feb 28, 2019 8:41:55 AM MonServer main
+INFO: Server ready.

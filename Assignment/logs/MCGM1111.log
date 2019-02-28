@@ -106,3 +106,15 @@ Feb 15, 2019 2:36:38 PM UserClient performManagerOperation
 INFO: MCGM1111 choose to Add Item
 Feb 15, 2019 2:36:56 PM UserClient performAddItem
 INFO: MCGM1111 is trying to Add item with item id MCG1014
+Feb 28, 2019 8:42:12 AM UserClient performManagerOperation
+INFO: MCGM1111 choose to List Item
+Feb 28, 2019 8:42:12 AM UserClient getResponseFromListItem
+INFO: MCGM1111 Requested to List Item 
+Feb 28, 2019 8:42:12 AM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MCG1012 IeamName DSD Quantity 52
+Current Borrowers[]
+Waiting List[]
+ItemId MCG1013 IeamName ALGO Quantity 0
+Current Borrowers[]
+Waiting List[]
+

@@ -479,3 +479,45 @@ Feb 23, 2019 10:07:03 PM UserClient getResponseFromRemoveItem
 INFO: Response Received from the server is Please Provide Correct Quantity
 Feb 23, 2019 10:07:03 PM UserClient getReturnItemResponse
 INFO: Response Received from the server is Fail
+Feb 27, 2019 10:59:35 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 27, 2019 10:59:35 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 27, 2019 10:59:35 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
+Feb 27, 2019 10:59:46 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Feb 27, 2019 10:59:55 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Feb 27, 2019 11:00:04 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Feb 27, 2019 11:00:07 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Feb 27, 2019 11:00:15 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1013 GHK Quantity 12
+Feb 27, 2019 11:00:15 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item GHK
+Feb 27, 2019 11:00:15 PM UserClient getResponseOfAddItem
+INFO: Connecting to -ORBInitialHost  Server
+Feb 28, 2019 8:35:51 AM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 28, 2019 8:35:51 AM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 28, 2019 8:36:35 AM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 28, 2019 8:36:35 AM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 28, 2019 8:36:35 AM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+

@@ -502,3 +502,15 @@ Feb 23, 2019 11:13:39 PM ConcordiaServer getWaitListResponse
 INFO: Response isSuccess
 Feb 23, 2019 11:13:39 PM ConcordiaServer$1 run
 INFO: sending response [B@433c675d
+Feb 27, 2019 9:01:58 PM ConcordiaServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Feb 27, 2019 10:33:17 PM ConcordiaServer main
+INFO: Server ready.
+Feb 27, 2019 10:59:35 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Feb 28, 2019 8:36:09 AM ConcordiaServer main
+INFO: Server ready.
+Feb 28, 2019 8:36:35 AM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Feb 28, 2019 8:42:01 AM ConcordiaServer main
+INFO: Server ready.

@@ -64,3 +64,15 @@ ItemId MON1013 IeamName ALGO Quantity 0
  WaitingList []
  Current Borrowers[]
 
+Feb 28, 2019 8:36:51 AM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Feb 28, 2019 8:36:51 AM UserClient getResponseFromListItem
+INFO: MONM1111 Requested to List Item 
+Feb 28, 2019 8:36:51 AM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MON1012 IeamName DSD Quantity 1
+ WaitingList []
+ Current Borrowers[]
+ItemId MON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
