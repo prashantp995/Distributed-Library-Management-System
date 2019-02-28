@@ -88,6 +88,8 @@ public class ServerUtils {
       serverInfo[3] = String.valueOf(LibConstants.MCG_PORT);
     } else if (serverName.equalsIgnoreCase("MON")) {
       serverInfo[3] = String.valueOf(LibConstants.MON_PORT);
+    } else if (serverName.equalsIgnoreCase("Naming")){
+      serverInfo[3] = String.valueOf(12);
     }
     return serverInfo;
   }

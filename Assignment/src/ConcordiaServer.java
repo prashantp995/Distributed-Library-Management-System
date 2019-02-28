@@ -24,7 +24,7 @@ public class ConcordiaServer {
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_CON_PORT);
     byte[] buf = new byte[256];
     try {
-      ORB orb = ORB.init(ServerUtils.getServerInfo("CON"), null);
+      ORB orb = ORB.init(args, null);
       //get reference to rootpoa & activate the POAManager
       POA rootpoa =
           (POA) orb.resolve_initial_references("RootPOA");
@@ -52,6 +52,7 @@ public class ConcordiaServer {
       NameComponent path[] = ncRef.to_name(name);
       ncRef.rebind(path, href);
       logger.info("Server ready.");
+      orb.run();
       Runnable runnable = new Runnable() {
         @Override
         public void run() {

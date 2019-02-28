@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
+import org.omg.CORBA.ORB;
 
 public class McGillRemoteServiceImpl extends LibraryServicePOA {
 
@@ -12,6 +13,7 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   HashSet<String> userIds = new HashSet<>();
   HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
+  private ORB orb;
 
 
   protected McGillRemoteServiceImpl(Logger logger)  {
@@ -33,6 +35,9 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   private void initUserID() {
     userIds.add("MCGU1111");
     userIds.add("MCGU1112");
+  }
+  public void setORB(ORB orb_val) {
+    orb = orb_val;
   }
 
 

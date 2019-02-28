@@ -464,19 +464,13 @@ public class UserClient {
 
   private static String[] getServerInfo() {
     String serverInfo[] = new String[4];
-    if (isConcordiaUser) {
-      serverInfo[0] = LibConstants.CON_REG;
-      serverInfo[1] = String.valueOf(LibConstants.CON_PORT);
-    } else if (isMcGillUser) {
-      serverInfo[0] = LibConstants.MCG_REG;
-      serverInfo[1] = String.valueOf(LibConstants.MCG_PORT);
-    } else if (isMonUser) {
+
 
       serverInfo[0] = "-ORBInitialHost";
       serverInfo[1] = "localhost";
       serverInfo[2] = "-ORBInitialPort";
-      serverInfo[3] = "8082";
-    }
+      serverInfo[3] = "8090";
+
     return serverInfo;
   }
 

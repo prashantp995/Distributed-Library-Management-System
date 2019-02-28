@@ -19,12 +19,12 @@ public class MonServer {
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_MON_PORT);
     byte[] buf = new byte[256];
     try {
-      ORB orb = ORB.init(ServerUtils.getServerInfo("MON"), null);
+
+      ORB orb = ORB.init(args, null);
       //get reference to rootpoa & activate the POAManager
       POA rootpoa =
           (POA) orb.resolve_initial_references("RootPOA");
       rootpoa.the_POAManager().activate();
-      int RMIPortNum = LibConstants.MON_PORT;
       MonRemoteServiceImpl exportedObj = new MonRemoteServiceImpl(logger);
       exportedObj.setORB(orb);
       // get object reference from the servant
@@ -46,9 +46,8 @@ public class MonServer {
       String name = LibConstants.MON_REG;
       NameComponent path[] = ncRef.to_name(name);
       ncRef.rebind(path, href);
-      System.out.println("Server Started " + " Rmi Port Number " + RMIPortNum + " Look Up "
-          + LibConstants.MON_REG);
       logger.info("Server ready.");
+      orb.run();
       Runnable runnable = new Runnable() {
         @Override
         public void run() {
