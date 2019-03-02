@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 import java.util.logging.Logger;
 import org.omg.CORBA.ORB;
 
-public class ConcordiaRemoteServiceImpl extends LibraryServicePOA{
+public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
 
   HashMap<String, LibraryModel> data = new HashMap<>();
   HashMap<String, ArrayList<String>> currentBorrowers = new HashMap<>();
@@ -17,7 +17,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA{
   private ORB orb;
 
 
-  protected ConcordiaRemoteServiceImpl(Logger logger)  {
+  protected ConcordiaRemoteServiceImpl(Logger logger) {
     super();
     initManagerID();
     initUserID();
@@ -27,6 +27,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA{
 
 
   }
+
   public void setORB(ORB orb_val) {
     orb = orb_val;
   }
@@ -43,7 +44,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA{
 
 
   @Override
-  public String findItem(String userId, String itemName)  {
+  public String findItem(String userId, String itemName) {
     logger.info(userId + "requested to find item" + itemName);
     String itemDetails;
     if (!isValidUser(userId)) {
@@ -60,7 +61,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA{
 
 
   @Override
-  public String returnItem(String userId, String itemID)  {
+  public String returnItem(String userId, String itemID) {
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
       return userId + "is not present/authorised";
@@ -81,7 +82,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA{
   }
 
   @Override
-  public String borrowItem(String userId, String itemID, int numberOfDays)  {
+  public String borrowItem(String userId, String itemID, int numberOfDays) {
     logger.info(userId + " has asked to borrow item " + itemID);
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
@@ -141,8 +142,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA{
   }
 
   @Override
-  public String addItem(String userId, String itemID, String itemName, int quantity)
-       {
+  public String addItem(String userId, String itemID, String itemName, int quantity) {
     logger.info("Add item is called on Concordia server by " + userId + " for " + itemID + " for "
         + quantity + " name " + itemName);
     StringBuilder response = new StringBuilder();

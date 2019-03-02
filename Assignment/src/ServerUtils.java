@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class ServerUtils {
+
   private static final String LOG_DIR = "C:/DSD/Git/DSD_Assignment_COMP_6231/Assignment/logs/";
 
   public static int getPortFromItemId(String itemID) {
@@ -56,12 +57,13 @@ public class ServerUtils {
     return response.toString();
   }
 
-  public static Logger setupLogger(Logger logger, String fileName, boolean showlogsInConsole) throws IOException {
+  public static Logger setupLogger(Logger logger, String fileName, boolean showlogsInConsole)
+      throws IOException {
 
     FileHandler fh;
 
     try {
-      if(!showlogsInConsole){
+      if (!showlogsInConsole) {
         logger.setUseParentHandlers(false);
       }
       fh = new FileHandler(LOG_DIR + fileName, true);
@@ -88,7 +90,7 @@ public class ServerUtils {
       serverInfo[3] = String.valueOf(LibConstants.MCG_PORT);
     } else if (serverName.equalsIgnoreCase("MON")) {
       serverInfo[3] = String.valueOf(LibConstants.MON_PORT);
-    } else if (serverName.equalsIgnoreCase("Naming")){
+    } else if (serverName.equalsIgnoreCase("Naming")) {
       serverInfo[3] = String.valueOf(12);
     }
     return serverInfo;

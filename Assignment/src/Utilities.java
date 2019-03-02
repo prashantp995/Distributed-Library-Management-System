@@ -37,12 +37,13 @@ public class Utilities {
     }
   }
 
-  public static Logger setupLogger(Logger logger, String fileName, boolean showlogsInConsole) throws IOException {
+  public static Logger setupLogger(Logger logger, String fileName, boolean showlogsInConsole)
+      throws IOException {
 
     FileHandler fh;
 
     try {
-      if(!showlogsInConsole){
+      if (!showlogsInConsole) {
         logger.setUseParentHandlers(false);
       }
       fh = new FileHandler(LOG_DIR + fileName, true);

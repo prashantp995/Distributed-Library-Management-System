@@ -4,8 +4,6 @@ import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.logging.Logger;
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NameComponent;

@@ -365,7 +365,8 @@ public class UserClient {
       int choice = scanner.nextInt();
       if (choice == 1) {
         logger.info(username + "is requesting to enroll in waitList of " + itemId);
-        String waitListResponse = libraryService.addUserInWaitingList(username, itemId, numberOfDays);
+        String waitListResponse = libraryService
+            .addUserInWaitingList(username, itemId, numberOfDays);
         logger.info("Response regarding to waitList for " + itemId + " : " + username + " is "
             + waitListResponse);
         System.out.println("Response regarding to waitList for " + itemId + " " + username + " is "
@@ -430,11 +431,10 @@ public class UserClient {
   private static String[] getServerInfo() {
     String serverInfo[] = new String[4];
 
-
-      serverInfo[0] = "-ORBInitialHost";
-      serverInfo[1] = "localhost";
-      serverInfo[2] = "-ORBInitialPort";
-      serverInfo[3] = "8090";
+    serverInfo[0] = "-ORBInitialHost";
+    serverInfo[1] = "localhost";
+    serverInfo[2] = "-ORBInitialPort";
+    serverInfo[3] = "8090";
 
     return serverInfo;
   }

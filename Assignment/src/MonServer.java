@@ -15,7 +15,8 @@ public class MonServer {
 
   public static void main(String args[]) throws IOException {
 
-    Logger logger = ServerUtils.setupLogger(Logger.getLogger("MONServerlog"), "MONServer.log", true);
+    Logger logger = ServerUtils
+        .setupLogger(Logger.getLogger("MONServerlog"), "MONServer.log", true);
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_MON_PORT);
     byte[] buf = new byte[256];
     try {
