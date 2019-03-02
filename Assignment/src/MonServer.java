@@ -47,7 +47,6 @@ public class MonServer {
       NameComponent path[] = ncRef.to_name(name);
       ncRef.rebind(path, href);
       logger.info("Server ready.");
-      orb.run();
       Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -100,6 +99,7 @@ public class MonServer {
         }
       };
       runnable.run();
+      orb.run();
     } catch (Exception re) {
       logger.info("Exception " + re);
     } finally {

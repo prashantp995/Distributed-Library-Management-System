@@ -1,8 +1,6 @@
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -26,20 +24,7 @@ public class UserClient {
   static LibraryService libraryService;
 
   public static void main(String args[])
-      throws IOException, NotBoundException {
-    int RMIPortNum = 8087;
-    CallbackClientImpl exportedObj = null;
-    try {
-      exportedObj = new CallbackClientImpl();
-      Registry registry =
-          LocateRegistry.createRegistry(RMIPortNum);
-      registry.rebind("CLIENT", exportedObj);
-    } catch (RemoteException e) {
-      e.printStackTrace();
-    }
-
-    System.out.println("Client Started " + " Rmi Port Number " + RMIPortNum + " Look Up "
-        + LibConstants.CON_REG);
+      throws IOException {
     boolean valid = false;
     while (!valid) {
       System.out.println("Enter your username: ");
@@ -238,13 +223,9 @@ public class UserClient {
   private static String getResponseFromRemoveItem(String username, String itemId,
       int quantity)
       throws RemoteException, NotBoundException {
-    String[] serverInfo = getServerInfo();
     logger.info(
         username + " Requested to Remove Item " + itemId + "Quantity" + quantity);
-    logger.info("Connecting to " + serverInfo[0] + "  Server");
-    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
-    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
-    String response = obj.removeItem(username, itemId, quantity);
+    String response = libraryService.removeItem(username, itemId, quantity);
     System.out.println("Response Received from the server is " + response);
     logger.info("Response Received from the server is " + response);
     return response;
@@ -288,13 +269,9 @@ public class UserClient {
       String itemName, int quantity) throws RemoteException, NotBoundException {
     logger
         .info(username + " asked to Add item " + itemId + " " + itemName + " Quantity " + quantity);
-    String[] serverInfo = getServerInfo();
     logger.info(
         username + " Requested to Add Item " + itemName);
-    logger.info("Connecting to " + serverInfo[0] + "  Server");
-    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
-    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
-    String response = obj.addItem(username, itemId, itemName, quantity);
+    String response = libraryService.addItem(username, itemId, itemName, quantity);
     logger.info("Response Received from the server is " + response);
     System.out.println("Response Received from the server is " + response);
     return response;
@@ -353,13 +330,9 @@ public class UserClient {
 
   private static String getItemFindResponse(String username, String itemName)
       throws RemoteException, NotBoundException {
-    String[] serverInfo = getServerInfo();
     logger.info(
         username + " Requested to Find Item " + itemName);
-    logger.info("Connecting to " + serverInfo[0] + "  Server");
-    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
-    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
-    String response = obj.findItem(username, itemName);
+    String response = libraryService.findItem(username, itemName);
     logger.info("Response Received from the server is " + response);
     System.out.println("Response Received from the server is " + response);
     return response;
@@ -367,13 +340,9 @@ public class UserClient {
 
   private static String getReturnItemResponse(String username, String itemId)
       throws RemoteException, NotBoundException {
-    String[] serverInfo = getServerInfo();
     logger.info(
         username + " Requested to Return Item " + itemId);
-    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
-    logger.info("Connecting to " + serverInfo[0] + "  Server");
-    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
-    String response = obj.returnItem(username, itemId);
+    String response = libraryService.returnItem(username, itemId);
     logger.info("Response Received from the server is " + response);
     System.out.println("Response Received from the server is " + response);
     return response;
@@ -381,13 +350,9 @@ public class UserClient {
 
   private static String getBorrowItemResponse(String itemId, int numberOfDays, String username)
       throws RemoteException, NotBoundException {
-    String[] serverInfo = getServerInfo();
     logger.info(
         username + " Requested to Borrow Item " + itemId);
-    Registry registry = LocateRegistry.getRegistry(Integer.parseInt(serverInfo[1]));
-    logger.info("Connecting to " + serverInfo[0] + "  Server");
-    LibraryService obj = (LibraryService) registry.lookup(serverInfo[0]);
-    String response = obj.borrowItem(username, itemId, numberOfDays);
+    String response = libraryService.borrowItem(username, itemId, numberOfDays);
     logger.info("Response Received from the server is " + response);
     System.out.println("Response Received from the server is " + response);
     if (response.equalsIgnoreCase("Wait List Possible")) {
@@ -400,7 +365,7 @@ public class UserClient {
       int choice = scanner.nextInt();
       if (choice == 1) {
         logger.info(username + "is requesting to enroll in waitList of " + itemId);
-        String waitListResponse = obj.addUserInWaitingList(username, itemId, numberOfDays);
+        String waitListResponse = libraryService.addUserInWaitingList(username, itemId, numberOfDays);
         logger.info("Response regarding to waitList for " + itemId + " : " + username + " is "
             + waitListResponse);
         System.out.println("Response regarding to waitList for " + itemId + " " + username + " is "
