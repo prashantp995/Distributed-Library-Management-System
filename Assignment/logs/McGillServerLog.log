@@ -162,3 +162,37 @@ Feb 28, 2019 8:41:59 AM McGillServer main
 INFO: Server ready.
 Feb 28, 2019 8:42:12 AM McGillRemoteServiceImpl listItem
 INFO: MCGM1111Requested to View Data
+Mar 02, 2019 10:07:46 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:10:20 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:12:48 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:14:58 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:15:33 AM McGillServer$1 run
+INFO: findItem is called by /127.0.0.1:49317
+Mar 02, 2019 10:15:33 AM McGillServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSD
+Mar 02, 2019 10:15:33 AM McGillServer getFindItemResponse
+INFO: Response is  MCG1012 52
+Mar 02, 2019 10:15:34 AM McGillServer$1 run
+INFO: sending response [B@5a955565
+Mar 02, 2019 10:23:39 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:24:02 AM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:55017
+Mar 02, 2019 10:24:02 AM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User CONU1111 for days 1
+Mar 02, 2019 10:24:02 AM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 02, 2019 10:24:02 AM McGillServer$1 run
+INFO: sending response [B@799f7e29
+Mar 02, 2019 10:24:18 AM McGillServer$1 run
+INFO: findItem is called by /127.0.0.1:52448
+Mar 02, 2019 10:24:18 AM McGillServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSD
+Mar 02, 2019 10:24:18 AM McGillServer getFindItemResponse
+INFO: Response is  MCG1012 51
+Mar 02, 2019 10:24:18 AM McGillServer$1 run
+INFO: sending response [B@4b85612c

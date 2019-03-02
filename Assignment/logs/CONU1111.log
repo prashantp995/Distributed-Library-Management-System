@@ -254,3 +254,117 @@ Feb 23, 2019 10:38:00 PM UserClient getBorrowItemResponse
 INFO: CONU1111is requesting to enroll in waitList of MCG1013
 Feb 23, 2019 10:38:00 PM UserClient getBorrowItemResponse
 INFO: Response regarding to waitList for MCG1013 : CONU1111 is Success
+Mar 02, 2019 10:08:05 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1012 for 11 days.
+Mar 02, 2019 10:08:05 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1012
+Mar 02, 2019 10:08:05 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Mar 02, 2019 10:08:10 AM UserClient getItemFindResponse
+INFO: CONU1111 Requested to Find Item DSD
+Mar 02, 2019 10:10:52 AM UserClient getItemFindResponse
+INFO: CONU1111 Requested to Find Item DSD
+Mar 02, 2019 10:13:04 AM UserClient getItemFindResponse
+INFO: CONU1111 Requested to Find Item DSD
+Mar 02, 2019 10:15:11 AM UserClient getItemFindResponse
+INFO: CONU1111 Requested to Find Item DSD
+Mar 02, 2019 10:15:34 AM UserClient getItemFindResponse
+INFO: Response Received from the server is CON1012 5
+MON1012 1
+
+MCG1012 52
+
+Mar 02, 2019 10:16:19 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item MON1012 for 1 days.
+Mar 02, 2019 10:16:19 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item MON1012
+Mar 02, 2019 10:16:22 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Mar 02, 2019 10:16:37 AM UserClient performReturnItem
+INFO: CONU1111 Requested to Return Item MON1012
+Mar 02, 2019 10:16:37 AM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item MON1012
+Mar 02, 2019 10:16:41 AM UserClient getReturnItemResponse
+INFO: Response Received from the server is Success
+Mar 02, 2019 10:16:54 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item MON1013 for 1 days.
+Mar 02, 2019 10:16:54 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item MON1013
+Mar 02, 2019 10:16:58 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Wait List Possible
+Mar 02, 2019 10:17:03 AM UserClient getBorrowItemResponse
+INFO: CONU1111is requesting to enroll in waitList of MON1013
+Mar 02, 2019 10:17:06 AM UserClient getBorrowItemResponse
+INFO: Response regarding to waitList for MON1013 : CONU1111 is Success
+Mar 02, 2019 10:23:52 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1013 for 1 days.
+Mar 02, 2019 10:23:52 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1013
+Mar 02, 2019 10:23:52 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Wait List Possible
+Mar 02, 2019 10:23:53 AM UserClient getBorrowItemResponse
+INFO: CONU1111is requesting to enroll in waitList of CON1013
+Mar 02, 2019 10:23:53 AM UserClient getBorrowItemResponse
+INFO: Response regarding to waitList for CON1013 : CONU1111 is Success
+Mar 02, 2019 10:24:02 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item MCG1012 for 1 days.
+Mar 02, 2019 10:24:02 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item MCG1012
+Mar 02, 2019 10:24:02 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Mar 02, 2019 10:24:08 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item MCG1012 for 1 days.
+Mar 02, 2019 10:24:08 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item MCG1012
+Mar 02, 2019 10:24:08 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is FailCan not borrow more than one item from each of  external library
+Mar 02, 2019 10:24:14 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item MON1012 for 1 days.
+Mar 02, 2019 10:24:14 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item MON1012
+Mar 02, 2019 10:24:14 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Mar 02, 2019 10:24:18 AM UserClient getItemFindResponse
+INFO: CONU1111 Requested to Find Item DSD
+Mar 02, 2019 10:24:18 AM UserClient getItemFindResponse
+INFO: Response Received from the server is CON1012 5
+MON1012 0
+
+MCG1012 51
+
+Mar 02, 2019 10:24:22 AM UserClient performReturnItem
+INFO: CONU1111 Requested to Return Item MON1012
+Mar 02, 2019 10:24:22 AM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item MON1012
+Mar 02, 2019 10:24:22 AM UserClient getReturnItemResponse
+INFO: Response Received from the server is Success
+Mar 02, 2019 10:24:32 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1012 for 1 days.
+Mar 02, 2019 10:24:32 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1012
+Mar 02, 2019 10:24:32 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Mar 02, 2019 10:37:48 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1012 for 11 days.
+Mar 02, 2019 10:37:48 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1012
+Mar 02, 2019 10:37:48 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Fail user already borrowed item
+Mar 02, 2019 10:37:55 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1013 for 1 days.
+Mar 02, 2019 10:37:55 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1013
+Mar 02, 2019 10:37:55 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Already in Waiting List
+Mar 02, 2019 10:38:00 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1014 for 1 days.
+Mar 02, 2019 10:38:00 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1014
+Mar 02, 2019 10:38:00 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Fail Can not borrow , Item id is unknown to Library
+Mar 02, 2019 10:38:08 AM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item MON1014 for 1 days.
+Mar 02, 2019 10:38:08 AM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item MON1014
+Mar 02, 2019 10:38:08 AM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success

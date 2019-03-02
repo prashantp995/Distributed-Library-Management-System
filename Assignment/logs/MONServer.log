@@ -189,3 +189,137 @@ Feb 28, 2019 8:36:51 AM MonRemoteServiceImpl listItem
 INFO: MONM1111Requested to View Data
 Feb 28, 2019 8:41:55 AM MonServer main
 INFO: Server ready.
+Mar 02, 2019 10:07:47 AM MonServer main
+INFO: Server ready.
+Mar 02, 2019 10:10:22 AM MonServer main
+INFO: Server ready.
+Mar 02, 2019 10:12:51 AM MonServer main
+INFO: Server ready.
+Mar 02, 2019 10:15:00 AM MonServer main
+INFO: Server ready.
+Mar 02, 2019 10:15:24 AM MonServer$1 run
+INFO: findItem is called by /127.0.0.1:49312
+Mar 02, 2019 10:15:24 AM MonServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSD
+Mar 02, 2019 10:15:24 AM MonServer getFindItemResponse
+INFO: Response is  MON1012 1
+Mar 02, 2019 10:15:24 AM MonServer$1 run
+INFO: sending response [B@5a955565
+Mar 02, 2019 10:16:22 AM MonServer$1 run
+INFO: borrowItem is called by /127.0.0.1:56749
+Mar 02, 2019 10:16:22 AM MonServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MON1012 User CONU1111 for days 1
+Mar 02, 2019 10:16:22 AM MonServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 02, 2019 10:16:22 AM MonServer$1 run
+INFO: sending response [B@6293abcc
+Mar 02, 2019 10:16:41 AM MonServer$1 run
+INFO: returnItem is called by /127.0.0.1:56751
+Mar 02, 2019 10:16:41 AM MonServer getReturnItemResponse
+INFO: Return item is Called :   Item is MON1012 User CONU1111
+Mar 02, 2019 10:16:41 AM MonRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MON1012 was 0 ,Now processing waitinglist
+Mar 02, 2019 10:16:41 AM MonRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 02, 2019 10:16:41 AM MonServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 02, 2019 10:16:41 AM MonServer$1 run
+INFO: sending response [B@7995092a
+Mar 02, 2019 10:16:58 AM MonServer$1 run
+INFO: borrowItem is called by /127.0.0.1:53185
+Mar 02, 2019 10:16:58 AM MonServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MON1013 User CONU1111 for days 1
+Mar 02, 2019 10:16:58 AM MonServer getBorrowItemResponse
+INFO: Response isWait List Possible
+Mar 02, 2019 10:16:58 AM MonServer$1 run
+INFO: sending response [B@7fc2413d
+Mar 02, 2019 10:17:06 AM MonServer$1 run
+INFO: waitList is called by /127.0.0.1:53187
+Mar 02, 2019 10:17:06 AM MonServer getWaitListResponse
+INFO: User Selected to be in Wait List For itemMON1013 User CONU1111
+Mar 02, 2019 10:17:06 AM MonServer getWaitListResponse
+INFO: Response isSuccess
+Mar 02, 2019 10:17:06 AM MonServer$1 run
+INFO: sending response [B@f8c1ddd
+Mar 02, 2019 10:23:41 AM MonServer main
+INFO: Server ready.
+Mar 02, 2019 10:24:14 AM MonServer$1 run
+INFO: borrowItem is called by /127.0.0.1:52446
+Mar 02, 2019 10:24:14 AM MonServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MON1012 User CONU1111 for days 1
+Mar 02, 2019 10:24:14 AM MonServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 02, 2019 10:24:14 AM MonServer$1 run
+INFO: sending response [B@799f7e29
+Mar 02, 2019 10:24:18 AM MonServer$1 run
+INFO: findItem is called by /127.0.0.1:52447
+Mar 02, 2019 10:24:18 AM MonServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSD
+Mar 02, 2019 10:24:18 AM MonServer getFindItemResponse
+INFO: Response is  MON1012 0
+Mar 02, 2019 10:24:18 AM MonServer$1 run
+INFO: sending response [B@4b85612c
+Mar 02, 2019 10:24:22 AM MonServer$1 run
+INFO: returnItem is called by /127.0.0.1:52449
+Mar 02, 2019 10:24:22 AM MonServer getReturnItemResponse
+INFO: Return item is Called :   Item is MON1012 User CONU1111
+Mar 02, 2019 10:24:22 AM MonRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MON1012 was 0 ,Now processing waitinglist
+Mar 02, 2019 10:24:22 AM MonRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 02, 2019 10:24:22 AM MonServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 02, 2019 10:24:22 AM MonServer$1 run
+INFO: sending response [B@277050dc
+Mar 02, 2019 10:24:56 AM MonRemoteServiceImpl addItem
+INFO: Add item is called on Montreal server by MONM1111 for MON1012 for 4 name DSD
+Mar 02, 2019 10:24:56 AM MonRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying as new Item
+Mar 02, 2019 10:24:56 AM MonRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 02, 2019 10:32:36 AM MonRemoteServiceImpl listItem
+INFO: MONM1111Requested to View Data
+Mar 02, 2019 10:33:07 AM MonRemoteServiceImpl addItem
+INFO: Add item is called on Montreal server by MONM1111 for MON1014 for 11 name MCG
+Mar 02, 2019 10:33:07 AM MonRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Mar 02, 2019 10:33:10 AM MonRemoteServiceImpl listItem
+INFO: MONM1111Requested to View Data
+Mar 02, 2019 10:33:21 AM MonRemoteServiceImpl addItem
+INFO: Add item is called on Montreal server by CONM1111 for CON1015 for 1 name DSD
+Mar 02, 2019 10:33:21 AM MonRemoteServiceImpl addItem
+INFO: CONM1111is not present/authorised
+Mar 02, 2019 10:33:21 AM MonRemoteServiceImpl returnItem
+INFO: CONU1111is not present/authorised
+Mar 02, 2019 10:33:21 AM MonRemoteServiceImpl removeItem
+INFO: Remove item is called on Montreal server by CONM1111 for CON1015 for 5
+Mar 02, 2019 10:33:21 AM MonRemoteServiceImpl removeItem
+INFO: CONM1111is not Present/Authorised
+Mar 02, 2019 10:38:08 AM MonServer$1 run
+INFO: borrowItem is called by /127.0.0.1:59812
+Mar 02, 2019 10:38:08 AM MonServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MON1014 User CONU1111 for days 1
+Mar 02, 2019 10:38:08 AM MonServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 02, 2019 10:38:08 AM MonServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 02, 2019 10:39:21 AM MonRemoteServiceImpl returnItem
+INFO: CONU1111is not present/authorised
+Mar 02, 2019 10:39:21 AM MonRemoteServiceImpl addItem
+INFO: Add item is called on Montreal server by CONM1111 for CON1015 for 1 name DSD
+Mar 02, 2019 10:39:21 AM MonRemoteServiceImpl removeItem
+INFO: Remove item is called on Montreal server by CONM1111 for CON1015 for 5
+Mar 02, 2019 10:39:21 AM MonRemoteServiceImpl addItem
+INFO: CONM1111is not present/authorised
+Mar 02, 2019 10:39:21 AM MonRemoteServiceImpl removeItem
+INFO: CONM1111is not Present/Authorised
+Mar 02, 2019 10:57:56 AM MonRemoteServiceImpl removeItem
+INFO: Remove item is called on Montreal server by CONM1111 for CON1015 for 5
+Mar 02, 2019 10:57:56 AM MonRemoteServiceImpl removeItem
+INFO: CONM1111is not Present/Authorised
+Mar 02, 2019 10:57:56 AM MonRemoteServiceImpl returnItem
+INFO: CONU1111is not present/authorised
+Mar 02, 2019 10:58:07 AM MonRemoteServiceImpl addItem
+INFO: Add item is called on Montreal server by CONM1111 for CON1015 for 1 name DSD
+Mar 02, 2019 10:58:07 AM MonRemoteServiceImpl addItem
+INFO: CONM1111is not present/authorised
