@@ -650,3 +650,49 @@ Mar 02, 2019 10:38:26 AM ConcordiaRemoteServiceImpl addItem
 INFO: previous item details{, itemName='DSD', quantity=1}
 Mar 02, 2019 10:38:26 AM ConcordiaRemoteServiceImpl addItem
 INFO: updated item details{, itemName='DSD', quantity=2}
+Mar 04, 2019 3:59:43 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 3:59:56 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 04, 2019 4:00:06 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 04, 2019 4:00:52 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:01:07 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 04, 2019 4:01:11 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Mar 04, 2019 4:01:11 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [CON1012]
+Mar 04, 2019 4:01:21 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1013 for 11 name ALGO
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying  Item
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous item details{, itemName='ALGO', quantity=0}
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: updated item details{, itemName='ALGO', quantity=11}
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous quantity was 0 , now need to process waiting list
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Waiting List Found For The Item Id CON1013
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: CON1013  is assigned to CONU1111
+Mar 04, 2019 4:01:54 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 04, 2019 4:24:09 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:26:10 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:27:33 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:37:05 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:37:40 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012

@@ -561,3 +561,49 @@ Mar 02, 2019 10:38:26 AM UserClient getResponseFromRemoveItem
 INFO: Response Received from the server is Please Provide Correct Quantity
 Mar 02, 2019 10:38:26 AM UserClient getResponseOfAddItem
 INFO: Response Received from the server is Item add success, Quantity updated
+Mar 04, 2019 4:00:06 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Mar 04, 2019 4:00:06 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Mar 04, 2019 4:00:06 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 4
+ WaitingList []
+ Current Borrowers[Borrower@cd9da12]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
+Mar 04, 2019 4:01:21 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Mar 04, 2019 4:01:21 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Mar 04, 2019 4:01:21 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 4
+ WaitingList []
+ Current Borrowers[Borrower{iteID='CONU1111', numberOfDays=1}]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList [CONU1111]
+ Current Borrowers[]
+
+Mar 04, 2019 4:01:38 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Mar 04, 2019 4:01:41 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Mar 04, 2019 4:01:46 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1013 ALGO Quantity 11
+Mar 04, 2019 4:01:46 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item ALGO
+Mar 04, 2019 4:01:46 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Mar 04, 2019 4:01:54 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Mar 04, 2019 4:01:54 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Mar 04, 2019 4:01:54 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 4
+ WaitingList []
+ Current Borrowers[Borrower{iteID='CONU1111', numberOfDays=1}]
+ItemId CON1013 IeamName ALGO Quantity 10
+ WaitingList []
+ Current Borrowers[Borrower{iteID='CONU1111', numberOfDays=0}]
+

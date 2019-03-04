@@ -368,3 +368,33 @@ Mar 02, 2019 10:38:08 AM UserClient getBorrowItemResponse
 INFO: CONU1111 Requested to Borrow Item MON1014
 Mar 02, 2019 10:38:08 AM UserClient getBorrowItemResponse
 INFO: Response Received from the server is Success
+Mar 04, 2019 3:59:56 PM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1012 for 1 days.
+Mar 04, 2019 3:59:56 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1012
+Mar 04, 2019 3:59:56 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Mar 04, 2019 4:01:07 PM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1012 for 1 days.
+Mar 04, 2019 4:01:07 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1012
+Mar 04, 2019 4:01:07 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Mar 04, 2019 4:01:11 PM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1013 for 1 days.
+Mar 04, 2019 4:01:11 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1013
+Mar 04, 2019 4:01:11 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Wait List Possible
+Mar 04, 2019 4:01:12 PM UserClient getBorrowItemResponse
+INFO: CONU1111is requesting to enroll in waitList of CON1013
+Mar 04, 2019 4:01:12 PM UserClient getBorrowItemResponse
+INFO: Response regarding to waitList for CON1013 : CONU1111 is Success
+Mar 04, 2019 4:37:40 PM UserClient performBorrowItem
+INFO: CONU1111 Requested to Borrow Item CON1012 for 1 days.
+Mar 04, 2019 4:37:40 PM UserClient getBorrowItemResponse
+INFO: CONU1111 Requested to Borrow Item CON1012
+Mar 04, 2019 4:37:40 PM UserClient getBorrowItemResponse
+INFO: Response Received from the server is Success
+Mar 04, 2019 4:38:01 PM UserClient performExchangeItem
+INFO: CONU1111 requested to exchange CON1012withCON1013

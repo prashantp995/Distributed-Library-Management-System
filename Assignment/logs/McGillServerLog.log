@@ -196,3 +196,37 @@ Mar 02, 2019 10:24:18 AM McGillServer getFindItemResponse
 INFO: Response is  MCG1012 51
 Mar 02, 2019 10:24:18 AM McGillServer$1 run
 INFO: sending response [B@4b85612c
+Mar 04, 2019 3:59:20 PM McGillServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Mar 04, 2019 3:59:39 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:00:54 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:24:04 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:26:12 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:27:27 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:37:00 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:38:47 PM McGillRemoteServiceImpl performExchange
+INFO: Exchange item is valid
+Mar 04, 2019 4:39:20 PM McGillRemoteServiceImpl borrowItem
+INFO: Current BorrowerMCGU1111Borrowed Item [MCG1012]
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl addItem
+INFO: Add item is called on McGill server by MCGM1111 for MCG1013 for 22 name ALGO
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying as new Item
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: Waiting List Found For The Item Id MCG1013
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: MCG1013  is assigned to MCGU1111
+Mar 04, 2019 4:39:50 PM McGillRemoteServiceImpl listItem
+INFO: MCGM1111Requested to View Data
+Mar 04, 2019 4:40:15 PM McGillRemoteServiceImpl performExchange
+INFO: Exchange item is not valid

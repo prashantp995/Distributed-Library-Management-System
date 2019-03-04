@@ -323,3 +323,17 @@ Mar 02, 2019 10:58:07 AM MonRemoteServiceImpl addItem
 INFO: Add item is called on Montreal server by CONM1111 for CON1015 for 1 name DSD
 Mar 02, 2019 10:58:07 AM MonRemoteServiceImpl addItem
 INFO: CONM1111is not present/authorised
+Mar 04, 2019 3:59:41 PM MonServer main
+INFO: Server ready.
+Mar 04, 2019 4:00:58 PM MonServer main
+INFO: Server ready.
+Mar 04, 2019 4:24:06 PM MonServer main
+INFO: Server ready.
+Mar 04, 2019 4:26:17 PM MonServer main
+INFO: Server ready.
+Mar 04, 2019 4:27:18 PM MonServer main
+INFO: Server ready.
+Mar 04, 2019 4:27:31 PM MonServer main
+INFO: Server ready.
+Mar 04, 2019 4:37:03 PM MonServer main
+INFO: Server ready.
