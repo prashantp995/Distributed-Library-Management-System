@@ -129,6 +129,7 @@ public class UserClient {
         System.out.println(" 1  for borrowItem");
         System.out.println(" 2  for findItem");
         System.out.println(" 3  for returnItem");
+        System.out.println(" 4  for exchangeItem");
         System.out.println(" 0  Exit");
         Scanner scanner = new Scanner(System.in);
         try {
@@ -142,7 +143,7 @@ public class UserClient {
               System.exit(0);
               break;
             }
-            if (choice == 1 || choice == 2 || choice == 3) {
+            if (choice == 1 || choice == 2 || choice == 3 || choice == 4) {
               performOperation(choice, username);
             } else {
               System.out.println("please enter valid choice");
@@ -295,9 +296,30 @@ public class UserClient {
         System.out.println("perform return item");
         performReturnItem(username);
         break;
+      case 4:
+        System.out.println("perform exchange item");
+        performExchangeItem(username);
+        break;
       default:
         System.out.println("please enter valid choice");
     }
+  }
+
+  private static void performExchangeItem(String username) {
+    System.out.println("Please enter item id of the book that you already borrowed");
+    String oldItemID = getItemId();
+    System.out.println("Please enter item id of the book that you want to get in exchange");
+    String newItemID = getItemId();
+    logger.info(username + " requested to exchange " + oldItemID + "with" + newItemID);
+    getExchangeItemResponse(username, oldItemID, newItemID);
+  }
+
+  private static String getExchangeItemResponse(String username, String oldItemID,
+      String newItemID) {
+    String response = libraryService.exchangeItem(username, oldItemID, newItemID);
+    logger.info("Response Received from the server is " + response);
+    System.out.println("Response Received from the server is " + response);
+    return response;
   }
 
   private static void performReturnItem(String username) {

@@ -12,4 +12,5 @@ string returnItem(in string userId, in string itemID);
   string listItem(in string managerId);
 
   string addUserInWaitingList(in string userId,in string ItemId ,in long numberOfDays) ;
+  string exchangeItem(in string userId,in string oldItemId ,in string newItemID) ;
 };

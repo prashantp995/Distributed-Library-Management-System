@@ -95,4 +95,15 @@ public class ServerUtils {
     }
     return serverInfo;
   }
+
+  public static String determineLibOfItem(String itemId) {
+    if (itemId.startsWith(LibConstants.CON_REG)) {
+      return LibConstants.CON_REG;
+    } else if (itemId.startsWith(LibConstants.MON_REG)) {
+      return LibConstants.MON_REG;
+    } else if (itemId.startsWith(LibConstants.MCG_REG)) {
+      return LibConstants.MCG_REG;
+    }
+    return null;
+  }
 }

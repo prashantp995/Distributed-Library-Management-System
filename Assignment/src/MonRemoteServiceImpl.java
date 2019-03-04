@@ -471,6 +471,62 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
     return addUserInWaitList(ItemId, userId, numberOfDays, !ItemId.startsWith("MON"));
   }
 
+  @Override
+  public String exchangeItem(String userId, String oldItemId, String newItemID) {
+    String oldItemId_Lib = ServerUtils.determineLibOfItem(oldItemId);
+    String newItemId_Lib = ServerUtils.determineLibOfItem(newItemID);
+    if (oldItemId_Lib != null && newItemId_Lib != null) {
+      if (oldItemId_Lib.equals(LibConstants.MCG_REG) && newItemId_Lib
+          .equals(LibConstants.MCG_REG)) {
+        return performExchange(userId, oldItemId, newItemID, false);
+      } else {
+        return performExchange(userId, oldItemId, newItemID, true);
+      }
+    }
+
+    return LibConstants.SUCCESS;
+  }
+
+  private String performExchange(String userId, String oldItemId, String newItemID,
+      boolean callExternalServer) {
+    if (!callExternalServer) {
+      if (data.containsKey(oldItemId)) {
+        if (!data.get(oldItemId).getCurrentBorrowerList().contains(userId)) {
+          logger.info("Exchange item is not valid");
+          return oldItemId + " is not borrowed by user " + userId
+              + "Can not perform exchange operation";
+        } else if (data.get(newItemID).getCurrentBorrowerList().contains(userId)) {
+          logger.info("Exchange item is not valid");
+          return newItemID + " is already borrowed by user " + userId
+              + "Can not perform exchange operation ";
+        } else {
+          logger.info("Exchange item is valid");
+          if (data.containsKey(newItemID) && data.get(newItemID).getQuantity() > 0) {
+            logger.info("Old item id and New item id both belongs to McGill Server");
+            boolean isValidBorrow = isItemAvailableToBorrow(newItemID, userId, 0);
+            boolean isValidReturn = isValidReturn(userId, data.get(newItemID));
+            synchronized (data) {
+              if (isValidBorrow && isValidReturn) {
+                performReturnItemOperation(userId, oldItemId, false);
+                performBorrowItemOperation(newItemID, userId, 2);
+                return LibConstants.SUCCESS;
+              }
+            }
+
+          } else {
+            return newItemID + " is not recognized by library or enough quantity not available";
+          }
+        }
+      }
+    }
+    return LibConstants.FAIL;
+  }
+
+  private boolean isValidReturn(String userId, LibraryModel model) {
+    return model.getCurrentBorrowerList() != null && model.getCurrentBorrowerList()
+        .contains(userId);
+  }
+
   private String getData(HashMap<String, LibraryModel> data) {
     StringBuilder response = new StringBuilder();
     for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {

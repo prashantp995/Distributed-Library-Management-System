@@ -16,7 +16,7 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   private ORB orb;
 
 
-  protected McGillRemoteServiceImpl(Logger logger)  {
+  protected McGillRemoteServiceImpl(Logger logger) {
     super();
     initManagerID();
     initUserID();
@@ -36,13 +36,14 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     userIds.add("MCGU1111");
     userIds.add("MCGU1112");
   }
+
   public void setORB(ORB orb_val) {
     orb = orb_val;
   }
 
 
   @Override
-  public String findItem(String userId, String itemName)  {
+  public String findItem(String userId, String itemName) {
     logger.info(userId + "requested to find item" + itemName);
     String itemDetails;
     if (!isValidUser(userId)) {
@@ -89,7 +90,7 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   }
 
   @Override
-  public String returnItem(String userId, String itemID)  {
+  public String returnItem(String userId, String itemID) {
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
       return userId + "is not present/authorised";
@@ -109,7 +110,7 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   }
 
   @Override
-  public String borrowItem(String userId, String itemID, int numberOfDays)  {
+  public String borrowItem(String userId, String itemID, int numberOfDays) {
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
       return userId + "is not present/authorised";
@@ -238,8 +239,7 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   }
 
   @Override
-  public String addItem(String userId, String itemID, String itemName, int quantity)
-       {
+  public String addItem(String userId, String itemID, String itemName, int quantity) {
     logger.info("Add item is called on McGill server by " + userId + " for " + itemID + " for "
         + quantity + " name " + itemName);
     StringBuilder response = new StringBuilder();
@@ -350,6 +350,57 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     return addUserInWaitList(ItemId, userId, numberOfDays, !ItemId.startsWith("MCG"));
   }
 
+  @Override
+  public String exchangeItem(String userId, String oldItemId, String newItemID) {
+    String oldItemId_Lib = ServerUtils.determineLibOfItem(oldItemId);
+    String newItemId_Lib = ServerUtils.determineLibOfItem(newItemID);
+    if (oldItemId_Lib != null && newItemId_Lib != null) {
+      if (oldItemId_Lib.equals(LibConstants.MCG_REG) && newItemId_Lib
+          .equals(LibConstants.MCG_REG)) {
+        return performExchange(userId, oldItemId, newItemID, false);
+      } else {
+        return performExchange(userId, oldItemId, newItemID, true);
+      }
+    }
+
+    return LibConstants.SUCCESS;
+  }
+
+  private String performExchange(String userId, String oldItemId, String newItemID,
+      boolean callExternalServer) {
+    if (!callExternalServer) {
+      if (data.containsKey(oldItemId)) {
+        if (!data.get(oldItemId).getCurrentBorrowerList().contains(userId)) {
+          logger.info("Exchange item is not valid");
+          return oldItemId + " is not borrowed by user " + userId
+              + "Can not perform exchange operation";
+        } else if (data.get(newItemID).getCurrentBorrowerList().contains(userId)) {
+          logger.info("Exchange item is not valid");
+          return newItemID + " is already borrowed by user " + userId
+              + "Can not perform exchange operation ";
+        } else {
+          logger.info("Exchange item is valid");
+          if (data.containsKey(newItemID) && data.get(newItemID).getQuantity() > 0) {
+            logger.info("Old item id and New item id both belongs to McGill Server");
+            boolean isValidBorrow = isItemAvailableToBorrow(newItemID, userId, 0);
+            boolean isValidReturn = isValidReturn(userId, data.get(newItemID));
+            synchronized (data) {
+              if (isValidBorrow && isValidReturn) {
+                performReturnItemOperation(userId, oldItemId, false);
+                performBorrowItemOperation(newItemID, userId, 2);
+                return LibConstants.SUCCESS;
+              }
+            }
+
+          } else {
+            return newItemID + " is not recognized by library or enough quantity not available";
+          }
+        }
+      }
+    }
+    return LibConstants.FAIL;
+  }
+
   private String getData(HashMap<String, LibraryModel> data) {
     StringBuilder response = new StringBuilder();
     for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
@@ -452,8 +503,7 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
       }
       if (data.containsKey(itemID)) {
         LibraryModel model = data.get(itemID);
-        if (model.getCurrentBorrowerList() != null && model.getCurrentBorrowerList()
-            .contains(userId)) {
+        if (isValidReturn(userId, model)) {
           synchronized (data) {
             model.getCurrentBorrowerList().remove(userId);
             int previousQuantity = model.getQuantity();
@@ -471,6 +521,11 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
       }
       return LibConstants.FAIL;
     }
+  }
+
+  private boolean isValidReturn(String userId, LibraryModel model) {
+    return model.getCurrentBorrowerList() != null && model.getCurrentBorrowerList()
+        .contains(userId);
   }
 
   /**
