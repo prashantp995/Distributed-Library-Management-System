@@ -419,3 +419,191 @@ Feb 14, 2019 11:45:15 AM UserClient getResponseOfAddItem
 INFO: Connecting to CON  Server
 Feb 14, 2019 11:46:52 AM UserClient getResponseOfAddItem
 INFO: Response Received from the server is Item add success, Quantity updated
+Feb 23, 2019 10:06:29 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 23, 2019 10:06:29 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 23, 2019 10:06:29 PM UserClient getResponseFromListItem
+INFO: Connecting to CON  Server
+Feb 23, 2019 10:06:29 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList [CONU1111]
+ Current Borrowers[]
+
+Feb 23, 2019 10:06:39 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Feb 23, 2019 10:06:43 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Feb 23, 2019 10:06:46 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1013 ALGO Quantity 1
+Feb 23, 2019 10:06:46 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item ALGO
+Feb 23, 2019 10:06:46 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 23, 2019 10:06:46 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Feb 23, 2019 10:06:49 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 23, 2019 10:06:49 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 23, 2019 10:06:49 PM UserClient getResponseFromListItem
+INFO: Connecting to CON  Server
+Feb 23, 2019 10:06:49 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[CONU1111]
+
+Feb 23, 2019 10:07:03 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Feb 23, 2019 10:07:03 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Feb 23, 2019 10:07:03 PM UserClient getResponseOfAddItem
+INFO: Connecting to CON  Server
+Feb 23, 2019 10:07:03 PM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Feb 23, 2019 10:07:03 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Feb 23, 2019 10:07:03 PM UserClient getResponseFromRemoveItem
+INFO: Connecting to CON  Server
+Feb 23, 2019 10:07:03 PM UserClient getReturnItemResponse
+INFO: Connecting to CON  Server
+Feb 23, 2019 10:07:03 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Success
+Feb 23, 2019 10:07:03 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Please Provide Correct Quantity
+Feb 23, 2019 10:07:03 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Feb 27, 2019 10:59:35 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 27, 2019 10:59:35 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 27, 2019 10:59:35 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
+Feb 27, 2019 10:59:46 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Feb 27, 2019 10:59:55 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Feb 27, 2019 11:00:04 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Feb 27, 2019 11:00:07 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Feb 27, 2019 11:00:15 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1013 GHK Quantity 12
+Feb 27, 2019 11:00:15 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item GHK
+Feb 27, 2019 11:00:15 PM UserClient getResponseOfAddItem
+INFO: Connecting to -ORBInitialHost  Server
+Feb 28, 2019 8:35:51 AM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 28, 2019 8:35:51 AM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 28, 2019 8:36:35 AM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Feb 28, 2019 8:36:35 AM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Feb 28, 2019 8:36:35 AM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
+Mar 02, 2019 10:37:09 AM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Mar 02, 2019 10:37:09 AM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Mar 02, 2019 10:37:09 AM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 4
+ WaitingList []
+ Current Borrowers[CONU1111]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList [CONU1111]
+ Current Borrowers[]
+
+Mar 02, 2019 10:37:12 AM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Mar 02, 2019 10:37:12 AM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Mar 02, 2019 10:37:12 AM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Mar 02, 2019 10:37:12 AM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Mar 02, 2019 10:37:12 AM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Remove Item Fails , Item id is not present in database
+Mar 02, 2019 10:37:12 AM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Success
+Mar 02, 2019 10:37:12 AM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Mar 02, 2019 10:38:26 AM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Mar 02, 2019 10:38:26 AM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Mar 02, 2019 10:38:26 AM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Mar 02, 2019 10:38:26 AM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Mar 02, 2019 10:38:26 AM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Mar 02, 2019 10:38:26 AM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Please Provide Correct Quantity
+Mar 02, 2019 10:38:26 AM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Mar 04, 2019 4:00:06 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Mar 04, 2019 4:00:06 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Mar 04, 2019 4:00:06 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 4
+ WaitingList []
+ Current Borrowers[Borrower@cd9da12]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
+Mar 04, 2019 4:01:21 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Mar 04, 2019 4:01:21 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Mar 04, 2019 4:01:21 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 4
+ WaitingList []
+ Current Borrowers[Borrower{iteID='CONU1111', numberOfDays=1}]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList [CONU1111]
+ Current Borrowers[]
+
+Mar 04, 2019 4:01:38 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Mar 04, 2019 4:01:41 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Mar 04, 2019 4:01:46 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1013 ALGO Quantity 11
+Mar 04, 2019 4:01:46 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item ALGO
+Mar 04, 2019 4:01:46 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Mar 04, 2019 4:01:54 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Mar 04, 2019 4:01:54 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Mar 04, 2019 4:01:54 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 4
+ WaitingList []
+ Current Borrowers[Borrower{iteID='CONU1111', numberOfDays=1}]
+ItemId CON1013 IeamName ALGO Quantity 10
+ WaitingList []
+ Current Borrowers[Borrower{iteID='CONU1111', numberOfDays=0}]
+

@@ -1,12 +1,11 @@
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
+import org.omg.CORBA.ORB;
 
-public class MonRemoteServiceImpl extends UnicastRemoteObject implements LibraryService {
+public class MonRemoteServiceImpl extends LibraryServicePOA {
 
   HashMap<String, LibraryModel> data = new HashMap<>();
   HashMap<String, ArrayList<String>> currentBorrowers = new HashMap<>();
@@ -14,9 +13,10 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   HashSet<String> userIds = new HashSet<>();
   HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
+  private ORB orb;
 
 
-  protected MonRemoteServiceImpl(Logger logger) throws RemoteException {
+  protected MonRemoteServiceImpl(Logger logger) {
     super();
     initManagerID();
     initUserID();
@@ -25,6 +25,10 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     this.logger = logger;
 
 
+  }
+
+  public void setORB(ORB orb_val) {
+    orb = orb_val;
   }
 
   private void initManagerID() {
@@ -38,7 +42,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   }
 
   @Override
-  public String findItem(String userId, String itemName) throws RemoteException {
+  public String findItem(String userId, String itemName) {
     logger.info(userId + "requested to find item" + itemName);
     String itemDetails;
     if (!isValidUser(userId)) {
@@ -63,12 +67,12 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     }
     if (callExternalServers) {
       UdpRequestModel udpRequestModel = new UdpRequestModel("findItem", itemName);
-      String concordiaServerResponse = Utilities
+      String concordiaServerResponse = ServerUtils
           .callUDPServer(udpRequestModel, LibConstants.UDP_CON_PORT, logger);
       if (concordiaServerResponse != null && concordiaServerResponse.length() > 0) {
         response.append("\n" + concordiaServerResponse + "\n");
       }
-      String mcGillServerResponse = Utilities
+      String mcGillServerResponse = ServerUtils
           .callUDPServer(udpRequestModel, LibConstants.UDP_MCG_PORT, logger);
       if (mcGillServerResponse != null && mcGillServerResponse.length() > 0) {
         response.append(mcGillServerResponse + "\n");
@@ -84,7 +88,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   }
 
   @Override
-  public String returnItem(String userId, String itemID) throws RemoteException {
+  public String returnItem(String userId, String itemID) {
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
       return userId + "is not present/authorised";
@@ -141,9 +145,9 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     String response = null;
     if (callExternalServer) {
       UdpRequestModel udpRequestModel = new UdpRequestModel("returnItem", itemID, userId);
-      int port = Utilities.getPortFromItemId(itemID);
+      int port = ServerUtils.getPortFromItemId(itemID);
       if (port != 0) {
-        response = Utilities.callUDPServer(udpRequestModel, port, logger);
+        response = ServerUtils.callUDPServer(udpRequestModel, port, logger);
       }
       return response;
     } else {
@@ -177,7 +181,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   }
 
   @Override
-  public String borrowItem(String userId, String itemID, int numberOfDays) throws RemoteException {
+  public String borrowItem(String userId, String itemID, int numberOfDays) {
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
       return userId + "is not present/authorised";
@@ -260,12 +264,12 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       boolean externalServerCallRequire) {
     String response = null;
     if (externalServerCallRequire) {
-      int port = Utilities.getPortFromItemId(itemID);
+      int port = ServerUtils.getPortFromItemId(itemID);
       UdpRequestModel udpRequestModel = new UdpRequestModel(LibConstants.OPR_WAIT_LIST, itemID,
           numberOfDays, userId);
 
       if (port != 0) {
-        response = Utilities
+        response = ServerUtils
             .callUDPServer(udpRequestModel, port, logger);
       } else {
         response = "invalid item id";
@@ -330,9 +334,9 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     UdpRequestModel udpRequestModel = new UdpRequestModel("borrowItem", itemID, numberOfDays,
         userId);
     String response = null;
-    int port = Utilities.getPortFromItemId(itemID);
+    int port = ServerUtils.getPortFromItemId(itemID);
     if (port != 0) {
-      response = Utilities
+      response = ServerUtils
           .callUDPServer(udpRequestModel, port, logger);
     } else {
       response = "invalid item id";
@@ -343,8 +347,7 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
   }
 
   @Override
-  public String addItem(String userId, String itemID, String itemName, int quantity)
-      throws RemoteException {
+  public String addItem(String userId, String itemID, String itemName, int quantity) {
     logger.info("Add item is called on Montreal server by " + userId + " for " + itemID + " for "
         + quantity + " name " + itemName);
     StringBuilder response = new StringBuilder();
@@ -468,6 +471,62 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
     return addUserInWaitList(ItemId, userId, numberOfDays, !ItemId.startsWith("MON"));
   }
 
+  @Override
+  public String exchangeItem(String userId, String oldItemId, String newItemID) {
+    String oldItemId_Lib = ServerUtils.determineLibOfItem(oldItemId);
+    String newItemId_Lib = ServerUtils.determineLibOfItem(newItemID);
+    if (oldItemId_Lib != null && newItemId_Lib != null) {
+      if (oldItemId_Lib.equals(LibConstants.MCG_REG) && newItemId_Lib
+          .equals(LibConstants.MCG_REG)) {
+        return performExchange(userId, oldItemId, newItemID, false);
+      } else {
+        return performExchange(userId, oldItemId, newItemID, true);
+      }
+    }
+
+    return LibConstants.SUCCESS;
+  }
+
+  private String performExchange(String userId, String oldItemId, String newItemID,
+      boolean callExternalServer) {
+    if (!callExternalServer) {
+      if (data.containsKey(oldItemId)) {
+        if (!data.get(oldItemId).getCurrentBorrowerList().contains(userId)) {
+          logger.info("Exchange item is not valid");
+          return oldItemId + " is not borrowed by user " + userId
+              + "Can not perform exchange operation";
+        } else if (data.get(newItemID).getCurrentBorrowerList().contains(userId)) {
+          logger.info("Exchange item is not valid");
+          return newItemID + " is already borrowed by user " + userId
+              + "Can not perform exchange operation ";
+        } else {
+          logger.info("Exchange item is valid");
+          if (data.containsKey(newItemID) && data.get(newItemID).getQuantity() > 0) {
+            logger.info("Old item id and New item id both belongs to McGill Server");
+            boolean isValidBorrow = isItemAvailableToBorrow(newItemID, userId, 0);
+            boolean isValidReturn = isValidReturn(userId, data.get(newItemID));
+            synchronized (data) {
+              if (isValidBorrow && isValidReturn) {
+                performReturnItemOperation(userId, oldItemId, false);
+                performBorrowItemOperation(newItemID, userId, 2);
+                return LibConstants.SUCCESS;
+              }
+            }
+
+          } else {
+            return newItemID + " is not recognized by library or enough quantity not available";
+          }
+        }
+      }
+    }
+    return LibConstants.FAIL;
+  }
+
+  private boolean isValidReturn(String userId, LibraryModel model) {
+    return model.getCurrentBorrowerList() != null && model.getCurrentBorrowerList()
+        .contains(userId);
+  }
+
   private String getData(HashMap<String, LibraryModel> data) {
     StringBuilder response = new StringBuilder();
     for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
@@ -508,8 +567,8 @@ public class MonRemoteServiceImpl extends UnicastRemoteObject implements Library
       requestModel.setMethodName(LibConstants.USER_BORROWED_ITEMS);
       requestModel.setUserId(firstUserInWaitingList);
       requestModel.setItemId(itemId);
-      String response = Utilities.callUDPServer(requestModel, LibConstants.UDP_CON_PORT, logger);
-      String response2 = Utilities.callUDPServer(requestModel, LibConstants.UDP_MCG_PORT, logger);
+      String response = ServerUtils.callUDPServer(requestModel, LibConstants.UDP_CON_PORT, logger);
+      String response2 = ServerUtils.callUDPServer(requestModel, LibConstants.UDP_MCG_PORT, logger);
       System.out.println("reseponse received" + response + "response received 2" + response2);
       if (response.equalsIgnoreCase(LibConstants.FAIL) || response2
           .equalsIgnoreCase(LibConstants.FAIL)) {

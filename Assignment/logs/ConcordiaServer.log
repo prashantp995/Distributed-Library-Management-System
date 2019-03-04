@@ -366,3 +366,333 @@ Feb 15, 2019 2:29:48 PM ConcordiaRemoteServiceImpl borrowItem
 INFO: Calling ExternalUDP Servers To Borrow MCG1012 For CONU1111
 Feb 15, 2019 2:29:48 PM Utilities callUDPServer
 INFO: Calling  UDP Servers
+Feb 23, 2019 9:37:38 PM ConcordiaServer main
+INFO: Server ready.
+Feb 23, 2019 9:37:52 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Feb 23, 2019 9:37:54 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 9:37:54 PM ConcordiaServer$1 run
+INFO: waitList is called by /127.0.0.1:51787
+Feb 23, 2019 9:37:54 PM ConcordiaServer getWaitListResponse
+INFO: User Selected to be in Wait List For itemCONU1111 User CON1013
+Feb 23, 2019 9:37:54 PM ConcordiaServer main
+INFO: Exception java.lang.NullPointerException
+Feb 23, 2019 9:39:34 PM ConcordiaServer main
+INFO: Server ready.
+Feb 23, 2019 9:39:44 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Feb 23, 2019 10:04:15 PM ConcordiaServer main
+INFO: Server ready.
+Feb 23, 2019 10:04:35 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Feb 23, 2019 10:05:48 PM ConcordiaServer main
+INFO: Server ready.
+Feb 23, 2019 10:06:02 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Feb 23, 2019 10:06:29 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Feb 23, 2019 10:06:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1013 for 1 name ALGO
+Feb 23, 2019 10:06:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying  Item
+Feb 23, 2019 10:06:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Feb 23, 2019 10:06:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous item details{, itemName='ALGO', quantity=0}
+Feb 23, 2019 10:06:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: updated item details{, itemName='ALGO', quantity=1}
+Feb 23, 2019 10:06:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous quantity was 0 , now need to process waiting list
+Feb 23, 2019 10:06:46 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Feb 23, 2019 10:06:46 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Waiting List Found For The Item Id CON1013
+Feb 23, 2019 10:06:46 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: CON1013  is assigned to CONU1111
+Feb 23, 2019 10:06:49 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Feb 23, 2019 10:07:03 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1015 for 1 name DSD
+Feb 23, 2019 10:07:03 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Feb 23, 2019 10:07:03 PM ConcordiaRemoteServiceImpl removeItem
+INFO: Remove item is called on Concordia server by CONM1111 for CON1015 for 5
+Feb 23, 2019 10:07:03 PM ConcordiaRemoteServiceImpl returnItem
+INFO: Return Item Response is Fail
+Feb 23, 2019 10:16:38 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1013
+Feb 23, 2019 10:16:38 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [CON1013]
+Feb 23, 2019 10:16:38 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1013 For CONU1111
+Feb 23, 2019 10:16:38 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 10:16:39 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 10:26:20 PM ConcordiaServer main
+INFO: Server ready.
+Feb 23, 2019 10:26:32 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Feb 23, 2019 10:27:03 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1012
+Feb 23, 2019 10:27:03 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1012 For CONU1111
+Feb 23, 2019 10:27:03 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 10:30:58 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MCG1012
+Feb 23, 2019 10:30:58 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [MON1012]
+Feb 23, 2019 10:30:58 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG1012 For CONU1111
+Feb 23, 2019 10:30:58 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 10:31:03 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 10:36:26 PM ConcordiaServer main
+INFO: Server ready.
+Feb 23, 2019 10:37:03 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Feb 23, 2019 10:37:18 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Feb 23, 2019 10:37:38 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Feb 23, 2019 10:37:44 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1012
+Feb 23, 2019 10:37:44 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [CON1012]
+Feb 23, 2019 10:37:44 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1012 For CONU1111
+Feb 23, 2019 10:37:44 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 10:37:50 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MCG1019
+Feb 23, 2019 10:37:50 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [CON1012, MON1012]
+Feb 23, 2019 10:37:50 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG1019 For CONU1111
+Feb 23, 2019 10:37:50 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 10:37:57 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MCG1013
+Feb 23, 2019 10:37:57 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [CON1012, MON1012]
+Feb 23, 2019 10:37:57 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG1013 For CONU1111
+Feb 23, 2019 10:37:57 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 10:38:00 PM Utilities callUDPServer
+INFO: Calling  UDP Servers
+Feb 23, 2019 11:10:14 PM ConcordiaServer main
+INFO: Server ready.
+Feb 23, 2019 11:13:38 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:59694
+Feb 23, 2019 11:13:38 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1013 User MONU1111 for days 1
+Feb 23, 2019 11:13:38 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isWait List Possible
+Feb 23, 2019 11:13:38 PM ConcordiaServer$1 run
+INFO: sending response [B@c4437c4
+Feb 23, 2019 11:13:39 PM ConcordiaServer$1 run
+INFO: waitList is called by /127.0.0.1:57977
+Feb 23, 2019 11:13:39 PM ConcordiaServer getWaitListResponse
+INFO: User Selected to be in Wait List For itemCON1013 User MONU1111
+Feb 23, 2019 11:13:39 PM ConcordiaServer getWaitListResponse
+INFO: Response isSuccess
+Feb 23, 2019 11:13:39 PM ConcordiaServer$1 run
+INFO: sending response [B@433c675d
+Feb 27, 2019 9:01:58 PM ConcordiaServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Feb 27, 2019 10:33:17 PM ConcordiaServer main
+INFO: Server ready.
+Feb 27, 2019 10:59:35 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Feb 28, 2019 8:36:09 AM ConcordiaServer main
+INFO: Server ready.
+Feb 28, 2019 8:36:35 AM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Feb 28, 2019 8:42:01 AM ConcordiaServer main
+INFO: Server ready.
+Mar 02, 2019 10:07:49 AM ConcordiaServer main
+INFO: Server ready.
+Mar 02, 2019 10:08:05 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 02, 2019 10:08:10 AM ConcordiaRemoteServiceImpl findItem
+INFO: CONU1111requested to find itemDSD
+Mar 02, 2019 10:08:10 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:10:24 AM ConcordiaServer main
+INFO: Server ready.
+Mar 02, 2019 10:10:52 AM ConcordiaRemoteServiceImpl findItem
+INFO: CONU1111requested to find itemDSD
+Mar 02, 2019 10:10:55 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:12:41 AM ConcordiaServer main
+INFO: Server ready.
+Mar 02, 2019 10:13:04 AM ConcordiaRemoteServiceImpl findItem
+INFO: CONU1111requested to find itemDSD
+Mar 02, 2019 10:13:06 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:15:02 AM ConcordiaServer main
+INFO: Server ready.
+Mar 02, 2019 10:15:11 AM ConcordiaRemoteServiceImpl findItem
+INFO: CONU1111requested to find itemDSD
+Mar 02, 2019 10:15:13 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:15:33 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:16:19 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1012
+Mar 02, 2019 10:16:21 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1012 For CONU1111
+Mar 02, 2019 10:16:22 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:16:41 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:16:54 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1013
+Mar 02, 2019 10:16:54 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item []
+Mar 02, 2019 10:16:57 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1013 For CONU1111
+Mar 02, 2019 10:16:58 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:17:06 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:23:44 AM ConcordiaServer main
+INFO: Server ready.
+Mar 02, 2019 10:23:52 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Mar 02, 2019 10:24:02 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MCG1012
+Mar 02, 2019 10:24:02 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG1012 For CONU1111
+Mar 02, 2019 10:24:02 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:24:08 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MCG1012
+Mar 02, 2019 10:24:08 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [MCG1012]
+Mar 02, 2019 10:24:14 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1012
+Mar 02, 2019 10:24:14 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [MCG1012]
+Mar 02, 2019 10:24:14 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1012 For CONU1111
+Mar 02, 2019 10:24:14 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:24:18 AM ConcordiaRemoteServiceImpl findItem
+INFO: CONU1111requested to find itemDSD
+Mar 02, 2019 10:24:18 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:24:18 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:24:22 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:24:32 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 02, 2019 10:24:32 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [MCG1012]
+Mar 02, 2019 10:37:09 AM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 02, 2019 10:37:12 AM ConcordiaRemoteServiceImpl removeItem
+INFO: Remove item is called on Concordia server by CONM1111 for CON1015 for 5
+Mar 02, 2019 10:37:12 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:37:12 AM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1015 for 1 name DSD
+Mar 02, 2019 10:37:12 AM ConcordiaRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Mar 02, 2019 10:37:12 AM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:59779
+Mar 02, 2019 10:37:12 AM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1015 User CONU1111
+Mar 02, 2019 10:37:12 AM ConcordiaServer getReturnItemResponse
+INFO: Response isFail
+Mar 02, 2019 10:37:12 AM ConcordiaServer$1 run
+INFO: sending response [B@69d0a921
+Mar 02, 2019 10:37:48 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 02, 2019 10:37:48 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [MCG1012, CON1012]
+Mar 02, 2019 10:37:48 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: user already borrowed item 
+Mar 02, 2019 10:37:55 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Mar 02, 2019 10:37:55 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [MCG1012, CON1012]
+Mar 02, 2019 10:38:00 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1014
+Mar 02, 2019 10:38:00 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [MCG1012, CON1012]
+Mar 02, 2019 10:38:00 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 Can not borrow , Item id is unknown to Library  CON1014
+Mar 02, 2019 10:38:08 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1014
+Mar 02, 2019 10:38:08 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [MCG1012, CON1012]
+Mar 02, 2019 10:38:08 AM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1014 For CONU1111
+Mar 02, 2019 10:38:08 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 02, 2019 10:38:26 AM ConcordiaRemoteServiceImpl removeItem
+INFO: Remove item is called on Concordia server by CONM1111 for CON1015 for 5
+Mar 02, 2019 10:38:26 AM ConcordiaRemoteServiceImpl returnItem
+INFO: Return Item Response is Fail
+Mar 02, 2019 10:38:26 AM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1015 for 1 name DSD
+Mar 02, 2019 10:38:26 AM ConcordiaRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying  Item
+Mar 02, 2019 10:38:26 AM ConcordiaRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 02, 2019 10:38:26 AM ConcordiaRemoteServiceImpl addItem
+INFO: previous item details{, itemName='DSD', quantity=1}
+Mar 02, 2019 10:38:26 AM ConcordiaRemoteServiceImpl addItem
+INFO: updated item details{, itemName='DSD', quantity=2}
+Mar 04, 2019 3:59:43 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 3:59:56 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 04, 2019 4:00:06 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 04, 2019 4:00:52 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:01:07 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 04, 2019 4:01:11 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Mar 04, 2019 4:01:11 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Current BorrowerCONU1111Borrowed Item [CON1012]
+Mar 04, 2019 4:01:21 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1013 for 11 name ALGO
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying  Item
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous item details{, itemName='ALGO', quantity=0}
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: updated item details{, itemName='ALGO', quantity=11}
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous quantity was 0 , now need to process waiting list
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Waiting List Found For The Item Id CON1013
+Mar 04, 2019 4:01:46 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: CON1013  is assigned to CONU1111
+Mar 04, 2019 4:01:54 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 04, 2019 4:24:09 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:26:10 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:27:33 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:37:05 PM ConcordiaServer main
+INFO: Server ready.
+Mar 04, 2019 4:37:40 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012

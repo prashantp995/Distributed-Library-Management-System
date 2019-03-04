@@ -1,0 +1,16 @@
+interface LibraryService{
+string   findItem(in string userId, in string itemName);
+string returnItem(in string userId, in string itemID);
+
+  string borrowItem(in string userId, in string itemID, in long numberOfDays);
+
+  string addItem(in string userId, in string itemID, in string itemName, in long quantity)
+      ;
+
+  string removeItem(in string managerId, in string itemId, in long quantity);
+
+  string listItem(in string managerId);
+
+  string addUserInWaitingList(in string userId,in string ItemId ,in long numberOfDays) ;
+  string exchangeItem(in string userId,in string oldItemId ,in string newItemID) ;
+};

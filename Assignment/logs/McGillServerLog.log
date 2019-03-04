@@ -92,3 +92,141 @@ Feb 15, 2019 2:36:04 PM McGillRemoteServiceImpl removeItem
 INFO: Remove item is called on McGill server by MCGM1111 for MCG1012 for 2
 Feb 15, 2019 2:36:04 PM McGillRemoteServiceImpl updateQuantity
 INFO: updating existing item {, itemName='DSD', quantity=49}
+Feb 23, 2019 9:37:27 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 9:39:24 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:04:17 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:05:44 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:26:16 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:30:58 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:59891
+Feb 23, 2019 10:30:58 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User CONU1111 for days 1
+Feb 23, 2019 10:30:58 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Feb 23, 2019 10:30:58 PM McGillServer$1 run
+INFO: sending response [B@c4437c4
+Feb 23, 2019 10:36:31 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 10:37:50 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:55372
+Feb 23, 2019 10:37:50 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1019 User CONU1111 for days 1
+Feb 23, 2019 10:37:50 PM McGillServer getBorrowItemResponse
+INFO: Response isFail
+Feb 23, 2019 10:37:50 PM McGillServer$1 run
+INFO: sending response [B@c4437c4
+Feb 23, 2019 10:37:57 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:55373
+Feb 23, 2019 10:37:57 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1013 User CONU1111 for days 1
+Feb 23, 2019 10:37:57 PM McGillServer getBorrowItemResponse
+INFO: Response isWait List Possible
+Feb 23, 2019 10:37:57 PM McGillServer$1 run
+INFO: sending response [B@433c675d
+Feb 23, 2019 10:38:00 PM McGillServer$1 run
+INFO: waitList is called by /127.0.0.1:55374
+Feb 23, 2019 10:38:00 PM McGillServer getWaitListResponse
+INFO: User Selected to be in Wait List For itemMCG1013 User CONU1111
+Feb 23, 2019 10:38:00 PM McGillServer getWaitListResponse
+INFO: Response isSuccess
+Feb 23, 2019 10:38:00 PM McGillServer$1 run
+INFO: sending response [B@3f91beef
+Feb 23, 2019 11:10:10 PM McGillServer main
+INFO: Server ready.
+Feb 23, 2019 11:13:48 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:57980
+Feb 23, 2019 11:13:48 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1013 User MONU1111 for days 1
+Feb 23, 2019 11:13:48 PM McGillServer getBorrowItemResponse
+INFO: Response isWait List Possible
+Feb 23, 2019 11:13:48 PM McGillServer$1 run
+INFO: sending response [B@c4437c4
+Feb 23, 2019 11:13:50 PM McGillServer$1 run
+INFO: waitList is called by /127.0.0.1:57981
+Feb 23, 2019 11:13:50 PM McGillServer getWaitListResponse
+INFO: User Selected to be in Wait List For itemMCG1013 User MONU1111
+Feb 23, 2019 11:13:50 PM McGillServer getWaitListResponse
+INFO: Response isSuccess
+Feb 23, 2019 11:13:50 PM McGillServer$1 run
+INFO: sending response [B@433c675d
+Feb 28, 2019 8:36:00 AM McGillServer main
+INFO: Server ready.
+Feb 28, 2019 8:40:53 AM McGillServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Feb 28, 2019 8:41:59 AM McGillServer main
+INFO: Server ready.
+Feb 28, 2019 8:42:12 AM McGillRemoteServiceImpl listItem
+INFO: MCGM1111Requested to View Data
+Mar 02, 2019 10:07:46 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:10:20 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:12:48 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:14:58 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:15:33 AM McGillServer$1 run
+INFO: findItem is called by /127.0.0.1:49317
+Mar 02, 2019 10:15:33 AM McGillServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSD
+Mar 02, 2019 10:15:33 AM McGillServer getFindItemResponse
+INFO: Response is  MCG1012 52
+Mar 02, 2019 10:15:34 AM McGillServer$1 run
+INFO: sending response [B@5a955565
+Mar 02, 2019 10:23:39 AM McGillServer main
+INFO: Server ready.
+Mar 02, 2019 10:24:02 AM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:55017
+Mar 02, 2019 10:24:02 AM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User CONU1111 for days 1
+Mar 02, 2019 10:24:02 AM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 02, 2019 10:24:02 AM McGillServer$1 run
+INFO: sending response [B@799f7e29
+Mar 02, 2019 10:24:18 AM McGillServer$1 run
+INFO: findItem is called by /127.0.0.1:52448
+Mar 02, 2019 10:24:18 AM McGillServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is DSD
+Mar 02, 2019 10:24:18 AM McGillServer getFindItemResponse
+INFO: Response is  MCG1012 51
+Mar 02, 2019 10:24:18 AM McGillServer$1 run
+INFO: sending response [B@4b85612c
+Mar 04, 2019 3:59:20 PM McGillServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Mar 04, 2019 3:59:39 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:00:54 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:24:04 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:26:12 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:27:27 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:37:00 PM McGillServer main
+INFO: Server ready.
+Mar 04, 2019 4:38:47 PM McGillRemoteServiceImpl performExchange
+INFO: Exchange item is valid
+Mar 04, 2019 4:39:20 PM McGillRemoteServiceImpl borrowItem
+INFO: Current BorrowerMCGU1111Borrowed Item [MCG1012]
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl addItem
+INFO: Add item is called on McGill server by MCGM1111 for MCG1013 for 22 name ALGO
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying as new Item
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: Waiting List Found For The Item Id MCG1013
+Mar 04, 2019 4:39:46 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: MCG1013  is assigned to MCGU1111
+Mar 04, 2019 4:39:50 PM McGillRemoteServiceImpl listItem
+INFO: MCGM1111Requested to View Data
+Mar 04, 2019 4:40:15 PM McGillRemoteServiceImpl performExchange
+INFO: Exchange item is not valid

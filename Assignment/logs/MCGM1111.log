@@ -106,3 +106,37 @@ Feb 15, 2019 2:36:38 PM UserClient performManagerOperation
 INFO: MCGM1111 choose to Add Item
 Feb 15, 2019 2:36:56 PM UserClient performAddItem
 INFO: MCGM1111 is trying to Add item with item id MCG1014
+Feb 28, 2019 8:42:12 AM UserClient performManagerOperation
+INFO: MCGM1111 choose to List Item
+Feb 28, 2019 8:42:12 AM UserClient getResponseFromListItem
+INFO: MCGM1111 Requested to List Item 
+Feb 28, 2019 8:42:12 AM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MCG1012 IeamName DSD Quantity 52
+Current Borrowers[]
+Waiting List[]
+ItemId MCG1013 IeamName ALGO Quantity 0
+Current Borrowers[]
+Waiting List[]
+
+Mar 04, 2019 4:39:39 PM UserClient performManagerOperation
+INFO: MCGM1111 choose to Add Item
+Mar 04, 2019 4:39:41 PM UserClient performAddItem
+INFO: MCGM1111 is trying to Add item with item id MCG1013
+Mar 04, 2019 4:39:46 PM UserClient getResponseOfAddItem
+INFO: MCGM1111 asked to Add item MCG1013 ALGO Quantity 22
+Mar 04, 2019 4:39:46 PM UserClient getResponseOfAddItem
+INFO: MCGM1111 Requested to Add Item ALGO
+Mar 04, 2019 4:39:46 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Mar 04, 2019 4:39:50 PM UserClient performManagerOperation
+INFO: MCGM1111 choose to List Item
+Mar 04, 2019 4:39:50 PM UserClient getResponseFromListItem
+INFO: MCGM1111 Requested to List Item 
+Mar 04, 2019 4:39:50 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MCG1012 IeamName DSD Quantity 51
+Current Borrowers[MCGU1111]
+Waiting List[]
+ItemId MCG1013 IeamName ALGO Quantity 21
+Current Borrowers[MCGU1111]
+Waiting List[]
+

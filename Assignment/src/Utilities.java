@@ -1,12 +1,5 @@
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -44,12 +37,13 @@ public class Utilities {
     }
   }
 
-  public static Logger setupLogger(Logger logger, String fileName, boolean showlogsInConsole) throws IOException {
+  public static Logger setupLogger(Logger logger, String fileName, boolean showlogsInConsole)
+      throws IOException {
 
     FileHandler fh;
 
     try {
-      if(!showlogsInConsole){
+      if (!showlogsInConsole) {
         logger.setUseParentHandlers(false);
       }
       fh = new FileHandler(LOG_DIR + fileName, true);
@@ -95,35 +89,6 @@ public class Utilities {
             .startsWith("MCGM") || username.startsWith("MONM"));
   }
 
-  public static String callUDPServer(UdpRequestModel udpRequestModel, int udpPort, Logger logger) {
-    logger.info("Calling  UDP Servers");
-    StringBuilder response = new StringBuilder();
-    byte[] buf;
-    try {
-      DatagramSocket socket = new DatagramSocket();
-      InetAddress address = InetAddress.getByName("localhost");
-      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-      ObjectOutputStream os = new ObjectOutputStream(outputStream);
-      os.writeObject(udpRequestModel);
-      buf = outputStream.toByteArray();
-      DatagramPacket packet
-          = new DatagramPacket(buf, buf.length, address, udpPort);
-      socket.send(packet);
-      packet = new DatagramPacket(buf, buf.length);
-      socket.receive(packet);
-      String received = new String(
-          packet.getData(), 0, packet.getLength());
-      response.append(received);
-      System.out.println("Data Received " + received);
-    } catch (SocketException e) {
-      e.printStackTrace();
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return response.toString();
-  }
 
   public static int getResponseFromClient(Logger logger) {
 
@@ -142,16 +107,5 @@ public class Utilities {
     return 0;
   }
 
-  public static int getPortFromItemId(String itemID) {
-    if (itemID.startsWith("CON")) {
-      return LibConstants.UDP_CON_PORT;
-    }
-    if (itemID.startsWith("MCG")) {
-      return LibConstants.UDP_MCG_PORT;
-    }
-    if (itemID.startsWith("MON")) {
-      return LibConstants.UDP_MON_PORT;
-    }
-    return 0;
-  }
+
 }

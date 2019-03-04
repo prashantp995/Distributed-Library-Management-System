@@ -1,0 +1,4 @@
+-ORBInitialHost localhost -ORBInitialPort 8090
+start orbd -ORBInitialPort 8090&
+
+

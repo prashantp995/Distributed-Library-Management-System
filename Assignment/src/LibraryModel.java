@@ -9,6 +9,7 @@ public class LibraryModel {
   List<String> currentBorrowerList = new ArrayList<String>();
   int quantity;
 
+
   public LibraryModel(String itemId, String itemName, int quantity) {
     this.itemId = itemId;
     this.itemName = itemName;
