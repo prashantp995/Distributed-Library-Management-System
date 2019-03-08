@@ -57,8 +57,8 @@ public class UdpRequestModel implements Serializable {
     this.userId = userId;
   }
 
-  public UdpRequestModel(String borrowMethod, String itemId, int numberOfDays, String userId) {
-    this.methodName = borrowMethod;
+  public UdpRequestModel(String methodToExecuteOnExternalServer, String itemId, int numberOfDays, String userId) {
+    this.methodName = methodToExecuteOnExternalServer;
     this.itemId = itemId;
     this.numberOfDays = numberOfDays;
     this.userId = userId;

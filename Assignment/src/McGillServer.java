@@ -129,6 +129,13 @@ public class McGillServer {
     } else if (request.getMethodName().equalsIgnoreCase(LibConstants.USER_BORROWED_ITEMS)) {
       response = exportedObj
           .isUsereligibleToGetbook(request.getUserId(), request.getItemId(), false);
+    } else if (request.getMethodName().equalsIgnoreCase("validateBorrow")) {
+      response = String.valueOf(
+          exportedObj.isItemAvailableToBorrow(request.getItemId(), request.getUserId(),
+              request.getNumberOfDays()));
+    } else if (request.getMethodName().equalsIgnoreCase("validateReturn")) {
+      response = String.valueOf(
+          exportedObj.isValidReturn(request.getUserId(), request.getItemId()));
     }
     System.out.println("Response to send from udp is " + response);
 

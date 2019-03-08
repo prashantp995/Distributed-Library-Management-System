@@ -106,4 +106,18 @@ public class ServerUtils {
     }
     return null;
   }
+
+  public static String validateBorrowOnExternalServer(String userId, String newItemID,
+      Logger logger) {
+    UdpRequestModel requestModel = new UdpRequestModel("validateBorrow", newItemID, 2, userId);
+    return ServerUtils
+        .callUDPServer(requestModel, ServerUtils.getPortFromItemId(newItemID), logger);
+  }
+
+  public static String validateReturnOnExternalServer(String userId, String newItemID,
+      Logger logger) {
+    UdpRequestModel requestModel = new UdpRequestModel("validateReturn", newItemID, 2, userId);
+    return ServerUtils
+        .callUDPServer(requestModel, ServerUtils.getPortFromItemId(newItemID), logger);
+  }
 }
