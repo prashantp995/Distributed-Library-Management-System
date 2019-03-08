@@ -241,7 +241,7 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
     if (itemID.startsWith("MON") && !data.containsKey(itemID)) {
       return LibConstants.FAIL + "Can not borrow , Item id is unknown to Library";
     }
-    return null;
+    return LibConstants.SUCCESS;
   }
 
   private String handleWaitList(String userId, String itemID, int numberOfDays, String res,
@@ -486,16 +486,16 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
   public String exchangeItem(String userId, String oldItemId, String newItemID) {
     String oldItemId_Lib = ServerUtils.determineLibOfItem(oldItemId);
     String newItemId_Lib = ServerUtils.determineLibOfItem(newItemID);
-    if (newItemId_Lib.equalsIgnoreCase(this.lib)) {
+    if (newItemId_Lib.equalsIgnoreCase(lib)) {
       String validateBorrowForLocalUser = validateBorrow(userId, newItemID);
-      if (validateBorrowForLocalUser != null) {
-        return LibConstants.FAIL;
+      if (!validateBorrowForLocalUser.equalsIgnoreCase(LibConstants.SUCCESS)) {
+        return validateBorrowForLocalUser;
       }
     }
 
     if (oldItemId_Lib != null && newItemId_Lib != null) {
-      if (oldItemId_Lib.equals(this.lib) && newItemId_Lib
-          .equals(this.lib)) {
+      if (oldItemId_Lib.equals(lib) && newItemId_Lib
+          .equals(lib)) {
         return performExchange(userId, oldItemId, newItemID, false, oldItemId_Lib, newItemId_Lib);
       } else {
         return performExchange(userId, oldItemId, newItemID, true, oldItemId_Lib, newItemId_Lib);
@@ -538,7 +538,7 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
       }
     } else {
       logger.info("Need to connect to external server ....");
-      if (oldItemId_Lib.equals(this.lib)) {
+      if (oldItemId_Lib.equals(lib)) {
         logger.info(newItemID + "belongs to external server");
         boolean isValidReturn = isValidReturn(userId, data.get(oldItemId));
         logger.info("Verifying" + newItemID + " is is available to borrow In " + newItemId_Lib);
@@ -554,7 +554,7 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
           return LibConstants.FAIL;
         }
 
-      } else if (newItemId_Lib.equals(this.lib)) {
+      } else if (newItemId_Lib.equals(lib)) {
         logger.info(oldItemId + "Belongs to external server");
         boolean isValidBorrow = isItemAvailableToBorrow(newItemID, userId, 0);
         String isValidReturn = ServerUtils
@@ -567,8 +567,8 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
           return LibConstants.FAIL;
         }
 
-      } else if (!oldItemId_Lib.equals(this.lib) && !newItemId_Lib
-          .equals(this.lib)) {
+      } else if (!oldItemId_Lib.equals(lib) && !newItemId_Lib
+          .equals(lib)) {
         logger.info("both item id belongs to external server");
         String isValidReturn = ServerUtils
             .validateReturnOnExternalServer(userId, oldItemId, logger);
