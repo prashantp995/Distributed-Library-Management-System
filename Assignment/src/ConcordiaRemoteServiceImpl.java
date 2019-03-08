@@ -14,6 +14,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
   HashSet<String> userIds = new HashSet<>();
   HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
+  private static final String lib = LibConstants.CON_REG;
   private ORB orb;
 
 
@@ -88,36 +89,11 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
       logger.info(userId + "is not present/authorised");
       return userId + "is not present/authorised";
     }
-    if (currentBorrowers.containsKey(userId)) {
-      synchronized (currentBorrowers) {
-        logger.info("Current Borrower" + userId + "Borrowed Item " + currentBorrowers.get(userId)
-            .toString());
-        for (String borrowedItem : currentBorrowers.get(userId)) {
-          if (!borrowedItem.startsWith("CON") && !itemID.startsWith("CON")) {
-            if (borrowedItem.startsWith("MON") && itemID.startsWith("MON")) {
-              return LibConstants.FAIL
-                  + "Can not borrow more than one item from each of  external library";
-            }
-            if (borrowedItem.startsWith("MCG") && itemID.startsWith("MCG")) {
-              return LibConstants.FAIL
-                  + "Can not borrow more than one item from each of  external library";
-            }
-
-          }
-
-        }
-      }
-
+    String x = validateBorrow(userId, itemID);
+    if (!x.equalsIgnoreCase(LibConstants.SUCCESS)) {
+      return x;
     }
     StringBuilder response = new StringBuilder();
-    if (itemID.startsWith("CON") && !data.containsKey(itemID)) {
-      logger.info(userId + " Can not borrow , Item id is unknown to Library  " + itemID);
-      return LibConstants.FAIL + " Can not borrow , Item id is unknown to Library";
-    }
-    if (data.containsKey(itemID) && data.get(itemID).getCurrentBorrowerList().contains(userId)) {
-      logger.info("user already borrowed item ");
-      return LibConstants.FAIL + " user already borrowed item";
-    }
     String result = performBorrowItemOperation(itemID, userId,
         numberOfDays);//this will fail if itemID is not in this server
     //if fails then we need to connect to Respective External Server to Borrow Item
@@ -139,6 +115,40 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
     }
 
     return result;
+  }
+
+  public String validateBorrow(String userId, String itemID) {
+    if (currentBorrowers.containsKey(userId)) {
+      synchronized (currentBorrowers) {
+        logger.info("Current Borrower" + userId + "Borrowed Item " + currentBorrowers.get(userId)
+            .toString());
+        for (String borrowedItem : currentBorrowers.get(userId)) {
+          if (!borrowedItem.startsWith("CON") && !itemID.startsWith("CON")) {
+            if (borrowedItem.startsWith("MON") && itemID.startsWith("MON")) {
+              return LibConstants.FAIL
+                  + "Can not borrow more than one item from each of  external library";
+            }
+            if (borrowedItem.startsWith("MCG") && itemID.startsWith("MCG")) {
+              return LibConstants.FAIL
+                  + "Can not borrow more than one item from each of  external library";
+            }
+
+          }
+
+        }
+      }
+
+    }
+
+    if (itemID.startsWith("CON") && !data.containsKey(itemID)) {
+      logger.info(userId + " Can not borrow , Item id is unknown to Library  " + itemID);
+      return LibConstants.FAIL + " Can not borrow , Item id is unknown to Library";
+    }
+    if (data.containsKey(itemID) && data.get(itemID).getCurrentBorrowerList().contains(userId)) {
+      logger.info("user already borrowed item ");
+      return LibConstants.FAIL + " user already borrowed item";
+    }
+    return LibConstants.SUCCESS;
   }
 
   @Override
@@ -229,12 +239,18 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
   public String exchangeItem(String userId, String oldItemId, String newItemID) {
     String oldItemId_Lib = ServerUtils.determineLibOfItem(oldItemId);
     String newItemId_Lib = ServerUtils.determineLibOfItem(newItemID);
+    if (newItemId_Lib.equalsIgnoreCase(this.lib)) {
+      String validateBorrowForLocalUser = validateBorrow(userId, newItemID);
+      if (validateBorrowForLocalUser != null) {
+        return LibConstants.FAIL;
+      }
+    }
     if (oldItemId_Lib != null && newItemId_Lib != null) {
       if (oldItemId_Lib.equals(LibConstants.CON_REG) && newItemId_Lib
           .equals(LibConstants.CON_REG)) {
-        return performExchange(userId, oldItemId, newItemID, false);
+        return performExchange(userId, oldItemId, newItemID, false, oldItemId_Lib, newItemId_Lib);
       } else {
-        return performExchange(userId, oldItemId, newItemID, true);
+        return performExchange(userId, oldItemId, newItemID, true, oldItemId_Lib, newItemId_Lib);
       }
     }
 
@@ -242,7 +258,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
   }
 
   private String performExchange(String userId, String oldItemId, String newItemID,
-      boolean callExternalServer) {
+      boolean callExternalServer, String oldItemId_Lib, String newItemId_Lib) {
     if (!callExternalServer) {
       if (data.containsKey(oldItemId)) {
         if (!data.get(oldItemId).getCurrentBorrowerList().contains(userId)) {
@@ -256,13 +272,13 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
         } else {
           logger.info("Exchange item is valid");
           if (data.containsKey(newItemID) && data.get(newItemID).getQuantity() > 0) {
-            logger.info("Old item id and New item id both belongs to McGill Server");
+            logger.info("Old item id and New item id both belongs to Montreal Server");
             boolean isValidBorrow = isItemAvailableToBorrow(newItemID, userId, 0);
-            boolean isValidReturn = isValidReturn(userId, data.get(newItemID));
+            boolean isValidReturn = isValidReturn(userId, data.get(oldItemId));
             synchronized (data) {
               if (isValidBorrow && isValidReturn) {
-                performReturnItemOperation(userId, oldItemId, false);
-                performBorrowItemOperation(newItemID, userId, 2);
+                returnItem(userId, oldItemId);
+                borrowItem(newItemID, userId, 2);
                 return LibConstants.SUCCESS;
               }
             }
@@ -272,13 +288,67 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
           }
         }
       }
+    } else {
+      logger.info("Need to connect to external server ....");
+      if (oldItemId_Lib.equals(this.lib)) {
+        logger.info(newItemID + "belongs to external server");
+        boolean isValidReturn = isValidReturn(userId, data.get(oldItemId));
+        logger.info("Verifying" + newItemID + " is is available to borrow In " + newItemId_Lib);
+        String isValidBorrow = ServerUtils
+            .validateBorrowOnExternalServer(userId, newItemID, logger);
+        logger.info("Response received from " + newItemId_Lib + " is " + isValidBorrow);
+        if (isValidReturn && isValidBorrow.equalsIgnoreCase("true")) {
+          logger.info("validation successful");
+          returnItem(userId, oldItemId);
+          borrowItem(userId, newItemID, 2);
+          return LibConstants.SUCCESS;
+        } else {
+          return LibConstants.FAIL;
+        }
+
+      } else if (newItemId_Lib.equals(this.lib)) {
+        logger.info(oldItemId + "Belongs to external server");
+        boolean isValidBorrow = isItemAvailableToBorrow(newItemID, userId, 0);
+        String isValidReturn = ServerUtils
+            .validateReturnOnExternalServer(userId, oldItemId, logger);
+        if (isValidBorrow && isValidReturn.equalsIgnoreCase("true")) {
+          returnItem(userId, oldItemId);
+          borrowItem(userId, newItemID, 2);
+          return LibConstants.SUCCESS;
+        } else {
+          return LibConstants.FAIL;
+        }
+
+      } else if (!oldItemId_Lib.equals(this.lib) && !newItemId_Lib
+          .equals(this.lib)) {
+        logger.info("both item id belongs to external server");
+        String isValidReturn = ServerUtils
+            .validateReturnOnExternalServer(userId, oldItemId, logger);
+        String isValidBorrow = ServerUtils
+            .validateBorrowOnExternalServer(userId, newItemID, logger);
+        if (isValidBorrow.equalsIgnoreCase("true") && isValidReturn.equalsIgnoreCase("true")) {
+          returnItem(userId, oldItemId);
+          borrowItem(userId, newItemID, 2);
+          return LibConstants.SUCCESS;
+        } else {
+          return LibConstants.FAIL;
+        }
+      }
+
     }
     return LibConstants.FAIL;
   }
 
   private boolean isValidReturn(String userId, LibraryModel model) {
+    if (model == null) {
+      return false;
+    }
     return model.getCurrentBorrowerList() != null && model.getCurrentBorrowerList()
         .contains(userId);
+  }
+
+  public boolean isValidReturn(String userId, String itemId) {
+    return isValidReturn(userId, data.get(itemId));
   }
 
   private String getData(HashMap<String, LibraryModel> data) {
@@ -350,7 +420,8 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
   }
 
   private boolean isWaitListPossible(String itemID, String userId) {
-    if (data.containsKey(itemID) && data.get(itemID).getQuantity() == 0) {
+    if (data.containsKey(itemID) && data.get(itemID).getQuantity() == 0 && !data.get(itemID)
+        .getCurrentBorrowerList().contains(userId)) {
       return true;
     }
     return false;
@@ -364,7 +435,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
     return false;
   }
 
-  private boolean isItemAvailableToBorrow(String itemID, String userId, int numberOfDays) {
+  public boolean isItemAvailableToBorrow(String itemID, String userId, int numberOfDays) {
     if (data.containsKey(itemID)) {
       if (data.get(itemID).getQuantity() > 0) {
         //check if user has already borrowed the item
