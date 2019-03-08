@@ -230,3 +230,213 @@ Mar 04, 2019 4:39:50 PM McGillRemoteServiceImpl listItem
 INFO: MCGM1111Requested to View Data
 Mar 04, 2019 4:40:15 PM McGillRemoteServiceImpl performExchange
 INFO: Exchange item is not valid
+Mar 05, 2019 6:53:30 PM McGillServer main
+INFO: Server ready.
+Mar 05, 2019 7:10:22 PM McGillServer main
+INFO: Server ready.
+Mar 05, 2019 7:12:30 PM McGillServer main
+INFO: Server ready.
+Mar 05, 2019 7:15:04 PM McGillServer main
+INFO: Server ready.
+Mar 05, 2019 7:23:56 PM McGillServer main
+INFO: Server ready.
+Mar 05, 2019 7:27:16 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 2:29:31 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 2:41:56 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 3:00:55 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 5:39:55 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 5:41:19 PM McGillServer$1 run
+INFO: findItem is called by /127.0.0.1:62419
+Mar 07, 2019 5:41:19 PM McGillServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is MON1013
+Mar 07, 2019 5:41:19 PM McGillServer getFindItemResponse
+INFO: Response is  
+Mar 07, 2019 5:41:19 PM McGillServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 5:41:56 PM McGillServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:62423
+Mar 07, 2019 5:41:56 PM McGillServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 5:41:56 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:62424
+Mar 07, 2019 5:41:56 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User CONU1111 for days 2
+Mar 07, 2019 5:41:56 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 5:41:56 PM McGillServer$1 run
+INFO: sending response [B@277050dc
+Mar 07, 2019 5:42:04 PM McGillServer$1 run
+INFO: returnItem is called by /127.0.0.1:61010
+Mar 07, 2019 5:42:04 PM McGillServer getReturnItemResponse
+INFO: Return item is Called :   Item is MCG1012 User CONU1111
+Mar 07, 2019 5:42:04 PM McGillServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 5:42:04 PM McGillServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 07, 2019 5:53:17 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 5:59:49 PM McGillRemoteServiceImpl addItem
+INFO: Add item is called on McGill server by MCGM1111 for MCG6231 for 1 name Distributed
+Mar 07, 2019 5:59:49 PM McGillRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Mar 07, 2019 6:01:42 PM McGillRemoteServiceImpl listItem
+INFO: MCGM1111Requested to View Data
+Mar 07, 2019 6:03:32 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:62090
+Mar 07, 2019 6:03:32 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG6231 User MONU1111 for days 1
+Mar 07, 2019 6:03:32 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 6:03:32 PM McGillServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 6:04:37 PM McGillServer$1 run
+INFO: findItem is called by /127.0.0.1:54529
+Mar 07, 2019 6:04:37 PM McGillServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is Distributed
+Mar 07, 2019 6:04:37 PM McGillServer getFindItemResponse
+INFO: Response is  MCG6231 0
+Mar 07, 2019 6:04:37 PM McGillServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 6:06:31 PM McGillServer$1 run
+INFO: returnItem is called by /127.0.0.1:60331
+Mar 07, 2019 6:06:31 PM McGillServer getReturnItemResponse
+INFO: Return item is Called :   Item is MCG6231 User MONU1111
+Mar 07, 2019 6:06:31 PM McGillRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MCG6231 was 0 ,Now processing waitinglist
+Mar 07, 2019 6:06:31 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 07, 2019 6:06:31 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: Waiting List Found For The Item Id MCG6231
+Mar 07, 2019 6:06:31 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: MCG6231  is assigned to MCGU1111
+Mar 07, 2019 6:06:31 PM McGillServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 6:06:31 PM McGillServer$1 run
+INFO: sending response [B@277050dc
+Mar 07, 2019 6:07:23 PM McGillRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMCGU1111Borrowed Item [MCG6231]
+Mar 07, 2019 6:08:08 PM McGillRemoteServiceImpl listItem
+INFO: MCGM1111Requested to View Data
+Mar 07, 2019 6:26:02 PM McGillRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMCGU1111Borrowed Item [MCG6231]
+Mar 07, 2019 6:38:30 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 7:08:29 PM McGillRemoteServiceImpl addItem
+INFO: Add item is called on McGill server by MCGM1111 for MCG6231 for 1 name Distributed
+Mar 07, 2019 7:08:29 PM McGillRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Mar 07, 2019 7:09:45 PM McGillRemoteServiceImpl listItem
+INFO: MCGM1111Requested to View Data
+Mar 07, 2019 7:10:23 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:55434
+Mar 07, 2019 7:10:23 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG6231 User MONU1111 for days 1
+Mar 07, 2019 7:10:23 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 7:10:23 PM McGillServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 7:11:54 PM McGillServer$1 run
+INFO: returnItem is called by /127.0.0.1:55435
+Mar 07, 2019 7:11:54 PM McGillServer getReturnItemResponse
+INFO: Return item is Called :   Item is MCG6231 User MONU1111
+Mar 07, 2019 7:11:54 PM McGillRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MCG6231 was 0 ,Now processing waitinglist
+Mar 07, 2019 7:11:54 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 07, 2019 7:11:54 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: Waiting List Found For The Item Id MCG6231
+Mar 07, 2019 7:11:54 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: MCG6231  is assigned to MCGU1111
+Mar 07, 2019 7:11:54 PM McGillServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 7:11:54 PM McGillServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 7:12:19 PM McGillRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMCGU1111Borrowed Item [MCG6231]
+Mar 07, 2019 7:12:19 PM McGillRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG6231 For MCGU1111
+Mar 07, 2019 7:12:19 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:12:19 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:55436
+Mar 07, 2019 7:12:19 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG6231 User MCGU1111 for days 1
+Mar 07, 2019 7:12:19 PM McGillServer getBorrowItemResponse
+INFO: Response isFail
+Mar 07, 2019 7:12:19 PM McGillServer$1 run
+INFO: sending response [B@277050dc
+Mar 07, 2019 7:12:31 PM McGillRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MCG6231 was 0 ,Now processing waitinglist
+Mar 07, 2019 7:12:31 PM McGillRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 07, 2019 7:12:31 PM McGillRemoteServiceImpl returnItem
+INFO: Return Item Response is Success
+Mar 07, 2019 7:13:20 PM McGillServer$1 run
+INFO: returnItem is called by /127.0.0.1:58907
+Mar 07, 2019 7:13:20 PM McGillServer getReturnItemResponse
+INFO: Return item is Called :   Item is MCG6231 User MONU1111
+Mar 07, 2019 7:13:20 PM McGillServer getReturnItemResponse
+INFO: Response isFail
+Mar 07, 2019 7:13:20 PM McGillServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 07, 2019 8:01:52 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 8:06:13 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 8:09:42 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 8:17:23 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 8:21:17 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 8:23:59 PM McGillServer$1 run
+INFO: validateReturn is called by /127.0.0.1:58670
+Mar 07, 2019 8:23:59 PM McGillServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 8:23:59 PM McGillServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:58671
+Mar 07, 2019 8:23:59 PM McGillServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 8:24:27 PM McGillServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:51779
+Mar 07, 2019 8:24:27 PM McGillServer$1 run
+INFO: sending response [B@277050dc
+Mar 07, 2019 8:24:27 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:51781
+Mar 07, 2019 8:24:27 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User MONU1111 for days 2
+Mar 07, 2019 8:24:27 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:24:27 PM McGillServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 07, 2019 8:24:40 PM McGillServer$1 run
+INFO: validateReturn is called by /127.0.0.1:51782
+Mar 07, 2019 8:24:40 PM McGillServer$1 run
+INFO: sending response [B@7aec35a
+Mar 07, 2019 8:24:40 PM McGillServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:51783
+Mar 07, 2019 8:24:40 PM McGillServer$1 run
+INFO: sending response [B@67424e82
+Mar 07, 2019 8:29:57 PM McGillServer main
+INFO: Server ready.
+Mar 07, 2019 8:30:28 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:63672
+Mar 07, 2019 8:30:28 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User MONU1111 for days 1
+Mar 07, 2019 8:30:28 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:30:28 PM McGillServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 8:30:43 PM McGillServer$1 run
+INFO: validateReturn is called by /127.0.0.1:63673
+Mar 07, 2019 8:30:43 PM McGillServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 8:32:13 PM McGillServer$1 run
+INFO: validateReturn is called by /127.0.0.1:49200
+Mar 07, 2019 8:32:13 PM McGillServer$1 run
+INFO: sending response [B@277050dc

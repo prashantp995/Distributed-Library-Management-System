@@ -337,3 +337,453 @@ Mar 04, 2019 4:27:31 PM MonServer main
 INFO: Server ready.
 Mar 04, 2019 4:37:03 PM MonServer main
 INFO: Server ready.
+Mar 05, 2019 6:53:33 PM MonServer main
+INFO: Server ready.
+Mar 05, 2019 6:53:45 PM MonServer$1 run
+INFO: borrowItem is called by /127.0.0.1:50248
+Mar 05, 2019 6:53:45 PM MonServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MON1012 User CONU1111 for days 1
+Mar 05, 2019 6:53:45 PM MonServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 05, 2019 6:53:45 PM MonServer$1 run
+INFO: sending response [B@799f7e29
+Mar 05, 2019 7:10:24 PM MonServer main
+INFO: Server ready.
+Mar 05, 2019 7:11:35 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [MON1012]
+Mar 05, 2019 7:12:22 PM MonServer main
+INFO: Server ready.
+Mar 05, 2019 7:13:36 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [MON1012]
+Mar 05, 2019 7:15:06 PM MonServer main
+INFO: Server ready.
+Mar 05, 2019 7:15:50 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [MON1012]
+Mar 05, 2019 7:16:16 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 05, 2019 7:16:19 PM MonRemoteServiceImpl performExchange
+INFO: CON1013belongs to external server
+Mar 05, 2019 7:16:26 PM MonRemoteServiceImpl performExchange
+INFO: VerifyingCON1013 is is available to borrow In CON
+Mar 05, 2019 7:16:34 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 05, 2019 7:16:52 PM MonRemoteServiceImpl performExchange
+INFO: Response received from CON is false
+Mar 05, 2019 7:24:01 PM MonServer main
+INFO: Server ready.
+Mar 05, 2019 7:24:24 PM MonRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MON1012 was 0 ,Now processing waitinglist
+Mar 05, 2019 7:24:24 PM MonRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 05, 2019 7:24:24 PM MonRemoteServiceImpl returnItem
+INFO: Return Item Response is Success
+Mar 05, 2019 7:24:33 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [MON1012]
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl performExchange
+INFO: CON1012belongs to external server
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl performExchange
+INFO: VerifyingCON1012 is is available to borrow In CON
+Mar 05, 2019 7:24:59 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl performExchange
+INFO: Response received from CON is true
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl performExchange
+INFO: validation successful
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MON1012 was 0 ,Now processing waitinglist
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl returnItem
+INFO: Return Item Response is Success
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 05, 2019 7:24:59 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 05, 2019 7:24:59 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 05, 2019 7:25:17 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 05, 2019 7:25:41 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 05, 2019 7:25:41 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 05, 2019 7:25:41 PM MonRemoteServiceImpl performExchange
+INFO: CON1012belongs to external server
+Mar 05, 2019 7:25:41 PM MonRemoteServiceImpl performExchange
+INFO: VerifyingCON1012 is is available to borrow In CON
+Mar 05, 2019 7:25:41 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 05, 2019 7:25:41 PM MonRemoteServiceImpl performExchange
+INFO: Response received from CON is true
+Mar 05, 2019 7:26:29 PM MonRemoteServiceImpl returnItem
+INFO: MONU1012is not present/authorised
+Mar 05, 2019 7:26:52 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 05, 2019 7:27:07 PM MonServer main
+INFO: Server ready.
+Mar 05, 2019 7:27:56 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [MON1012]
+Mar 05, 2019 7:28:05 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 05, 2019 7:28:10 PM MonRemoteServiceImpl performExchange
+INFO: CON1012belongs to external server
+Mar 05, 2019 7:28:17 PM MonRemoteServiceImpl performExchange
+INFO: VerifyingCON1012 is is available to borrow In CON
+Mar 05, 2019 7:28:21 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 05, 2019 7:28:50 PM MonRemoteServiceImpl performExchange
+INFO: Response received from CON is true
+Mar 05, 2019 7:28:52 PM MonRemoteServiceImpl performExchange
+INFO: validation successful
+Mar 05, 2019 7:28:55 PM MonRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MON1012 was 0 ,Now processing waitinglist
+Mar 05, 2019 7:28:55 PM MonRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 05, 2019 7:28:55 PM MonRemoteServiceImpl returnItem
+INFO: Return Item Response is Success
+Mar 05, 2019 7:29:06 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 05, 2019 7:29:15 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 05, 2019 7:29:18 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 2:29:34 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 2:39:42 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 2:39:42 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 2:39:56 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON1012]
+Mar 07, 2019 2:39:56 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 2:39:56 PM MonRemoteServiceImpl performExchange
+INFO: CON1012Belongs to external server
+Mar 07, 2019 2:39:56 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 2:40:19 PM MonRemoteServiceImpl listItem
+INFO: MONM1111Requested to View Data
+Mar 07, 2019 2:41:59 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 2:42:32 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 2:42:33 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 2:43:11 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON1012]
+Mar 07, 2019 2:43:21 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 2:43:24 PM MonRemoteServiceImpl performExchange
+INFO: CON1012Belongs to external server
+Mar 07, 2019 2:43:31 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 2:44:34 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON1012]
+Mar 07, 2019 2:44:37 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 2:44:43 PM MonRemoteServiceImpl performExchange
+INFO: CON1012Belongs to external server
+Mar 07, 2019 2:44:47 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 3:00:57 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 3:01:38 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 3:01:38 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 3:01:45 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON1012]
+Mar 07, 2019 3:01:45 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 3:01:45 PM MonRemoteServiceImpl performExchange
+INFO: CON1012Belongs to external server
+Mar 07, 2019 3:01:45 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 3:01:45 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 3:01:45 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 07, 2019 3:01:55 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 3:02:01 PM MonRemoteServiceImpl performReturnItemOperation
+INFO: Previous Quantity for the item MON1012 was 0 ,Now processing waitinglist
+Mar 07, 2019 3:02:01 PM MonRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 07, 2019 3:02:01 PM MonRemoteServiceImpl returnItem
+INFO: Return Item Response is Success
+Mar 07, 2019 5:39:58 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 5:41:07 PM MonServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:62417
+Mar 07, 2019 5:41:07 PM MonServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 5:41:19 PM MonServer$1 run
+INFO: findItem is called by /127.0.0.1:62418
+Mar 07, 2019 5:41:19 PM MonServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is MON1013
+Mar 07, 2019 5:41:19 PM MonServer getFindItemResponse
+INFO: Response is  
+Mar 07, 2019 5:41:19 PM MonServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 5:53:21 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 6:03:09 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON6231 For MONU1111
+Mar 07, 2019 6:03:09 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 6:03:32 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON6231]
+Mar 07, 2019 6:03:32 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG6231 For MONU1111
+Mar 07, 2019 6:03:32 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 6:04:06 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON6231, MCG6231]
+Mar 07, 2019 6:04:37 PM MonRemoteServiceImpl findItem
+INFO: MONU1111requested to find itemDistributed
+Mar 07, 2019 6:04:37 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 6:04:37 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 6:06:31 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 6:38:33 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 7:10:15 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON6231 For MONU1111
+Mar 07, 2019 7:10:15 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:10:23 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON6231]
+Mar 07, 2019 7:10:23 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG6231 For MONU1111
+Mar 07, 2019 7:10:23 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:10:33 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON6231, MCG6231]
+Mar 07, 2019 7:11:54 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:13:00 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON6231]
+Mar 07, 2019 7:13:10 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:13:20 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:13:34 PM MonRemoteServiceImpl listItem
+INFO: MONM1111Requested to View Data
+Mar 07, 2019 7:14:51 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON6231]
+Mar 07, 2019 7:15:42 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:15:55 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 07, 2019 7:15:55 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON6231 For MONU1111
+Mar 07, 2019 7:15:55 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:16:09 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON6231]
+Mar 07, 2019 7:16:09 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 7:16:09 PM MonRemoteServiceImpl performExchange
+INFO: CON6231Belongs to external server
+Mar 07, 2019 7:16:09 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:16:09 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:16:09 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 07, 2019 7:16:18 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:16:26 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 7:16:26 PM MonServer$1 run
+INFO: returnItem is called by /127.0.0.1:56213
+Mar 07, 2019 7:16:26 PM MonServer getReturnItemResponse
+INFO: Return item is Called :   Item is MON6231 User MONU1111
+Mar 07, 2019 7:16:26 PM MonServer getReturnItemResponse
+INFO: Response isFail
+Mar 07, 2019 7:16:26 PM MonServer$1 run
+INFO: sending response [B@69d0a921
+Mar 07, 2019 8:01:54 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 8:02:16 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 8:02:17 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:03:26 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON1012]
+Mar 07, 2019 8:03:56 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON1012]
+Mar 07, 2019 8:06:16 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 8:06:27 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 8:06:27 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:09:08 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:09:08 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:09:08 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:09:08 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:09:17 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:09:17 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:09:17 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:09:17 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:09:23 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:09:40 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 8:10:11 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 8:10:12 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:10:45 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:10:45 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:10:46 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:17:25 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 8:18:15 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 8:18:16 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:19:00 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:19:12 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:19:23 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:19:45 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:20:05 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:21:14 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 07, 2019 8:21:14 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1013 For MONU1111
+Mar 07, 2019 8:21:14 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:21:19 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 8:23:08 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 8:23:08 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:23:16 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:23:16 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:23:16 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:23:16 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:23:16 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:23:16 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 07, 2019 8:23:16 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1013 For MONU1111
+Mar 07, 2019 8:23:16 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:23:22 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:23:29 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:23:37 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 07, 2019 8:23:37 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 8:23:37 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:23:59 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:23:59 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:23:59 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:23:59 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:24:27 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:24:27 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:24:27 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:24:27 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:24:27 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:24:27 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item []
+Mar 07, 2019 8:24:27 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG1012 For MONU1111
+Mar 07, 2019 8:24:27 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:24:40 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:24:40 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:24:40 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:24:40 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:29:59 PM MonServer main
+INFO: Server ready.
+Mar 07, 2019 8:30:17 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1012 For MONU1111
+Mar 07, 2019 8:30:17 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:30:28 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [CON1012]
+Mar 07, 2019 8:30:28 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG1012 For MONU1111
+Mar 07, 2019 8:30:28 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:30:43 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:30:43 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:30:43 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:30:43 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:31:30 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:31:30 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:31:30 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:31:30 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:31:30 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:31:30 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [MCG1012]
+Mar 07, 2019 8:31:30 PM MonRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow CON1013 For MONU1111
+Mar 07, 2019 8:31:30 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:32:00 PM MonRemoteServiceImpl validateBorrow
+INFO: Current BorrowerMONU1111Borrowed Item [MCG1012, CON1013]
+Mar 07, 2019 8:32:13 PM MonRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 8:32:13 PM MonRemoteServiceImpl performExchange
+INFO: both item id belongs to external server
+Mar 07, 2019 8:32:13 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 8:32:13 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers

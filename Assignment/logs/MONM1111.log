@@ -165,3 +165,27 @@ Mar 02, 2019 10:58:00 AM UserClient getReturnItemResponse
 INFO: Response Received from the server is CONU1111is not present/authorised
 Mar 02, 2019 10:58:07 AM UserClient getResponseOfAddItem
 INFO: Response Received from the server is Item Add Fails,User is not Present/Authorised
+Mar 07, 2019 2:40:19 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Mar 07, 2019 2:40:19 PM UserClient getResponseFromListItem
+INFO: MONM1111 Requested to List Item 
+Mar 07, 2019 2:40:19 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MON1012 IeamName DSD Quantity 1
+ WaitingList []
+ Current Borrowers[]
+ItemId MON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
+Mar 07, 2019 7:13:34 PM UserClient performManagerOperation
+INFO: MONM1111 choose to List Item
+Mar 07, 2019 7:13:34 PM UserClient getResponseFromListItem
+INFO: MONM1111 Requested to List Item 
+Mar 07, 2019 7:13:34 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId MON1012 IeamName DSD Quantity 1
+ WaitingList []
+ Current Borrowers[]
+ItemId MON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+

@@ -696,3 +696,545 @@ Mar 04, 2019 4:37:05 PM ConcordiaServer main
 INFO: Server ready.
 Mar 04, 2019 4:37:40 PM ConcordiaRemoteServiceImpl borrowItem
 INFO: CONU1111 has asked to borrow item CON1012
+Mar 05, 2019 6:53:23 PM ConcordiaServer main
+INFO: Server ready.
+Mar 05, 2019 6:53:45 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1012
+Mar 05, 2019 6:53:45 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1012 For CONU1111
+Mar 05, 2019 6:53:45 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 05, 2019 6:54:29 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1012
+Mar 05, 2019 6:54:29 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item [MON1012]
+Mar 05, 2019 7:10:26 PM ConcordiaServer main
+INFO: Server ready.
+Mar 05, 2019 7:10:52 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 05, 2019 7:12:14 PM ConcordiaServer main
+INFO: Server ready.
+Mar 05, 2019 7:15:07 PM ConcordiaServer main
+INFO: Server ready.
+Mar 05, 2019 7:16:39 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:53655
+Mar 05, 2019 7:16:39 PM ConcordiaServer$1 run
+INFO: sending response [B@5a955565
+Mar 05, 2019 7:23:54 PM ConcordiaServer main
+INFO: Server ready.
+Mar 05, 2019 7:24:59 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:60196
+Mar 05, 2019 7:24:59 PM ConcordiaServer$1 run
+INFO: sending response [B@799f7e29
+Mar 05, 2019 7:24:59 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:60197
+Mar 05, 2019 7:24:59 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 2
+Mar 05, 2019 7:24:59 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 05, 2019 7:24:59 PM ConcordiaServer$1 run
+INFO: sending response [B@4b85612c
+Mar 05, 2019 7:25:17 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:60198
+Mar 05, 2019 7:25:17 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 05, 2019 7:25:17 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 05, 2019 7:25:17 PM ConcordiaServer$1 run
+INFO: sending response [B@277050dc
+Mar 05, 2019 7:25:41 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:60199
+Mar 05, 2019 7:25:41 PM ConcordiaServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 05, 2019 7:26:02 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 05, 2019 7:26:52 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:56283
+Mar 05, 2019 7:26:52 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 05, 2019 7:26:52 PM ConcordiaServer getReturnItemResponse
+INFO: Response isFail
+Mar 05, 2019 7:26:52 PM ConcordiaServer$1 run
+INFO: sending response [B@7aec35a
+Mar 05, 2019 7:27:19 PM ConcordiaServer main
+INFO: Server ready.
+Mar 05, 2019 7:28:31 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:51170
+Mar 05, 2019 7:28:31 PM ConcordiaServer$1 run
+INFO: sending response [B@5a955565
+Mar 05, 2019 7:29:20 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:54716
+Mar 05, 2019 7:29:20 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 2
+Mar 05, 2019 7:29:27 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 05, 2019 7:29:38 PM ConcordiaServer$1 run
+INFO: sending response [B@6293abcc
+Mar 05, 2019 7:52:10 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 2:29:39 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 2:39:42 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:63340
+Mar 07, 2019 2:39:42 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 1
+Mar 07, 2019 2:39:42 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 2:39:42 PM ConcordiaServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 2:39:56 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:63345
+Mar 07, 2019 2:39:56 PM ConcordiaServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 2:40:55 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 07, 2019 2:41:52 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 2:42:33 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:58609
+Mar 07, 2019 2:42:33 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 1
+Mar 07, 2019 2:42:33 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 2:42:33 PM ConcordiaServer$1 run
+INFO: sending response [B@5a955565
+Mar 07, 2019 2:43:33 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:58617
+Mar 07, 2019 2:43:33 PM ConcordiaServer$1 run
+INFO: sending response [B@6293abcc
+Mar 07, 2019 2:45:16 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:50710
+Mar 07, 2019 2:45:16 PM ConcordiaServer$1 run
+INFO: sending response [B@7995092a
+Mar 07, 2019 3:01:00 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 3:01:23 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1013
+Mar 07, 2019 3:01:38 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:61767
+Mar 07, 2019 3:01:38 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 1
+Mar 07, 2019 3:01:38 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 3:01:38 PM ConcordiaServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 3:01:45 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:61768
+Mar 07, 2019 3:01:45 PM ConcordiaServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 3:01:45 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:61769
+Mar 07, 2019 3:01:45 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 07, 2019 3:01:45 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 3:01:45 PM ConcordiaServer$1 run
+INFO: sending response [B@277050dc
+Mar 07, 2019 3:01:55 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:61770
+Mar 07, 2019 3:01:55 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 07, 2019 3:01:55 PM ConcordiaServer getReturnItemResponse
+INFO: Response isFail
+Mar 07, 2019 3:01:55 PM ConcordiaServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 07, 2019 5:40:00 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 5:40:27 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 07, 2019 5:40:33 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 07, 2019 5:40:33 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item [CON1012]
+Mar 07, 2019 5:40:33 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: user already borrowed item 
+Mar 07, 2019 5:41:07 PM ConcordiaRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 5:41:07 PM ConcordiaRemoteServiceImpl performExchange
+INFO: MON1013belongs to external server
+Mar 07, 2019 5:41:07 PM ConcordiaRemoteServiceImpl performExchange
+INFO: VerifyingMON1013 is is available to borrow In MON
+Mar 07, 2019 5:41:07 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 5:41:07 PM ConcordiaRemoteServiceImpl performExchange
+INFO: Response received from MON is false
+Mar 07, 2019 5:41:19 PM ConcordiaRemoteServiceImpl findItem
+INFO: CONU1111requested to find itemMON1013
+Mar 07, 2019 5:41:19 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 5:41:19 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 5:41:56 PM ConcordiaRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 07, 2019 5:41:56 PM ConcordiaRemoteServiceImpl performExchange
+INFO: MCG1012belongs to external server
+Mar 07, 2019 5:41:56 PM ConcordiaRemoteServiceImpl performExchange
+INFO: VerifyingMCG1012 is is available to borrow In MCG
+Mar 07, 2019 5:41:56 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 5:41:56 PM ConcordiaRemoteServiceImpl performExchange
+INFO: Response received from MCG is true
+Mar 07, 2019 5:41:56 PM ConcordiaRemoteServiceImpl performExchange
+INFO: validation successful
+Mar 07, 2019 5:41:56 PM ConcordiaRemoteServiceImpl returnItem
+INFO: Return Item Response is Success
+Mar 07, 2019 5:41:56 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MCG1012
+Mar 07, 2019 5:41:56 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item []
+Mar 07, 2019 5:41:56 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MCG1012 For CONU1111
+Mar 07, 2019 5:41:56 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 5:42:04 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 07, 2019 5:53:23 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 6:00:34 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON6231 for 2 name Distributed
+Mar 07, 2019 6:00:34 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Mar 07, 2019 6:00:59 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON7654 for 1 name APP
+Mar 07, 2019 6:00:59 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Mar 07, 2019 6:03:09 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:62086
+Mar 07, 2019 6:03:09 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON6231 User MONU1111 for days 1
+Mar 07, 2019 6:03:09 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 6:03:09 PM ConcordiaServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 6:04:37 PM ConcordiaServer$1 run
+INFO: findItem is called by /127.0.0.1:54528
+Mar 07, 2019 6:04:37 PM ConcordiaServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is Distributed
+Mar 07, 2019 6:04:37 PM ConcordiaServer getFindItemResponse
+INFO: Response is  CON6231 1
+Mar 07, 2019 6:04:37 PM ConcordiaServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 6:38:27 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 7:08:58 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON6231 for 2 name Distributed
+Mar 07, 2019 7:08:58 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Mar 07, 2019 7:09:19 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON7654 for 1 name APP
+Mar 07, 2019 7:09:19 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Mar 07, 2019 7:09:22 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 07, 2019 7:10:15 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:55433
+Mar 07, 2019 7:10:15 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON6231 User MONU1111 for days 1
+Mar 07, 2019 7:10:15 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 7:10:15 PM ConcordiaServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 7:13:10 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:58906
+Mar 07, 2019 7:13:10 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 07, 2019 7:13:10 PM ConcordiaServer getReturnItemResponse
+INFO: Response isFail
+Mar 07, 2019 7:13:10 PM ConcordiaServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 7:14:08 PM ConcordiaRemoteServiceImpl listItem
+INFO: CONM1111Requested to View Data
+Mar 07, 2019 7:15:42 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:56208
+Mar 07, 2019 7:15:42 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON6231 User MONU1111
+Mar 07, 2019 7:15:42 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 7:15:42 PM ConcordiaServer$1 run
+INFO: sending response [B@277050dc
+Mar 07, 2019 7:15:55 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:56209
+Mar 07, 2019 7:15:55 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON6231 User MONU1111 for days 1
+Mar 07, 2019 7:15:55 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 7:15:55 PM ConcordiaServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 07, 2019 7:16:09 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:56210
+Mar 07, 2019 7:16:09 PM ConcordiaServer$1 run
+INFO: sending response [B@7aec35a
+Mar 07, 2019 7:16:09 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:56211
+Mar 07, 2019 7:16:09 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON6231 User MONU1111
+Mar 07, 2019 7:16:09 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 7:16:09 PM ConcordiaServer$1 run
+INFO: sending response [B@67424e82
+Mar 07, 2019 7:16:18 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:56212
+Mar 07, 2019 7:16:18 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON6231 User MONU1111
+Mar 07, 2019 7:16:18 PM ConcordiaServer getReturnItemResponse
+INFO: Response isFail
+Mar 07, 2019 7:16:18 PM ConcordiaServer$1 run
+INFO: sending response [B@42110406
+Mar 07, 2019 8:01:56 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 8:02:17 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:65479
+Mar 07, 2019 8:02:17 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 1
+Mar 07, 2019 8:02:18 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:02:18 PM ConcordiaServer$1 run
+INFO: sending response [B@5a955565
+Mar 07, 2019 8:03:00 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1013 for 11 name ALGO
+Mar 07, 2019 8:03:00 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying  Item
+Mar 07, 2019 8:03:00 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 07, 2019 8:03:00 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous item details{, itemName='ALGO', quantity=0}
+Mar 07, 2019 8:03:00 PM ConcordiaRemoteServiceImpl addItem
+INFO: updated item details{, itemName='ALGO', quantity=11}
+Mar 07, 2019 8:03:00 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous quantity was 0 , now need to process waiting list
+Mar 07, 2019 8:03:00 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 07, 2019 8:06:07 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 8:06:27 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:65482
+Mar 07, 2019 8:06:27 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 1
+Mar 07, 2019 8:06:27 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:06:27 PM ConcordiaServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 8:09:08 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:64965
+Mar 07, 2019 8:09:08 PM ConcordiaServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 8:09:08 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:64966
+Mar 07, 2019 8:09:08 PM ConcordiaServer$1 run
+INFO: sending response [B@277050dc
+Mar 07, 2019 8:09:17 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:64967
+Mar 07, 2019 8:09:17 PM ConcordiaServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 07, 2019 8:09:17 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:64968
+Mar 07, 2019 8:09:17 PM ConcordiaServer$1 run
+INFO: sending response [B@7aec35a
+Mar 07, 2019 8:09:23 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:64969
+Mar 07, 2019 8:09:23 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 07, 2019 8:09:23 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:09:23 PM ConcordiaServer$1 run
+INFO: sending response [B@67424e82
+Mar 07, 2019 8:09:46 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 8:10:12 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:64970
+Mar 07, 2019 8:10:12 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 1
+Mar 07, 2019 8:10:13 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:10:13 PM ConcordiaServer$1 run
+INFO: sending response [B@5a955565
+Mar 07, 2019 8:10:52 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:64971
+Mar 07, 2019 8:10:52 PM ConcordiaServer main
+INFO: Exception java.lang.NullPointerException
+Mar 07, 2019 8:17:16 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 8:17:20 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 8:17:48 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1013 for 3 name ALGO
+Mar 07, 2019 8:17:48 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying  Item
+Mar 07, 2019 8:17:48 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 07, 2019 8:17:48 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous item details{, itemName='ALGO', quantity=0}
+Mar 07, 2019 8:17:48 PM ConcordiaRemoteServiceImpl addItem
+INFO: updated item details{, itemName='ALGO', quantity=3}
+Mar 07, 2019 8:17:48 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous quantity was 0 , now need to process waiting list
+Mar 07, 2019 8:17:48 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 07, 2019 8:18:16 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:59416
+Mar 07, 2019 8:18:16 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 1
+Mar 07, 2019 8:18:18 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:18:18 PM ConcordiaServer$1 run
+INFO: sending response [B@5a955565
+Mar 07, 2019 8:19:25 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:52638
+Mar 07, 2019 8:19:25 PM ConcordiaServer$1 run
+INFO: sending response [B@6293abcc
+Mar 07, 2019 8:19:51 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:60315
+Mar 07, 2019 8:19:51 PM ConcordiaServer$1 run
+INFO: sending response [B@7995092a
+Mar 07, 2019 8:20:08 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:60316
+Mar 07, 2019 8:20:08 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 07, 2019 8:20:19 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:20:27 PM ConcordiaServer$1 run
+INFO: sending response [B@7fc2413d
+Mar 07, 2019 8:21:21 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 8:21:45 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1013 for 11 name ALGO
+Mar 07, 2019 8:21:45 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying  Item
+Mar 07, 2019 8:21:45 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 07, 2019 8:21:45 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous item details{, itemName='ALGO', quantity=0}
+Mar 07, 2019 8:21:45 PM ConcordiaRemoteServiceImpl addItem
+INFO: updated item details{, itemName='ALGO', quantity=11}
+Mar 07, 2019 8:21:45 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous quantity was 0 , now need to process waiting list
+Mar 07, 2019 8:21:45 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 07, 2019 8:22:37 PM ConcordiaRemoteServiceImpl performExchange
+INFO: Exchange item is not valid
+Mar 07, 2019 8:22:57 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 07, 2019 8:23:08 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:58662
+Mar 07, 2019 8:23:08 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 1
+Mar 07, 2019 8:23:08 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:23:08 PM ConcordiaServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 8:23:16 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:58663
+Mar 07, 2019 8:23:16 PM ConcordiaServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 8:23:16 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:58664
+Mar 07, 2019 8:23:16 PM ConcordiaServer$1 run
+INFO: sending response [B@277050dc
+Mar 07, 2019 8:23:16 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:58665
+Mar 07, 2019 8:23:16 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 07, 2019 8:23:16 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:23:16 PM ConcordiaServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 07, 2019 8:23:16 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:58666
+Mar 07, 2019 8:23:16 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1013 User MONU1111 for days 2
+Mar 07, 2019 8:23:16 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:23:16 PM ConcordiaServer$1 run
+INFO: sending response [B@7aec35a
+Mar 07, 2019 8:23:22 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:58667
+Mar 07, 2019 8:23:22 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 07, 2019 8:23:22 PM ConcordiaServer getReturnItemResponse
+INFO: Response isFail
+Mar 07, 2019 8:23:22 PM ConcordiaServer$1 run
+INFO: sending response [B@67424e82
+Mar 07, 2019 8:23:29 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:58668
+Mar 07, 2019 8:23:29 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1013 User MONU1111
+Mar 07, 2019 8:23:29 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:23:29 PM ConcordiaServer$1 run
+INFO: sending response [B@42110406
+Mar 07, 2019 8:23:37 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:58669
+Mar 07, 2019 8:23:37 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 11
+Mar 07, 2019 8:23:37 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:23:37 PM ConcordiaServer$1 run
+INFO: sending response [B@531d72ca
+Mar 07, 2019 8:24:27 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:51778
+Mar 07, 2019 8:24:27 PM ConcordiaServer$1 run
+INFO: sending response [B@22d8cfe0
+Mar 07, 2019 8:24:27 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:51780
+Mar 07, 2019 8:24:27 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 07, 2019 8:24:27 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:24:27 PM ConcordiaServer$1 run
+INFO: sending response [B@579bb367
+Mar 07, 2019 8:29:52 PM ConcordiaServer main
+INFO: Server ready.
+Mar 07, 2019 8:30:18 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:63671
+Mar 07, 2019 8:30:18 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1012 User MONU1111 for days 11
+Mar 07, 2019 8:30:18 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:30:18 PM ConcordiaServer$1 run
+INFO: sending response [B@799f7e29
+Mar 07, 2019 8:30:43 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:63674
+Mar 07, 2019 8:30:43 PM ConcordiaServer$1 run
+INFO: sending response [B@4b85612c
+Mar 07, 2019 8:31:12 PM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1013 for 11 name ALGO
+Mar 07, 2019 8:31:12 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id   exist in  database, modifying  Item
+Mar 07, 2019 8:31:12 PM ConcordiaRemoteServiceImpl addItem
+INFO: Item id and Item name matches
+Mar 07, 2019 8:31:12 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous item details{, itemName='ALGO', quantity=0}
+Mar 07, 2019 8:31:12 PM ConcordiaRemoteServiceImpl addItem
+INFO: updated item details{, itemName='ALGO', quantity=11}
+Mar 07, 2019 8:31:12 PM ConcordiaRemoteServiceImpl addItem
+INFO: previous quantity was 0 , now need to process waiting list
+Mar 07, 2019 8:31:12 PM ConcordiaRemoteServiceImpl processWaitingListIfPossible
+INFO: Now attempting to process wait list
+Mar 07, 2019 8:31:30 PM ConcordiaServer$1 run
+INFO: validateReturn is called by /127.0.0.1:49196
+Mar 07, 2019 8:31:30 PM ConcordiaServer$1 run
+INFO: sending response [B@277050dc
+Mar 07, 2019 8:31:30 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:49197
+Mar 07, 2019 8:31:30 PM ConcordiaServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 07, 2019 8:31:30 PM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:49198
+Mar 07, 2019 8:31:30 PM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1012 User MONU1111
+Mar 07, 2019 8:31:30 PM ConcordiaServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:31:30 PM ConcordiaServer$1 run
+INFO: sending response [B@7aec35a
+Mar 07, 2019 8:31:30 PM ConcordiaServer$1 run
+INFO: borrowItem is called by /127.0.0.1:49199
+Mar 07, 2019 8:31:30 PM ConcordiaServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is CON1013 User MONU1111 for days 2
+Mar 07, 2019 8:31:30 PM ConcordiaServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 07, 2019 8:31:30 PM ConcordiaServer$1 run
+INFO: sending response [B@67424e82
+Mar 07, 2019 8:32:13 PM ConcordiaServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:49201
+Mar 07, 2019 8:32:13 PM ConcordiaServer$1 run
+INFO: sending response [B@42110406
