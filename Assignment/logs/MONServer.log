@@ -787,3 +787,5 @@ Mar 07, 2019 8:32:13 PM ServerUtils callUDPServer
 INFO: Calling  UDP Servers
 Mar 07, 2019 8:32:13 PM ServerUtils callUDPServer
 INFO: Calling  UDP Servers
+Mar 08, 2019 5:51:07 PM MonServer main
+INFO: Server ready.

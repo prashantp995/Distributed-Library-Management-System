@@ -1238,3 +1238,65 @@ Mar 07, 2019 8:32:13 PM ConcordiaServer$1 run
 INFO: validateBorrow is called by /127.0.0.1:49201
 Mar 07, 2019 8:32:13 PM ConcordiaServer$1 run
 INFO: sending response [B@42110406
+Mar 08, 2019 5:51:11 PM ConcordiaServer main
+INFO: Server ready.
+Mar 08, 2019 5:52:33 PM ConcordiaServer main
+INFO: Server ready.
+Mar 08, 2019 5:53:25 PM ConcordiaServer main
+INFO: Server ready.
+Mar 08, 2019 6:00:36 PM ConcordiaServer main
+INFO: Server ready.
+Mar 08, 2019 6:01:04 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1012
+Mar 08, 2019 6:01:04 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1012 For CONU1111
+Mar 08, 2019 6:01:04 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 08, 2019 6:01:16 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1013
+Mar 08, 2019 6:01:16 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item [MON1012]
+Mar 08, 2019 6:01:27 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item [MON1012]
+Mar 08, 2019 6:02:52 PM ConcordiaRemoteServiceImpl returnItem
+INFO: Return Item Response is Fail
+Mar 08, 2019 6:02:59 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item [MON1012]
+Mar 08, 2019 6:03:13 PM ConcordiaServer main
+INFO: Server ready.
+Mar 08, 2019 6:03:59 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item MON1012
+Mar 08, 2019 6:04:04 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: Calling ExternalUDP Servers To Borrow MON1012 For CONU1111
+Mar 08, 2019 6:04:06 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 08, 2019 6:04:23 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item [MON1012]
+Mar 08, 2019 6:05:23 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item [MON1012]
+Mar 08, 2019 6:08:38 PM ConcordiaRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 08, 2019 6:08:38 PM ConcordiaRemoteServiceImpl performExchange
+INFO: MON1012belongs to external server
+Mar 08, 2019 6:08:38 PM ConcordiaRemoteServiceImpl performExchange
+INFO: VerifyingMON1012 is is available to borrow In MON
+Mar 08, 2019 6:08:39 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 08, 2019 6:08:40 PM ConcordiaRemoteServiceImpl performExchange
+INFO: Response received from MON is false
+Mar 08, 2019 6:08:56 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item [MON1012]
+Mar 08, 2019 6:09:01 PM ConcordiaRemoteServiceImpl performExchange
+INFO: Need to connect to external server ....
+Mar 08, 2019 6:09:01 PM ConcordiaRemoteServiceImpl performExchange
+INFO: MON1012Belongs to external server
+Mar 08, 2019 6:09:02 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 08, 2019 6:09:08 PM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 08, 2019 6:09:08 PM ConcordiaRemoteServiceImpl borrowItem
+INFO: CONU1111 has asked to borrow item CON1012
+Mar 08, 2019 6:09:08 PM ConcordiaRemoteServiceImpl validateBorrow
+INFO: Current BorrowerCONU1111Borrowed Item []
+Mar 08, 2019 6:09:21 PM ConcordiaRemoteServiceImpl returnItem
+INFO: Return Item Response is Success
