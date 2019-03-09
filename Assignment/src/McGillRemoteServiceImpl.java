@@ -16,7 +16,9 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   String lib = LibConstants.MCG_REG;
   private ORB orb;
 
-
+  /**
+   * Constructor to initiate implementation of the server
+   */
   protected McGillRemoteServiceImpl(Logger logger) {
     super();
     initManagerID();
@@ -59,8 +61,15 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     return itemDetails;
   }
 
+  /**
+   * Find item function
+   *
+   * @param itemName name of the item that you need to search
+   * @param callExternalServers true if you want response from other servers
+   */
   public String findItem(String itemName, boolean callExternalServers) {
     StringBuilder response = new StringBuilder();
+    logger.info("Find Item is called on " + itemName);
     for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
       if (letterEntry.getValue().getItemName().equals(itemName)) {
         response.append(letterEntry.getKey() + " ");
@@ -85,7 +94,12 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     return response.toString();
   }
 
-
+  /**
+   * This is to validate non manager users
+   *
+   * @param userId userId you want to validate
+   * @return true if user is in list of authorized non manager user list
+   */
   private boolean isValidUser(String userId) {
     return userIds.contains(userId);
   }
@@ -144,6 +158,10 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     return result;
   }
 
+  /**
+   * before continuing borrow operation , need to validate borrow operation . such as (user can not
+   * borrow more than one item from each of external lib
+   */
   private String validateBorrow(String userId, String itemID) {
     if (currentBorrowers.containsKey(userId)) {
       synchronized (currentBorrowers) {
@@ -191,6 +209,11 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     }
   }
 
+  /**
+   * This function will be called in case some one return item or manager adds the item
+   *
+   * @param itemID item Id of returned item or added item
+   */
   private void processWaitingListIfPossible(String itemID) {
     if (data.containsKey(itemID)) {
       logger.info("Now attempting to process wait list");
@@ -223,6 +246,12 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     }
   }
 
+  /**
+   * If user want to enroll him/her self in the wait list then this function will be called
+   *
+   * @param itemID itemID
+   * @param externalServerCallRequire true if itemid belongs to non home library
+   */
   public String addUserInWaitList(String itemID, String userId, int numberOfDays,
       boolean externalServerCallRequire) {
     String response = null;
@@ -283,6 +312,10 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     return response.toString();
   }
 
+  /**
+   * When manager wants to add quantity in existing item , item id and item name provided by manager
+   * should be same.
+   */
   private boolean validateItemIdAndName(String itemID, String itemName) {
     for (Entry<String, LibraryModel> letterEntry : data.entrySet()) {
       String id = letterEntry.getKey();
@@ -330,6 +363,11 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     data.put(itemId, libraryModel);
   }
 
+  /**
+   * When manager wants to remove item completely (quantity <=0) and if user has already borrowed it
+   * in past we should keep track of such items for further use when user actually performs return
+   * item
+   */
   private synchronized void removeItemCompletely(String itemId) {
     LibraryModel libraryModel = data.get(itemId);
     logger.info("removing" + libraryModel);
@@ -398,13 +436,13 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
         } else {
           logger.info("Exchange item is valid");
           if (data.containsKey(newItemID) && data.get(newItemID).getQuantity() > 0) {
-            logger.info("Old item id and New item id both belongs to Montreal Server");
+            logger.info("Old item id and New item id both belongs to McGill Server");
             boolean isValidBorrow = isItemAvailableToBorrow(newItemID, userId, 0);
             boolean isValidReturn = isValidReturn(userId, data.get(oldItemId));
             synchronized (data) {
               if (isValidBorrow && isValidReturn) {
                 returnItem(userId, oldItemId);
-                borrowItem(newItemID, userId, 2);
+                borrowItem(userId, newItemID, 2);
                 return LibConstants.SUCCESS;
               }
             }
