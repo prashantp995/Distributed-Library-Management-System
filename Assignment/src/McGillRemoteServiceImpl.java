@@ -364,6 +364,7 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   public String exchangeItem(String userId, String oldItemId, String newItemID) {
     String oldItemId_Lib = ServerUtils.determineLibOfItem(oldItemId);
     String newItemId_Lib = ServerUtils.determineLibOfItem(newItemID);
+    logger.info(userId + "has asked to return " + oldItemId + " in exchange of " + newItemID);
     if (newItemId_Lib.equalsIgnoreCase(lib)) {
       String validateBorrowForLocalUser = validateBorrow(userId, newItemID);
       if (!validateBorrowForLocalUser.equalsIgnoreCase(LibConstants.SUCCESS)) {
@@ -379,7 +380,7 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
       }
     }
 
-    return LibConstants.SUCCESS;
+    return LibConstants.FAIL;
   }
 
   private String performExchange(String userId, String oldItemId, String newItemID,

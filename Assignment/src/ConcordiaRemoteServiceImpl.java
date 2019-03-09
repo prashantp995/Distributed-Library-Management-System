@@ -254,7 +254,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
       }
     }
 
-    return LibConstants.SUCCESS;
+    return LibConstants.FAIL;
   }
 
   private String performExchange(String userId, String oldItemId, String newItemID,
