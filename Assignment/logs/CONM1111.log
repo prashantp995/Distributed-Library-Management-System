@@ -747,3 +747,49 @@ Mar 07, 2019 8:31:12 PM UserClient getResponseOfAddItem
 INFO: CONM1111 Requested to Add Item ALGO
 Mar 07, 2019 8:31:12 PM UserClient getResponseOfAddItem
 INFO: Response Received from the server is Item add success, Quantity updated
+Mar 08, 2019 7:09:39 PM UserClient performManagerOperation
+INFO: CONM1111 choose to List Item
+Mar 08, 2019 7:09:39 PM UserClient getResponseFromListItem
+INFO: CONM1111 Requested to List Item 
+Mar 08, 2019 7:09:39 PM UserClient getResponseFromListItem
+INFO: Response Received from the server is ItemId CON1012 IeamName DSD Quantity 5
+ WaitingList []
+ Current Borrowers[]
+ItemId CON1013 IeamName ALGO Quantity 0
+ WaitingList []
+ Current Borrowers[]
+
+Mar 08, 2019 7:09:43 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Mar 08, 2019 7:09:46 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1012
+Mar 08, 2019 7:09:57 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1012 DSD Quantity 11
+Mar 08, 2019 7:09:57 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Mar 08, 2019 7:09:57 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated
+Mar 08, 2019 7:10:12 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1015 DSD Quantity 1
+Mar 08, 2019 7:10:12 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item DSD
+Mar 08, 2019 7:10:12 PM UserClient getResponseFromRemoveItem
+INFO: CONM1111 Requested to Remove Item CON1015Quantity5
+Mar 08, 2019 7:10:12 PM UserClient getReturnItemResponse
+INFO: CONU1111 Requested to Return Item CON1015
+Mar 08, 2019 7:10:12 PM UserClient getResponseFromRemoveItem
+INFO: Response Received from the server is Remove Item Fails , Item id is not present in database
+Mar 08, 2019 7:10:12 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item Add Success
+Mar 08, 2019 7:10:12 PM UserClient getReturnItemResponse
+INFO: Response Received from the server is Fail
+Mar 08, 2019 7:10:15 PM UserClient performManagerOperation
+INFO: CONM1111 choose to Add Item
+Mar 08, 2019 7:10:18 PM UserClient performAddItem
+INFO: CONM1111 is trying to Add item with item id CON1013
+Mar 08, 2019 7:10:21 PM UserClient getResponseOfAddItem
+INFO: CONM1111 asked to Add item CON1013 ALGO Quantity 99
+Mar 08, 2019 7:10:21 PM UserClient getResponseOfAddItem
+INFO: CONM1111 Requested to Add Item ALGO
+Mar 08, 2019 7:10:21 PM UserClient getResponseOfAddItem
+INFO: Response Received from the server is Item add success, Quantity updated

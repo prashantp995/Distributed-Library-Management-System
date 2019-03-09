@@ -440,3 +440,89 @@ Mar 07, 2019 8:32:13 PM McGillServer$1 run
 INFO: validateReturn is called by /127.0.0.1:49200
 Mar 07, 2019 8:32:13 PM McGillServer$1 run
 INFO: sending response [B@277050dc
+Mar 08, 2019 5:51:09 PM McGillServer main
+INFO: Server ready.
+Mar 08, 2019 5:52:28 PM McGillServer main
+INFO: Server ready.
+Mar 08, 2019 5:53:17 PM McGillServer main
+INFO: Server ready.
+Mar 08, 2019 5:56:06 PM McGillServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Mar 08, 2019 5:58:07 PM McGillServer main
+INFO: Server ready.
+Mar 08, 2019 6:00:34 PM McGillServer main
+INFO: Server ready.
+Mar 08, 2019 6:03:15 PM McGillServer main
+INFO: Server ready.
+Mar 08, 2019 6:35:44 PM McGillServer main
+INFO: Server ready.
+Mar 08, 2019 6:36:07 PM McGillServer$1 run
+INFO: findItem is called by /127.0.0.1:59637
+Mar 08, 2019 6:36:07 PM McGillServer getFindItemResponse
+INFO: FindItem is Called : Requested Item is ALGO
+Mar 08, 2019 6:36:07 PM McGillServer getFindItemResponse
+INFO: Response is  MCG1013 0
+Mar 08, 2019 6:36:07 PM McGillServer$1 run
+INFO: sending response [B@799f7e29
+Mar 08, 2019 6:36:14 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:59638
+Mar 08, 2019 6:36:14 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User CONU1111 for days 1
+Mar 08, 2019 6:36:14 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 08, 2019 6:36:14 PM McGillServer$1 run
+INFO: sending response [B@4b85612c
+Mar 08, 2019 6:36:31 PM McGillServer$1 run
+INFO: returnItem is called by /127.0.0.1:62091
+Mar 08, 2019 6:36:31 PM McGillServer getReturnItemResponse
+INFO: Return item is Called :   Item is MCG1012 User CONU1111
+Mar 08, 2019 6:36:31 PM McGillServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 08, 2019 6:36:31 PM McGillServer$1 run
+INFO: sending response [B@277050dc
+Mar 08, 2019 6:36:55 PM McGillServer$1 run
+INFO: validateBorrow is called by /127.0.0.1:62094
+Mar 08, 2019 6:36:55 PM McGillServer$1 run
+INFO: sending response [B@5c29bfd
+Mar 08, 2019 6:37:05 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:50031
+Mar 08, 2019 6:37:05 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1012 User CONU1111 for days 1
+Mar 08, 2019 6:37:05 PM McGillServer getBorrowItemResponse
+INFO: Response isSuccess
+Mar 08, 2019 6:37:05 PM McGillServer$1 run
+INFO: sending response [B@7aec35a
+Mar 08, 2019 6:37:17 PM McGillServer$1 run
+INFO: returnItem is called by /127.0.0.1:50032
+Mar 08, 2019 6:37:17 PM McGillServer getReturnItemResponse
+INFO: Return item is Called :   Item is MCG1012 User CONU1111
+Mar 08, 2019 6:37:17 PM McGillServer getReturnItemResponse
+INFO: Response isSuccess
+Mar 08, 2019 6:37:17 PM McGillServer$1 run
+INFO: sending response [B@67424e82
+Mar 08, 2019 7:09:24 PM McGillServer main
+INFO: Server ready.
+Mar 08, 2019 7:10:52 PM McGillServer$1 run
+INFO: borrowItem is called by /127.0.0.1:49342
+Mar 08, 2019 7:10:52 PM McGillServer getBorrowItemResponse
+INFO: Borrow item is Called : Requested Item is MCG1013 User CONU1111 for days 1
+Mar 08, 2019 7:10:52 PM McGillServer getBorrowItemResponse
+INFO: Response isWait List Possible
+Mar 08, 2019 7:10:52 PM McGillServer$1 run
+INFO: sending response [B@799f7e29
+Mar 08, 2019 7:10:53 PM McGillServer$1 run
+INFO: waitList is called by /127.0.0.1:49343
+Mar 08, 2019 7:10:53 PM McGillServer getWaitListResponse
+INFO: User Selected to be in Wait List For itemMCG1013 User CONU1111
+Mar 08, 2019 7:10:53 PM McGillServer getWaitListResponse
+INFO: Response isSuccess
+Mar 08, 2019 7:10:53 PM McGillServer$1 run
+INFO: sending response [B@4b85612c
+Mar 08, 2019 7:34:17 PM McGillServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Mar 08, 2019 7:34:37 PM McGillServer main
+INFO: Server ready.
+Mar 08, 2019 7:35:20 PM McGillServer$1 run
+INFO: validateReturn is called by /127.0.0.1:61455
+Mar 08, 2019 7:35:20 PM McGillServer$1 run
+INFO: sending response [B@446cdf90
