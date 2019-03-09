@@ -526,7 +526,7 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
             synchronized (data) {
               if (isValidBorrow && isValidReturn) {
                 returnItem(userId, oldItemId);
-                borrowItem(newItemID, userId, 2);
+                borrowItem(userId, newItemID, 2);
                 return LibConstants.SUCCESS;
               }
             }

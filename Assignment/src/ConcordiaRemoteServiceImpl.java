@@ -272,13 +272,13 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
         } else {
           logger.info("Exchange item is valid");
           if (data.containsKey(newItemID) && data.get(newItemID).getQuantity() > 0) {
-            logger.info("Old item id and New item id both belongs to Montreal Server");
+            logger.info("Old item id and New item id both belongs to Concordia Server");
             boolean isValidBorrow = isItemAvailableToBorrow(newItemID, userId, 0);
             boolean isValidReturn = isValidReturn(userId, data.get(oldItemId));
             synchronized (data) {
               if (isValidBorrow && isValidReturn) {
                 returnItem(userId, oldItemId);
-                borrowItem(newItemID, userId, 2);
+                borrowItem(userId, newItemID, 2);
                 return LibConstants.SUCCESS;
               }
             }
