@@ -24,6 +24,8 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
     data.put("MON1012", new LibraryModel("DSD", 1));
     data.put("MON1013", new LibraryModel("ALGO", 0));
     this.logger = logger;
+    this.logger.info("Valid Manager Ids" + managerIds.toString());
+    this.logger.info("Valid User Ids" + userIds.toString());
 
 
   }
@@ -50,8 +52,10 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
       logger.info(userId + "is not valid/authorized to  find Item" + itemName);
       return userId + "is not valid/authorized to  find Item" + itemName;
     } else {
+      logger.info(userId + " is valid");
       itemDetails = findItem(itemName, true);
       if (itemDetails.length() == 0) {
+        logger.info(itemName + " Not Found In Montreal Server requested by " + userId);
         return "No item found in Montreal Server";
       }
     }
@@ -71,11 +75,15 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
       String concordiaServerResponse = ServerUtils
           .callUDPServer(udpRequestModel, LibConstants.UDP_CON_PORT, logger);
       if (concordiaServerResponse != null && concordiaServerResponse.length() > 0) {
+        logger.info("Response Received from Concordia Server Is" + concordiaServerResponse
+            + " for requested item " + itemName);
         response.append("\n" + concordiaServerResponse + "\n");
       }
       String mcGillServerResponse = ServerUtils
           .callUDPServer(udpRequestModel, LibConstants.UDP_MCG_PORT, logger);
       if (mcGillServerResponse != null && mcGillServerResponse.length() > 0) {
+        logger.info("Response Received from McGill Server Is" + mcGillServerResponse
+            + " for requested item " + itemName);
         response.append(mcGillServerResponse + "\n");
       }
     }
@@ -100,9 +108,11 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
       response = performReturnItemOperation(userId, itemID, false);
       logger.info("Return Item Response is " + response);
     } else {
+      logger.info(itemID + " belongs to external server");
       response = performReturnItemOperation(userId, itemID, true);
       if (response.equalsIgnoreCase(LibConstants.SUCCESS)) {
         System.out.println("External Server Approved Return Item");
+        logger.info("return item request for" + itemID + " by " + userId + "Approved");
         removeFromCurrentBorrowers(userId, itemID);
       }
     }
@@ -188,7 +198,8 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
       return userId + "is not present/authorised";
     }
     String validateBorrow = validateBorrow(userId, itemID);
-    if (validateBorrow != null) {
+    if (!validateBorrow.equalsIgnoreCase(LibConstants.SUCCESS)) {
+      logger.info("Validation of the borrow item " + itemID + " by " + userId + " failed ");
       return validateBorrow;
     }
     StringBuilder response = new StringBuilder();
@@ -224,10 +235,14 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
         for (String borrowedItem : currentBorrowers.get(userId)) {
           if (!borrowedItem.startsWith("MON") && !itemID.startsWith("MON")) {
             if (borrowedItem.startsWith("CON") && itemID.startsWith("CON")) {
+              logger.info("validation for borrowItem Fails " +
+                  userId + " Can not borrow more than one item from each of  external library");
               return LibConstants.FAIL
                   + "Can not borrow more than one item from each of  external library";
             }
             if (borrowedItem.startsWith("MCG") && itemID.startsWith("MCG")) {
+              logger.info("validation for borrowItem Fails " +
+                  userId + " Can not borrow more than one item from each of  external library");
               return LibConstants.FAIL
                   + "Can not borrow more than one item from each of  external library";
             }
@@ -265,10 +280,14 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
     } else {
       currentBorrowers.get(userId).add(itemID);
     }
+    logger.info("updated current borrower List is  " + currentBorrowers.toString());
   }
 
   /**
-   * ask user if he/she wants to add him/her self in to waiting list
+   * If user want to enroll him/her self in the wait list then this function will be called
+   *
+   * @param itemID itemID
+   * @param externalServerCallRequire true if itemid belongs to non home library
    */
   public String addUserInWaitList(String itemID, String userId, int numberOfDays,
       boolean externalServerCallRequire) {
@@ -289,6 +308,7 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
         LibraryModel libraryModel = data.get(itemID);
         libraryModel.getWaitingList().add(userId);
         data.put(itemID, libraryModel);
+        logger.info(userId + " has been added in waiting list of " + itemID);
         response = LibConstants.SUCCESS;
       }
     }
@@ -306,17 +326,23 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
       addOrUpdateInCurrentBorrowers(userId, itemID);
       return LibConstants.SUCCESS;
     } else if (isUserInWaitList(itemID, userId)) {
+      logger.info(userId + " is already in waiting list of " + itemID);
       return LibConstants.ALREADY_WAITING_LIST;
     } else if (isWaitListPossible(itemID, userId)) {
+      logger.info(userId + " can register for the waiting list of " + itemID);
       return LibConstants.WAIT_LIST_POSSIBLE;
 
     }
     return LibConstants.FAIL;
   }
 
+  /**
+   * check if wait list possible by looking at quantity and user has not borrowed that item already
+   */
   private boolean isWaitListPossible(String itemID, String userId) {
     if (data.containsKey(itemID) && data.get(itemID).getQuantity() == 0 && !data.get(itemID)
         .getCurrentBorrowerList().contains(userId)) {
+      logger.info(userId + " can register for waiting list of " + itemID);
       return true;
     }
     return false;
@@ -325,6 +351,7 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
   private boolean isUserInWaitList(String itemID, String userId) {
     if (data.containsKey(itemID) && data.get(itemID).getWaitingList() != null && data.get(itemID)
         .getWaitingList().contains(userId)) {
+      logger.info(userId + " is already in waiting list of " + itemID);
       return true;
     }
     return false;
@@ -341,6 +368,9 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
     return false;
   }
 
+  /**
+   * Borrow  item from the external server.
+   */
   public String borrowItemFromExternalServer(String userId, String itemID, int numberOfDays) {
     UdpRequestModel udpRequestModel = new UdpRequestModel("borrowItem", itemID, numberOfDays,
         userId);
@@ -436,6 +466,9 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
         removeItemCompletely(itemId);
         response.append("Remove Item Success , Item Removed Completely");
       } else if (data.get(itemId).getQuantity() - quantity < 0) {
+        logger.info(
+            "Quantity Provided by " + managerId + " is not correct , removing " + quantity + "from "
+                + itemId + "will result in negative Quantity");
         response.append("Please Provide Correct Quantity");
       } else {
         updateQuantity(itemId, quantity);
@@ -505,6 +538,14 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
     return LibConstants.FAIL;
   }
 
+  /**
+   * This function is to perform exchange
+   *
+   * @param userId user id
+   * @param oldItemId item that user has already borrowed.
+   * @param newItemID item that user wishes to borrow
+   * @param callExternalServer true if any of old/new  or both Item id is out of home server
+   */
   private String performExchange(String userId, String oldItemId, String newItemID,
       boolean callExternalServer, String oldItemId_Lib, String newItemId_Lib) {
     if (!callExternalServer) {
@@ -523,6 +564,8 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
             logger.info("Old item id and New item id both belongs to Montreal Server");
             boolean isValidBorrow = isItemAvailableToBorrow(newItemID, userId, 0);
             boolean isValidReturn = isValidReturn(userId, data.get(oldItemId));
+            logger.info(
+                "validation Result For Borrow " + isValidBorrow + " \n For Return" + isValidReturn);
             synchronized (data) {
               if (isValidBorrow && isValidReturn) {
                 returnItem(userId, oldItemId);
@@ -532,7 +575,10 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
             }
 
           } else {
-            return newItemID + " is not recognized by library or enough quantity not available";
+            String result =
+                newItemID + " is not recognized by library or enough quantity not available";
+            logger.info(result);
+            return result;
           }
         }
       }
@@ -597,6 +643,7 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
   }
 
   public boolean isValidReturn(String userId, String itemId) {
+    logger.info("is valid return ? checking for" + itemId);
     return isValidReturn(userId, data.get(itemId));
   }
 
@@ -619,6 +666,12 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
     return managerIds.contains(managerId);
   }
 
+  /**
+   * Once item is return by user , remove user from the current borrower list
+   *
+   * @param userId userId
+   * @param itemID itemID
+   */
   private synchronized void removeFromCurrentBorrowers(String userId, String itemID) {
     if (currentBorrowers.containsKey(userId)) {
       ArrayList<String> borrowedItems = currentBorrowers.get(userId);
