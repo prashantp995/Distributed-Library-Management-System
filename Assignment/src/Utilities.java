@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -87,24 +86,6 @@ public class Utilities {
             || username.startsWith("MCGU")
             || username.startsWith("MONU") || username.startsWith("CONM") || username
             .startsWith("MCGM") || username.startsWith("MONM"));
-  }
-
-
-  public static int getResponseFromClient(Logger logger) {
-
-    Registry registry = null;
-    try {
-      registry = LocateRegistry.getRegistry(LibConstants.CLIENT_PORT);
-      CallbackClientInterface obj = (CallbackClientInterface) registry
-          .lookup(LibConstants.CLIENT_REG);
-      return obj.askForWaitingList();
-    } catch (RemoteException e) {
-      e.printStackTrace();
-    } catch (NotBoundException e) {
-      e.printStackTrace();
-    }
-
-    return 0;
   }
 
 

@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 import java.util.logging.Logger;
 import org.omg.CORBA.ORB;
 
-public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
+public class ConcordiaRemoteServiceImpl {
 
   HashMap<String, LibraryModel> data = new HashMap<>();
   HashMap<String, ArrayList<String>> currentBorrowers = new HashMap<>();
@@ -46,7 +46,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
   }
 
 
-  @Override
+  
   public String findItem(String userId, String itemName) {
     logger.info(userId + "requested to find item" + itemName);
     String itemDetails;
@@ -65,7 +65,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
   }
 
 
-  @Override
+  
   public String returnItem(String userId, String itemID) {
     if (!isValidUser(userId)) {
       logger.info(userId + "is not present/authorised");
@@ -88,7 +88,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
     return response;
   }
 
-  @Override
+  
   public String borrowItem(String userId, String itemID, int numberOfDays) {
     logger.info(userId + " has asked to borrow item " + itemID);
     if (!isValidUser(userId)) {
@@ -162,7 +162,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
     return LibConstants.SUCCESS;
   }
 
-  @Override
+  
   public String addItem(String userId, String itemID, String itemName, int quantity) {
     logger.info("Add item is called on Concordia server by " + userId + " for " + itemID + " for "
         + quantity + " name " + itemName);
@@ -200,7 +200,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
     return response.toString();
   }
 
-  @Override
+  
   public String removeItem(String managerId, String itemId, int quantity) {
     logger.info(
         "Remove item is called on Concordia server by " + managerId + " for " + itemId + " for "
@@ -233,7 +233,7 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
     return response.toString();
   }
 
-  @Override
+  
   public String listItem(String managerId) {
     logger.info(managerId + "Requested to View Data");
     if (!isValidManager(managerId)) {
@@ -243,13 +243,13 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
     return getData(data);
   }
 
-  @Override
+  
   public String addUserInWaitingList(String userId, String ItemId, int numberOfDays) {
     return addUserInWaitList(ItemId, userId, numberOfDays, !ItemId.startsWith("CON"));
 
   }
 
-  @Override
+  
   public String exchangeItem(String userId, String oldItemId, String newItemID) {
     String oldItemId_Lib = ServerUtils.determineLibOfItem(oldItemId);
     String newItemId_Lib = ServerUtils.determineLibOfItem(newItemID);
@@ -497,17 +497,6 @@ public class ConcordiaRemoteServiceImpl extends LibraryServicePOA {
       borrowedItems.remove(itemID);
       currentBorrowers.put(userId, borrowedItems);
     }
-  }
-
-  private String handleWaitList(String userId, String itemID, int numberOfDays, String res,
-      boolean externalServerCallRequire) {
-    logger.info(
-        itemID + " is not available to borrow now, adding wait list is possible ,asking " + userId);
-    int clientChoice = Utilities.getResponseFromClient(logger);
-    if (clientChoice == 1) {
-      res = addUserInWaitList(itemID, userId, numberOfDays, externalServerCallRequire);
-    }
-    return res;
   }
 
   private void addOrUpdateInCurrentBorrowers(String userId, String itemID) {

@@ -204,15 +204,6 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     return LibConstants.SUCCESS;
   }
 
-  private String handleWaitList(String userId, String itemID, int numberOfDays, String res,
-      boolean externalServerCallRequire) {
-    int clientChoice = Utilities.getResponseFromClient(logger);
-    if (clientChoice == 1) {
-      res = addUserInWaitList(itemID, userId, numberOfDays, externalServerCallRequire);
-    }
-    return res;
-  }
-
   private void addOrUpdateInCurrentBorrowers(String userId, String itemID) {
     if (!currentBorrowers.containsKey(userId)) {
       ArrayList<String> itemBorrowed = new ArrayList<>();
