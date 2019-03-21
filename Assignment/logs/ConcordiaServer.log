@@ -1432,3 +1432,31 @@ Mar 08, 2019 7:35:20 PM ConcordiaServer$1 run
 INFO: validateBorrow is called by /127.0.0.1:61456
 Mar 08, 2019 7:35:20 PM ConcordiaServer$1 run
 INFO: sending response [B@446cdf90
+Mar 21, 2019 10:51:32 AM ConcordiaRemoteServiceImpl <init>
+INFO: Valid Manager Ids[CONM1111, CONM1112]
+Mar 21, 2019 10:51:32 AM ConcordiaRemoteServiceImpl <init>
+INFO: Valid User Ids[CONU1111, CONU1112]
+Mar 21, 2019 10:52:59 AM ConcordiaRemoteServiceImpl <init>
+INFO: Valid Manager Ids[CONM1111, CONM1112]
+Mar 21, 2019 10:52:59 AM ConcordiaRemoteServiceImpl <init>
+INFO: Valid User Ids[CONU1111, CONU1112]
+Mar 21, 2019 10:52:59 AM ConcordiaServer main
+INFO: Server ready.
+Mar 21, 2019 10:53:13 AM ConcordiaRemoteServiceImpl removeItem
+INFO: Remove item is called on Concordia server by CONM1111 for CON1015 for 5
+Mar 21, 2019 10:53:13 AM ConcordiaRemoteServiceImpl returnItem
+INFO: CON1015 belongs to external server
+Mar 21, 2019 10:53:13 AM ConcordiaRemoteServiceImpl addItem
+INFO: Add item is called on Concordia server by CONM1111 for CON1015 for 1 name DSD
+Mar 21, 2019 10:53:13 AM ConcordiaRemoteServiceImpl addItem
+INFO: Item id is not in existing database, Adding as new Item
+Mar 21, 2019 10:53:13 AM ServerUtils callUDPServer
+INFO: Calling  UDP Servers
+Mar 21, 2019 10:53:13 AM ConcordiaServer$1 run
+INFO: returnItem is called by /127.0.0.1:55880
+Mar 21, 2019 10:53:13 AM ConcordiaServer getReturnItemResponse
+INFO: Return item is Called :   Item is CON1015 User CONU1111
+Mar 21, 2019 10:53:13 AM ConcordiaServer getReturnItemResponse
+INFO: Response isFail
+Mar 21, 2019 10:53:13 AM ConcordiaServer$1 run
+INFO: sending response [B@69d0a921
