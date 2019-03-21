@@ -789,3 +789,15 @@ Mar 07, 2019 8:32:13 PM ServerUtils callUDPServer
 INFO: Calling  UDP Servers
 Mar 08, 2019 5:51:07 PM MonServer main
 INFO: Server ready.
+Mar 21, 2019 10:51:28 AM MonRemoteServiceImpl <init>
+INFO: Valid Manager Ids[MONM1111, MONM1112]
+Mar 21, 2019 10:51:29 AM MonRemoteServiceImpl <init>
+INFO: Valid User Ids[MONU1111, MONU1112]
+Mar 21, 2019 10:52:11 AM MonServer main
+INFO: Exception org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Mar 21, 2019 10:53:05 AM MonRemoteServiceImpl <init>
+INFO: Valid Manager Ids[MONM1111, MONM1112]
+Mar 21, 2019 10:53:05 AM MonRemoteServiceImpl <init>
+INFO: Valid User Ids[MONU1111, MONU1112]
+Mar 21, 2019 10:53:05 AM MonServer main
+INFO: Server ready.
