@@ -11,7 +11,16 @@ import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.PortableServer.POA;
 
-public class MonServer {
+public class MonServer extends Thread {
+
+  private DatagramSocket socket;
+  static MonRemoteServiceImpl exportedObj;
+  private DatagramPacket packet;
+
+  public MonServer(DatagramSocket socket, DatagramPacket packet) {
+    this.socket = socket;
+    this.packet = packet;
+  }
 
   public static void main(String args[]) throws IOException {
 
@@ -26,7 +35,7 @@ public class MonServer {
       POA rootpoa =
           (POA) orb.resolve_initial_references("RootPOA");
       rootpoa.the_POAManager().activate();
-      MonRemoteServiceImpl exportedObj = new MonRemoteServiceImpl(logger);
+      exportedObj = new MonRemoteServiceImpl(logger);
       exportedObj.setORB(orb);
       // get object reference from the servant
       org.omg.CORBA.Object ref =
@@ -48,64 +57,60 @@ public class MonServer {
       NameComponent path[] = ncRef.to_name(name);
       ncRef.rebind(path, href);
       logger.info("Server ready.");
-      Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-          boolean running = true;
-          System.out.println("UDP Server is listening on port" + LibConstants.UDP_MON_PORT);
-          DatagramPacket reponsePacket = null;
-          while (running) {
-            DatagramPacket packet
-                = new DatagramPacket(buf, buf.length);
-            try {
-              socket.receive(packet);
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-
-            InetAddress address = packet.getAddress();
-            int port = packet.getPort();
-            packet = new DatagramPacket(buf, buf.length, address, port);
-            String received
-                = new String(packet.getData(), 0, packet.getLength());
-            byte[] data = packet.getData();
-            ByteArrayInputStream in = new ByteArrayInputStream(data);
-            ObjectInputStream is = null;
-            try {
-              is = new ObjectInputStream(in);
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-            try {
-              assert is != null;
-              UdpRequestModel request = (UdpRequestModel) is.readObject();
-              logger.info(request.getMethodName() + " is called by " + address + ":" + port);
-              String response = null;
-              reponsePacket = getDatagramPacket(reponsePacket, address, port, request, response,
-                  exportedObj, logger);
-              logger.info("sending response " + reponsePacket.getData());
-
-            } catch (ClassNotFoundException e) {
-              e.printStackTrace();
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-            try {
-              socket.send(reponsePacket);
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-          }
-
+      boolean running = true;
+      System.out.println("UDP Server is listening on port" + LibConstants.MON_PORT);
+      while (running) {
+        DatagramPacket packet
+            = new DatagramPacket(buf, buf.length);
+        try {
+          socket.receive(packet);
+          MonServer monServer = new MonServer(socket, packet);
+          monServer.run();
+        } catch (IOException e) {
+          e.printStackTrace();
         }
-      };
-      runnable.run();
+      }
       orb.run();
-    } catch (Exception re) {
-      logger.info("Exception " + re);
-    } finally {
-      Utilities.closeLoggerHandlers(logger);
-      socket.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  @Override
+  public void run() {
+    System.out.println(this.getId());
+    DatagramPacket reponsePacket = null;
+    InetAddress address = packet.getAddress();
+    int port = packet.getPort();
+    String received
+        = new String(packet.getData(), 0, packet.getLength());
+    byte[] data = packet.getData();
+    ByteArrayInputStream in = new ByteArrayInputStream(data);
+    ObjectInputStream is = null;
+    try {
+      is = new ObjectInputStream(in);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    try {
+      assert is != null;
+      UdpRequestModel request = (UdpRequestModel) is.readObject();
+      exportedObj.logger.info(request.getMethodName() + " is called by " + address + ":" + port);
+      String response = null;
+      reponsePacket = getDatagramPacket(reponsePacket, address, port, request, response,
+          exportedObj, exportedObj.logger);
+      exportedObj.logger.info("sending response " + reponsePacket.getData().toString());
+
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    try {
+      socket.send(reponsePacket);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 
