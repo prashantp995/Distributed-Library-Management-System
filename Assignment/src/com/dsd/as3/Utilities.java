@@ -92,22 +92,4 @@ public class Utilities {
   }
 
 
-  public static int getResponseFromClient(Logger logger) {
-
-    Registry registry = null;
-    try {
-      registry = LocateRegistry.getRegistry(LibConstants.CLIENT_PORT);
-      CallbackClientInterface obj = (CallbackClientInterface) registry
-          .lookup(LibConstants.CLIENT_REG);
-      return obj.askForWaitingList();
-    } catch (RemoteException e) {
-      e.printStackTrace();
-    } catch (NotBoundException e) {
-      e.printStackTrace();
-    }
-
-    return 0;
-  }
-
-
 }

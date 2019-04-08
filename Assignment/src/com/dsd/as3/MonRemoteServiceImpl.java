@@ -263,14 +263,6 @@ public class MonRemoteServiceImpl implements LibraryServiceOperations {
     return LibConstants.SUCCESS;
   }
 
-  private String handleWaitList(String userId, String itemID, int numberOfDays, String res,
-      boolean externalServerCallRequire) {
-    int clientChoice = Utilities.getResponseFromClient(logger);
-    if (clientChoice == 1) {
-      res = addUserInWaitList(itemID, userId, numberOfDays, externalServerCallRequire);
-    }
-    return res;
-  }
 
   /**
    * update current borrower data , if user borrows item or wait list is processed and item assigned

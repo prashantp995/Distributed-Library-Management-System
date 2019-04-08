@@ -503,16 +503,6 @@ public class ConcordiaRemoteServiceImpl implements LibraryServiceOperations {
     }
   }
 
-  private String handleWaitList(String userId, String itemID, int numberOfDays, String res,
-      boolean externalServerCallRequire) {
-    logger.info(
-        itemID + " is not available to borrow now, adding wait list is possible ,asking " + userId);
-    int clientChoice = Utilities.getResponseFromClient(logger);
-    if (clientChoice == 1) {
-      res = addUserInWaitList(itemID, userId, numberOfDays, externalServerCallRequire);
-    }
-    return res;
-  }
 
   private void addOrUpdateInCurrentBorrowers(String userId, String itemID) {
     if (!currentBorrowers.containsKey(userId)) {
