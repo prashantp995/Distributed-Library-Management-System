@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
-import org.omg.CORBA.ORB;
 
 @WebService(endpointInterface = "com.dsd.as3.LibraryServiceOperations")
 //@SOAPBinding(style = SOAPBinding.Style.RPC)
@@ -21,7 +19,7 @@ public class McGillRemoteServiceImpl implements LibraryServiceOperations {
   HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
   String lib = LibConstants.MCG_REG;
-  private ORB orb;
+
 
   /**
    * Constructor to initiate implementation of the server
@@ -49,10 +47,6 @@ public class McGillRemoteServiceImpl implements LibraryServiceOperations {
   private void initUserID() {
     userIds.add("MCGU1111");
     userIds.add("MCGU1112");
-  }
-
-  public void setORB(ORB orb_val) {
-    orb = orb_val;
   }
 
 

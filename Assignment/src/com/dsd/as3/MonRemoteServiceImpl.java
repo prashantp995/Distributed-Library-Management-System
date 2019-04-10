@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 import javax.jws.WebService;
-import org.omg.CORBA.ORB;
 
 @WebService(endpointInterface = "com.dsd.as3.LibraryServiceOperations")
 public class MonRemoteServiceImpl implements LibraryServiceOperations {
@@ -18,7 +17,6 @@ public class MonRemoteServiceImpl implements LibraryServiceOperations {
   HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
   String lib = LibConstants.MON_REG;
-  private ORB orb;
 
 
   protected MonRemoteServiceImpl(Logger logger) {
@@ -34,9 +32,9 @@ public class MonRemoteServiceImpl implements LibraryServiceOperations {
 
   }
 
-  public void setORB(ORB orb_val) {
-    orb = orb_val;
+  public MonRemoteServiceImpl() {
   }
+
 
   private void initManagerID() {
     managerIds.add("MONM1111");

@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 import javax.jws.WebService;
-import org.omg.CORBA.ORB;
 
 @WebService(endpointInterface = "com.dsd.as3.LibraryServiceOperations")
 public class ConcordiaRemoteServiceImpl implements LibraryServiceOperations {
@@ -19,7 +18,6 @@ public class ConcordiaRemoteServiceImpl implements LibraryServiceOperations {
   HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
   private static final String lib = LibConstants.CON_REG;
-  private ORB orb;
 
 
   protected ConcordiaRemoteServiceImpl(Logger logger) {
@@ -35,8 +33,7 @@ public class ConcordiaRemoteServiceImpl implements LibraryServiceOperations {
 
   }
 
-  public void setORB(ORB orb_val) {
-    orb = orb_val;
+  public ConcordiaRemoteServiceImpl() {
   }
 
   private void initManagerID() {
