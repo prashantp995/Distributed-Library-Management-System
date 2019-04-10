@@ -484,7 +484,7 @@ public class UserClient {
       @Override
       public void run() {
         try {
-          getResponseOfAddItem("CONM1111", "CON1015", "DSD", 1);
+          getResponseOfAddItem("CONM1111", "CON1015", "Thread", 1);
         } catch (RemoteException e) {
           e.printStackTrace();
         } catch (NotBoundException e) {
@@ -519,12 +519,27 @@ public class UserClient {
         }
       }
     };
+
+    Runnable runnable4 = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          getBorrowItemResponse("CON1015", 2, "CONU1111");
+        } catch (RemoteException e) {
+          e.printStackTrace();
+        } catch (NotBoundException e) {
+          e.printStackTrace();
+        }
+      }
+    };
     Thread thread = new Thread(runnable);
     Thread thread2 = new Thread(runnable2);
     Thread thread3 = new Thread(runnable3);
+    Thread thread4 = new Thread(runnable4);
     thread.start();
     thread2.start();
     thread3.start();
+    thread4.start();
 
 
   }
