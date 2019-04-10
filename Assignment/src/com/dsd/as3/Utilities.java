@@ -15,7 +15,7 @@ import java.util.logging.SimpleFormatter;
 
 public class Utilities {
 
-  private static final String LOG_DIR = "C:\\DSD\\Git\\DSD_Assignment_COMP_6231\\Assignment\\logs";
+  private static final String LOG_DIR = "C:\\DSD\\Git\\DSD_Assignment_COMP_6231\\Assignment\\logs\\";
 
   public static void startRegistry(int RMIPortNum)
       throws RemoteException {
