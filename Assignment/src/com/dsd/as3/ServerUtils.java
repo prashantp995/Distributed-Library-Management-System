@@ -14,7 +14,7 @@ import java.util.logging.SimpleFormatter;
 
 public class ServerUtils {
 
-  private static final String LOG_DIR = "C:\\Users\\ppatel\\DSD_3\\Assignment\\logs\\";
+  private static final String LOG_DIR = "C:\\DSD\\Git\\DSD_Assignment_COMP_6231\\Assignment\\logs";
 
   public static int getPortFromItemId(String itemID) {
     if (itemID.startsWith("CON")) {
