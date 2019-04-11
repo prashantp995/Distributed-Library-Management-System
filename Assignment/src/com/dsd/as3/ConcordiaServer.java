@@ -1,3 +1,5 @@
+package com.dsd.as3;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -5,75 +7,56 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.logging.Logger;
+import javax.xml.ws.Endpoint;
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.PortableServer.POA;
 
-public class McGillServer extends Thread {
+public class ConcordiaServer extends Thread {
+
 
   private DatagramSocket socket;
-  static McGillRemoteServiceImpl exportedObj;
+  static ConcordiaRemoteServiceImpl exportedObj;
   private DatagramPacket packet;
 
-  public McGillServer(DatagramSocket socket, DatagramPacket packet) {
+  public ConcordiaServer(DatagramSocket socket, DatagramPacket packet) {
     this.socket = socket;
     this.packet = packet;
   }
 
   public static void main(String args[]) throws IOException {
 
-    Logger logger = ServerUtils
-        .setupLogger(Logger.getLogger("McGillServerLog"), "McGillServerLog.log", true);
+    Logger logger = ServerUtils.setupLogger(Logger.getLogger("CONServerlog"), "ConcordiaServer.log",
+        true);
     String registryURL;
-    DatagramSocket socket = new DatagramSocket(LibConstants.UDP_MCG_PORT);
-    byte[] buf = new byte[256];
+    DatagramSocket socket = new DatagramSocket(LibConstants.UDP_CON_PORT);
+    byte[] buf = new byte[1000];
     try {
-      ORB orb = ORB.init(args, null);
-      //get reference to rootpoa & activate the POAManager
-      POA rootpoa =
-          (POA) orb.resolve_initial_references("RootPOA");
-      rootpoa.the_POAManager().activate();
-      exportedObj = new McGillRemoteServiceImpl(logger);
-      exportedObj.setORB(orb);
-      // get object reference from the servant
-      org.omg.CORBA.Object ref =
-          rootpoa.servant_to_reference(exportedObj);
-      // and cast the reference to a CORBA reference
-      LibraryService href = LibraryServiceHelper.narrow(ref);
-
-      // get the root naming context
-      // NameService invokes the transient name service
-      org.omg.CORBA.Object objRef =
-          orb.resolve_initial_references("NameService");
-      // Use NamingContextExt, which is part of the
-      // Interoperable Naming Service (INS) specification.
-      NamingContextExt ncRef =
-          NamingContextExtHelper.narrow(objRef);
-
+      exportedObj = new ConcordiaRemoteServiceImpl(logger);
+      Endpoint endpoint = Endpoint.publish("http://localhost:8080/comp", exportedObj);
       // bind the Object Reference in Naming
-      String name = LibConstants.MCG_REG;
-      NameComponent path[] = ncRef.to_name(name);
-      ncRef.rebind(path, href);
+
+      String name = LibConstants.CON_REG;
       logger.info("Server ready.");
+
       boolean running = true;
+      System.out.println("UDP Server is listening on port" + LibConstants.UDP_CON_PORT);
       while (running) {
         DatagramPacket packet
             = new DatagramPacket(buf, buf.length);
         try {
           socket.receive(packet);
-          McGillServer mcGillServer = new McGillServer(socket, packet);
-          mcGillServer.run();
+          ConcordiaServer concordiaServer = new ConcordiaServer(socket, packet);
+          concordiaServer.run();
         } catch (IOException e) {
           e.printStackTrace();
         }
       }
-      orb.run();
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
 
   @Override
@@ -112,12 +95,10 @@ public class McGillServer extends Thread {
     }
   }
 
-  /**
-   * prepare datagram packet to send as a response from the server
-   */
+
   private static synchronized DatagramPacket getDatagramPacket(DatagramPacket reponsePacket,
       InetAddress address,
-      int port, UdpRequestModel request, String response, McGillRemoteServiceImpl exportedObj,
+      int port, UdpRequestModel request, String response, ConcordiaRemoteServiceImpl exportedObj,
       Logger logger) {
     if (request.getMethodName().equalsIgnoreCase("findItem")) {
       response = getFindItemResponse(request, exportedObj, logger);
@@ -152,7 +133,7 @@ public class McGillServer extends Thread {
   }
 
   private static String getReturnItemResponse(UdpRequestModel request,
-      McGillRemoteServiceImpl exportedObj, Logger logger) {
+      ConcordiaRemoteServiceImpl exportedObj, Logger logger) {
     String response;
     logger.info(
         "Return item is Called :   Item is " + request.getItemId() + " User " + request
@@ -164,7 +145,7 @@ public class McGillServer extends Thread {
   }
 
   private static String getWaitListResponse(UdpRequestModel request,
-      McGillRemoteServiceImpl exportedObj, Logger logger) {
+      ConcordiaRemoteServiceImpl exportedObj, Logger logger) {
     String response;
     logger.info(
         "User Selected to be in Wait List For item" + request.getItemId() + " User " + request
@@ -177,7 +158,7 @@ public class McGillServer extends Thread {
   }
 
   private static String getBorrowItemResponse(UdpRequestModel request,
-      McGillRemoteServiceImpl exportedObj, Logger logger) {
+      ConcordiaRemoteServiceImpl exportedObj, Logger logger) {
     String response;
     logger.info(
         "Borrow item is Called : Requested Item is " + request.getItemId() + " User " + request
@@ -191,7 +172,7 @@ public class McGillServer extends Thread {
   }
 
   private static String getFindItemResponse(UdpRequestModel request,
-      McGillRemoteServiceImpl exportedObj, Logger logger) {
+      ConcordiaRemoteServiceImpl exportedObj, Logger logger) {
     String response;
     logger.info("FindItem is Called : Requested Item is " + request.getItemName());
     response = exportedObj.findItem(request.getItemName(), false);
@@ -199,5 +180,9 @@ public class McGillServer extends Thread {
     return response;
   }
 
-
 }
+
+
+
+
+

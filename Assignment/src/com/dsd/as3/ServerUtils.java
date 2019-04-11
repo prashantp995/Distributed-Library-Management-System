@@ -1,3 +1,5 @@
+package com.dsd.as3;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -12,7 +14,7 @@ import java.util.logging.SimpleFormatter;
 
 public class ServerUtils {
 
-  private static final String LOG_DIR = "C:/DSD/Git/DSD_Assignment_COMP_6231/Assignment/logs/";
+  private static final String LOG_DIR = "C:\\DSD\\Git\\DSD_Assignment_COMP_6231\\Assignment\\logs\\";
 
   public static int getPortFromItemId(String itemID) {
     if (itemID.startsWith("CON")) {

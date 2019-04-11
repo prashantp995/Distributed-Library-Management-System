@@ -1,11 +1,14 @@
+package com.dsd.as3;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
-import org.omg.CORBA.ORB;
+import javax.jws.WebService;
 
-public class MonRemoteServiceImpl extends LibraryServicePOA {
+@WebService(endpointInterface = "com.dsd.as3.LibraryServiceOperations")
+public class MonRemoteServiceImpl implements LibraryServiceOperations {
 
   HashMap<String, LibraryModel> data = new HashMap<>();
   HashMap<String, ArrayList<String>> currentBorrowers = new HashMap<>();
@@ -14,7 +17,6 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
   HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
   String lib = LibConstants.MON_REG;
-  private ORB orb;
 
 
   protected MonRemoteServiceImpl(Logger logger) {
@@ -30,9 +32,9 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
 
   }
 
-  public void setORB(ORB orb_val) {
-    orb = orb_val;
+  public MonRemoteServiceImpl() {
   }
+
 
   private void initManagerID() {
     managerIds.add("MONM1111");
@@ -259,14 +261,6 @@ public class MonRemoteServiceImpl extends LibraryServicePOA {
     return LibConstants.SUCCESS;
   }
 
-  private String handleWaitList(String userId, String itemID, int numberOfDays, String res,
-      boolean externalServerCallRequire) {
-    int clientChoice = Utilities.getResponseFromClient(logger);
-    if (clientChoice == 1) {
-      res = addUserInWaitList(itemID, userId, numberOfDays, externalServerCallRequire);
-    }
-    return res;
-  }
 
   /**
    * update current borrower data , if user borrows item or wait list is processed and item assigned

@@ -1,3 +1,5 @@
+package com.dsd.as3;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -13,7 +15,7 @@ import java.util.logging.SimpleFormatter;
 
 public class Utilities {
 
-  private static final String LOG_DIR = "C:/DSD/Git/DSD_Assignment_COMP_6231/Assignment/logs/";
+  private static final String LOG_DIR = "C:\\DSD\\Git\\DSD_Assignment_COMP_6231\\Assignment\\logs\\";
 
   public static void startRegistry(int RMIPortNum)
       throws RemoteException {
@@ -87,24 +89,6 @@ public class Utilities {
             || username.startsWith("MCGU")
             || username.startsWith("MONU") || username.startsWith("CONM") || username
             .startsWith("MCGM") || username.startsWith("MONM"));
-  }
-
-
-  public static int getResponseFromClient(Logger logger) {
-
-    Registry registry = null;
-    try {
-      registry = LocateRegistry.getRegistry(LibConstants.CLIENT_PORT);
-      CallbackClientInterface obj = (CallbackClientInterface) registry
-          .lookup(LibConstants.CLIENT_REG);
-      return obj.askForWaitingList();
-    } catch (RemoteException e) {
-      e.printStackTrace();
-    } catch (NotBoundException e) {
-      e.printStackTrace();
-    }
-
-    return 0;
   }
 
 

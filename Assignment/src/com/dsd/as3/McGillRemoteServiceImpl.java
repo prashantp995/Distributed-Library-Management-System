@@ -1,11 +1,16 @@
+package com.dsd.as3;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
-import org.omg.CORBA.ORB;
+import javax.jws.WebService;
 
-public class McGillRemoteServiceImpl extends LibraryServicePOA {
+@WebService(endpointInterface = "com.dsd.as3.LibraryServiceOperations")
+//@SOAPBinding(style = SOAPBinding.Style.RPC)
+
+public class McGillRemoteServiceImpl implements LibraryServiceOperations {
 
   HashMap<String, LibraryModel> data = new java.util.HashMap<>();
   HashMap<String, ArrayList<String>> currentBorrowers = new HashMap<>();
@@ -14,7 +19,7 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   HashSet<String> completelyRemovedItems = new HashSet<String>();//removed items by Manager
   Logger logger = null;
   String lib = LibConstants.MCG_REG;
-  private ORB orb;
+
 
   /**
    * Constructor to initiate implementation of the server
@@ -31,6 +36,9 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
 
   }
 
+  public McGillRemoteServiceImpl() {
+  }
+
   private void initManagerID() {
     managerIds.add("MCGM1111");
     managerIds.add("MCGM1112");
@@ -39,10 +47,6 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
   private void initUserID() {
     userIds.add("MCGU1111");
     userIds.add("MCGU1112");
-  }
-
-  public void setORB(ORB orb_val) {
-    orb = orb_val;
   }
 
 
@@ -204,14 +208,6 @@ public class McGillRemoteServiceImpl extends LibraryServicePOA {
     return LibConstants.SUCCESS;
   }
 
-  private String handleWaitList(String userId, String itemID, int numberOfDays, String res,
-      boolean externalServerCallRequire) {
-    int clientChoice = Utilities.getResponseFromClient(logger);
-    if (clientChoice == 1) {
-      res = addUserInWaitList(itemID, userId, numberOfDays, externalServerCallRequire);
-    }
-    return res;
-  }
 
   private void addOrUpdateInCurrentBorrowers(String userId, String itemID) {
     if (!currentBorrowers.containsKey(userId)) {

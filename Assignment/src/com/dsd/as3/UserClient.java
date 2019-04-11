@@ -1,15 +1,16 @@
+
+package com.dsd.as3;
+
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Logger;
-import org.omg.CORBA.ORB;
-import org.omg.CORBA.ORBPackage.InvalidName;
-import org.omg.CosNaming.NamingContextExt;
-import org.omg.CosNaming.NamingContextExtHelper;
-import org.omg.CosNaming.NamingContextPackage.CannotProceed;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
 
 public class UserClient {
 
@@ -21,7 +22,9 @@ public class UserClient {
   static boolean isMonManager = false;
   static HashMap<Integer, String> serverInfo = new HashMap<Integer, String>();
   static Logger logger = null;
-  static LibraryService libraryService;
+  static LibraryServiceOperations libraryService;
+  static String webServicePort = null;
+  static String webServiceURL = null;
 
   public static void main(String args[])
       throws IOException {
@@ -46,37 +49,41 @@ public class UserClient {
   }
 
   private static void setupConnectionInfo() {
-    String[] serverInfo = getServerInfo();
-    ORB orb = ORB.init(serverInfo, null);
-    org.omg.CORBA.Object objRef = null;
+    URL compURL = null;
     try {
-      objRef = orb.resolve_initial_references("NameService");
-      NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
-      libraryService = LibraryServiceHelper.narrow(ncRef.resolve_str(getKeyForNamingService()));
-    } catch (InvalidName invalidName) {
-      invalidName.printStackTrace();
-    } catch (CannotProceed cannotProceed) {
-      cannotProceed.printStackTrace();
-    } catch (org.omg.CosNaming.NamingContextPackage.InvalidName invalidName) {
-      invalidName.printStackTrace();
-    } catch (NotFound notFound) {
-      notFound.printStackTrace();
+      compURL = new URL(webServiceURL);
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+    QName compQName = new QName("http://as3.dsd.com/", webServicePort);
+    Service compService = Service.create(compURL, compQName);
+
+    try {
+      libraryService = compService.getPort(LibraryServiceOperations.class);
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 
   private static void determineUniversity(String username) {
     if (username.startsWith("CON")) {
       isConcordiaUser = true;
+      webServicePort = "ConcordiaRemoteServiceImplService";
+      webServiceURL = "http://localhost:8080/comp?wsdl";
       if (username.startsWith("CONM")) {
         isConcordiaManager = true;
       }
     } else if (username.startsWith("MCG")) {
       isMcGillUser = true;
+      webServicePort = "McGillRemoteServiceImplService";
+      webServiceURL = "http://localhost:8081/comp?wsdl";
       if (username.startsWith("MCGM")) {
         isMcGillManager = true;
       }
     } else if (username.startsWith("MON")) {
       isMonUser = true;
+      webServicePort = "MonRemoteServiceImplService";
+      webServiceURL = "http://localhost:8082/comp?wsdl";
       if (username.startsWith("MONM")) {
         isMonManager = true;
       }
@@ -477,7 +484,7 @@ public class UserClient {
       @Override
       public void run() {
         try {
-          getResponseOfAddItem("CONM1111", "CON1015", "DSD", 1);
+          getResponseOfAddItem("CONM1111", "CON1015", "Thread", 1);
         } catch (RemoteException e) {
           e.printStackTrace();
         } catch (NotBoundException e) {
@@ -512,12 +519,27 @@ public class UserClient {
         }
       }
     };
+
+    Runnable runnable4 = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          getBorrowItemResponse("CON1015", 2, "CONU1111");
+        } catch (RemoteException e) {
+          e.printStackTrace();
+        } catch (NotBoundException e) {
+          e.printStackTrace();
+        }
+      }
+    };
     Thread thread = new Thread(runnable);
     Thread thread2 = new Thread(runnable2);
     Thread thread3 = new Thread(runnable3);
+    Thread thread4 = new Thread(runnable4);
     thread.start();
     thread2.start();
     thread3.start();
+    thread4.start();
 
 
   }

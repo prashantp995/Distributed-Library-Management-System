@@ -1,3 +1,5 @@
+package com.dsd.as3;
+
 import java.util.Objects;
 
 public class Borrower {

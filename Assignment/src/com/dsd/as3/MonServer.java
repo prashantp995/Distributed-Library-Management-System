@@ -1,3 +1,5 @@
+package com.dsd.as3;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -5,6 +7,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.logging.Logger;
+import javax.xml.ws.Endpoint;
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
@@ -29,33 +32,11 @@ public class MonServer extends Thread {
     DatagramSocket socket = new DatagramSocket(LibConstants.UDP_MON_PORT);
     byte[] buf = new byte[256];
     try {
-
-      ORB orb = ORB.init(args, null);
-      //get reference to rootpoa & activate the POAManager
-      POA rootpoa =
-          (POA) orb.resolve_initial_references("RootPOA");
-      rootpoa.the_POAManager().activate();
       exportedObj = new MonRemoteServiceImpl(logger);
-      exportedObj.setORB(orb);
-      // get object reference from the servant
-      org.omg.CORBA.Object ref =
-          rootpoa.servant_to_reference(exportedObj);
-      // and cast the reference to a CORBA reference
-      LibraryService href = LibraryServiceHelper.narrow(ref);
-
-      // get the root naming context
-      // NameService invokes the transient name service
-      org.omg.CORBA.Object objRef =
-          orb.resolve_initial_references("NameService");
-      // Use NamingContextExt, which is part of the
-      // Interoperable Naming Service (INS) specification.
-      NamingContextExt ncRef =
-          NamingContextExtHelper.narrow(objRef);
-
+      Endpoint endpoint = Endpoint.publish("http://localhost:8082/comp", exportedObj);
       // bind the Object Reference in Naming
-      String name = LibConstants.MON_REG;
-      NameComponent path[] = ncRef.to_name(name);
-      ncRef.rebind(path, href);
+      String name = LibConstants.MCG_REG;
+
       logger.info("Server ready.");
       boolean running = true;
       System.out.println("UDP Server is listening on port" + LibConstants.MON_PORT);
@@ -70,7 +51,6 @@ public class MonServer extends Thread {
           e.printStackTrace();
         }
       }
-      orb.run();
     } catch (Exception e) {
       e.printStackTrace();
     }

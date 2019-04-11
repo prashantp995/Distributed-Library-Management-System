@@ -1,3 +1,5 @@
+package com.dsd.as3;
+
 import java.io.Serializable;
 
 public class UdpRequestModel implements Serializable {

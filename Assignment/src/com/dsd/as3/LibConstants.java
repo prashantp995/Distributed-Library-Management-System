@@ -1,3 +1,5 @@
+package com.dsd.as3;
+
 public class LibConstants {
 
   public static final int CON_PORT = 8080;
